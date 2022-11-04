@@ -49,7 +49,7 @@ class Player
 		int			ct = 0;
 		int			face = 0;
 
-		Vector2		position;
+		Vector2		position = {0, 0};
 		float		speed = 0;
 		bool		canJump = false;
 };

@@ -158,7 +158,7 @@
 // 	else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 1) // move lft
 // 	{
 // 		player->ftMovePosition(0, -95);
-// 		DrawTextureEx(player->ftReturnGoodImage("Move LFT", *i / 10), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
+// 		DrawTextureEx(player->ftReturnGoodImage("Move Lft", *i / 10), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
 // 		player->ftMovePosition(0, 95);
 // 	}
 // 	else if (player->ftReturnCt() == 4 && player->ftReturnFace() == 0) // Jump right
@@ -433,6 +433,7 @@ int main(void)
 
 void	ftImgsGestion(Player *player, Ply1 *P1, int *i)
 {
+	player->position.x -= 25;
 	if (P1->ct == 0 && P1->face == 0) // Idle right
 	{
 		player->position.y -= 100;
@@ -482,6 +483,7 @@ void	ftImgsGestion(Player *player, Ply1 *P1, int *i)
 		player->position.y += 95;
 	}
 	*i += 1;
+	player->position.x += 25;
 }
 
 void	ftInitImgs(Ply1 *P1)
