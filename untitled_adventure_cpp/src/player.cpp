@@ -1,5 +1,15 @@
 #include "../includes/player.hpp"
 
+Player::Player()
+{
+	return ;
+}
+
+Player::~Player()
+{
+	return ;
+}
+
 void	Player::ftInitImgsEd(void)
 {
 	this->p1_idle_ri[0] = LoadTexture("./imgs/edward_elric/ed_idle_ri/ed_idleri_00.png");
@@ -53,11 +63,11 @@ void	Player::ftInitImgsIchigo(void)
 
 	this->p1_jumpr[0] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_00.png");
 	this->p1_jumpr[1] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_01.png");
-	this->p1_jumpr[1] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_02.png");
+	this->p1_jumpr[2] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_02.png");
 
 	this->p1_jumpl[0] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_00.png");
 	this->p1_jumpl[1] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_01.png");
-	this->p1_jumpl[1] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_02.png");
+	this->p1_jumpl[2] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_02.png");
 
 	this->p1_falll[0] = LoadTexture("./imgs/ichigo/ichigo_falllft/ichigo_falllft_00.png");
 	this->p1_falll[1] = LoadTexture("./imgs/ichigo/ichigo_falllft/ichigo_falllft_01.png");
@@ -103,16 +113,6 @@ Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
 	else if (string == "Fall Lft")
 		return (this->p1_falll[ct]);
 	return (this->p1_idle_ri[0]);
-}
-
-Player::Player()
-{
-	return ;
-}
-
-Player::~Player()
-{
-	return ;
 }
 
 void    Player::ftSetPosition(Vector2 pos)
@@ -247,4 +247,30 @@ int		Player::ftReturnCtFall(void) const
 void	Player::ftChangeCtFall(int ct)
 {
 	this->ctFall = ct;
+}
+
+void	Player::ftInitCtMoveX(int ct)
+{
+	this->moveX = ct;
+}
+
+void	Player::ftInitCtMoveY(int ct, std::string string)
+{
+	if (string == "Idle")
+		this->moveIdleY = ct;
+	else if (string == "Move")
+		this->moveMoveY = ct;
+}
+
+int		Player::ftReturnCtMoveX(void) const
+{
+	return (this->moveX);
+}
+
+int		Player::ftReturnctMoveY(std::string string) const
+{
+	if (string == "Idle")
+		return (this->moveIdleY);
+	else if (string == "Move")
+		return (this->moveMoveY);
 }

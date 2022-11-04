@@ -65,7 +65,6 @@ int main(void)
 {
 	const int	screenWidth = 1200;
 	const int	screenHeight = 800;
-	// int			menuCt = 0;
 	int			characterSelection = 0;
 	int			i = 0;
 	int			k;
@@ -117,11 +116,11 @@ int main(void)
 
 		if (menu.ftReturnStart() == 0)
 		{
-			SetTargetFPS(5);
+			SetTargetFPS(10);
 		}
 		else if (menu.ftReturnStart() == 1)
 		{
-			SetTargetFPS(5);
+			SetTargetFPS(10);
 		}
 		else
 		{
@@ -175,8 +174,11 @@ int main(void)
 				player->ftInitPlayerImgs(1);
 				player->ftChangeCtIdle(15);
 				player->ftChangeCtMove(10);
-				player->ftChangeCtJump(30);
+				player->ftChangeCtJump(25);
 				player->ftChangeCtFall(10);
+				player->ftInitCtMoveX(25);
+				player->ftInitCtMoveY(100, "Idle");
+				player->ftInitCtMoveY(95, "Move");
 				menu.ftChangeStart(0);
 			}
 			else if (menu.ftReturnPlayer() == 2)
@@ -184,8 +186,11 @@ int main(void)
 				player->ftInitPlayerImgs(2);
 				player->ftChangeCtIdle(15);
 				player->ftChangeCtMove(8);
-				player->ftChangeCtJump(20);
+				player->ftChangeCtJump(15);
 				player->ftChangeCtFall(10);
+				player->ftInitCtMoveX(55);
+				player->ftInitCtMoveY(108, "Idle");
+				player->ftInitCtMoveY(86, "Move");
 				menu.ftChangeStart(0);
 			}
 		}
@@ -215,63 +220,63 @@ int main(void)
 
 void	ftImgsGestion(Player *player, int *i)
 {
-	player->ftMovePosition(-25, 0);
+	player->ftMovePosition(-player->ftReturnCtMoveX(), 0);
 
 	if (player->ftReturnCt() == 0 && player->ftReturnFace() == 0) // Idle right
 	{
-		player->ftMovePosition(0, -100);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Idle"));
 		DrawTextureEx(player->ftReturnGoodImage("Idle Ri", *i / player->ftReturnCtIdle()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 100);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Idle"));
 	}
 	else if (player->ftReturnCt() == 0 && player->ftReturnFace() == 1) // Idle left
 	{
-		player->ftMovePosition(0, -100);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Idle"));
 		DrawTextureEx(player->ftReturnGoodImage("Idle Lft", *i / player->ftReturnCtIdle()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 100);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Idle"));
 	}
 	else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 0) // move right
 	{
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Move Ri", *i / player->ftReturnCtMove()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 	}
 	else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 1) // move lft
 	{
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Move Lft", *i / player->ftReturnCtMove()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 	}
 	else if (player->ftReturnCt() == 4 && player->ftReturnFace() == 0) // Jump right
 	{
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Jump Ri", *i / player->ftReturnCtJump()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 	}
 	else if (player->ftReturnCt() == 4 && player->ftReturnFace() == 1) // Jump left
 	{
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Jump Lft", *i / player->ftReturnCtJump()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 	}
 	else if (player->ftReturnCt() == 5 && player->ftReturnFace() == 0) // Fall right
 	{
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Fall Ri", *i / player->ftReturnCtFall()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 		if (*i >= 19)
 			*i = 0;
 	}
 	else if (player->ftReturnCt() == 5 && player->ftReturnFace() == 1) // Fall left
 	{
 		// std::cout << "FALL L" << std::endl;
-		player->ftMovePosition(0, -95);
+		player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
 		DrawTextureEx(player->ftReturnGoodImage("Fall Lft", *i / player->ftReturnCtFall()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, 95);
+		player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
 		if (*i >= 19)
 			*i = 0;
 	}
 
-	player->ftMovePosition(+25, 0);
+	player->ftMovePosition(player->ftReturnCtMoveX(), 0);
 	*i += 1;
 }
 

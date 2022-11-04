@@ -40,6 +40,11 @@ class Player
 		int			ftReturnFace(void) const;
 		void		ftChangeFace(int face);
 
+		void		ftInitCtMoveX(int ct);
+		void		ftInitCtMoveY(int ct, std::string string);
+		int			ftReturnCtMoveX(void) const;
+		int			ftReturnctMoveY(std::string string) const;
+
 		int			ftReturnCtIdle(void) const;
 		void		ftChangeCtIdle(int ct);
 		int			ftReturnCtMove(void) const;
@@ -58,8 +63,11 @@ class Player
 		Texture2D	p1_jumpr[3];
 		Texture2D	p1_falll[2];
 		Texture2D	p1_fallr[2];
-		int			ct;
-		int			face;
+		int			ct = 0;
+		int			face = 0;
+		int			moveX;
+		int			moveIdleY;
+		int			moveMoveY;
 
 		Vector2		position;
 		float		speed;
