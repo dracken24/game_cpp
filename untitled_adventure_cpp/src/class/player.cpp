@@ -1,4 +1,4 @@
-#include "../includes/player.hpp"
+#include "../myIncludes/player.hpp"
 
 Player::Player()
 {
@@ -273,4 +273,5 @@ int		Player::ftReturnctMoveY(std::string string) const
 		return (this->moveIdleY);
 	else if (string == "Move")
 		return (this->moveMoveY);
+	return (0);
 }
