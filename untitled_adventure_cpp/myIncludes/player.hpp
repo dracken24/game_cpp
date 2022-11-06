@@ -37,6 +37,8 @@ class Player
 
 		int			ftReturnCt(void) const;
 		void		ftChangeCt(int ct);
+		int			ftReturnAttackCt(void) const;
+		void		ftChangeAttackCt(int ct);
 		int			ftReturnFace(void) const;
 		void		ftChangeFace(int face);
 
@@ -44,6 +46,10 @@ class Player
 		void		ftInitCtMoveY(int ct, std::string string);
 		int			ftReturnCtMoveX(void) const;
 		int			ftReturnctMoveY(std::string string) const;
+		int			ftReturnMoveAttackX(void) const;
+		void		ftChangeMoveAttackX(int ct);
+		int			ftReturnMoveAttackY(void) const;
+		void		ftChangeMoveAttackY(int ct);
 
 		int			ftReturnCtIdle(void) const;
 		void		ftChangeCtIdle(int ct);
@@ -53,6 +59,8 @@ class Player
 		void		ftChangeCtJump(int ct);
 		int			ftReturnCtFall(void) const;
 		void		ftChangeCtFall(int ct);
+		int			ftReturnCtAttack(void) const;
+		void		ftChangeCtAttack(int ct);
 
 	private:
 		Texture2D	p1_idle_ri[4];
@@ -63,11 +71,16 @@ class Player
 		Texture2D	p1_jumpr[3];
 		Texture2D	p1_falll[2];
 		Texture2D	p1_fallr[2];
+		Texture2D	p1_attack00ri[7];
+		Texture2D	p1_attack00lft[7];
 		int			ct = 0;
+		int			ctA = 0;
 		int			face = 0;
 		int			moveX;
 		int			moveIdleY;
 		int			moveMoveY;
+		int			moveAttackX = 0;
+		int			moveAttackY = 0;
 
 		Vector2		position;
 		float		speed;
@@ -76,6 +89,7 @@ class Player
 		int			ctMove;
 		int			ctJump;
 		int			ctFall;
+		int			ctAttack;
 };
 
 #endif

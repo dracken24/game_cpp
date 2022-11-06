@@ -10,8 +10,9 @@ Player::~Player()
 	return ;
 }
 
-void	Player::ftInitImgsEd(void)
+void	Player::ftInitImgsEd(void) // Edward Elrick
 {
+	// Idle
 	this->p1_idle_ri[0] = LoadTexture("./imgs/edward_elric/ed_idle_ri/ed_idleri_00.png");
 	this->p1_idle_ri[1] = LoadTexture("./imgs/edward_elric/ed_idle_ri/ed_idleri_01.png");
 	this->p1_idle_ri[2] = LoadTexture("./imgs/edward_elric/ed_idle_ri/ed_idleri_02.png");
@@ -22,18 +23,21 @@ void	Player::ftInitImgsEd(void)
 	this->p1_idle_lft[2] = LoadTexture("./imgs/edward_elric/ed_idle_lft/ed_idlelft_02.png");
 	this->p1_idle_lft[3] = LoadTexture("./imgs/edward_elric/ed_idle_lft/ed_idlelft_03.png");
 
+	// Jump
 	this->p1_jumpr[0] = LoadTexture("./imgs/edward_elric/ed_jumpri/ed_jumpr_00.png");
 	this->p1_jumpr[1] = LoadTexture("./imgs/edward_elric/ed_jumpri/ed_jumpr_01.png");
 
 	this->p1_jumpl[0] = LoadTexture("./imgs/edward_elric/ed_jumplft/ed_jumpl_00.png");
 	this->p1_jumpl[1] = LoadTexture("./imgs/edward_elric/ed_jumplft/ed_jumpl_01.png");
 
+	// Fall
 	this->p1_falll[0] = LoadTexture("./imgs/edward_elric/ed_falllft/ed_falll_00.png");
 	this->p1_falll[1] = LoadTexture("./imgs/edward_elric/ed_falllft/ed_falll_01.png");
 
 	this->p1_fallr[0] = LoadTexture("./imgs/edward_elric/ed_fallri/ed_fallr_00.png");
 	this->p1_fallr[1] = LoadTexture("./imgs/edward_elric/ed_fallri/ed_fallr_01.png");
 
+	// Move
 	this->p1_runRi[0] = LoadTexture("./imgs/edward_elric/ed_run_right/ed_runr_00.png");
 	this->p1_runRi[1] = LoadTexture("./imgs/edward_elric/ed_run_right/ed_runr_01.png");
 	this->p1_runRi[2] = LoadTexture("./imgs/edward_elric/ed_run_right/ed_runr_02.png");
@@ -47,10 +51,28 @@ void	Player::ftInitImgsEd(void)
 	this->p1_runLft[3] = LoadTexture("./imgs/edward_elric/ed_run_lft/ed_runl_03.png");
 	this->p1_runLft[4] = LoadTexture("./imgs/edward_elric/ed_run_lft/ed_runl_04.png");
 	this->p1_runLft[5] = LoadTexture("./imgs/edward_elric/ed_run_lft/ed_runl_05.png");
+
+	// Attack 00
+	this->p1_attack00ri[0] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_00.png");
+	this->p1_attack00ri[1] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_01.png");
+	this->p1_attack00ri[2] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_02.png");
+	this->p1_attack00ri[3] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_03.png");
+	this->p1_attack00ri[4] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_04.png");
+	this->p1_attack00ri[5] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_05.png");
+	this->p1_attack00ri[6] = LoadTexture("./imgs/edward_elric/ed_attack_ri_00/ed_att_ri_06.png");
+
+	this->p1_attack00lft[0] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_00.png");
+	this->p1_attack00lft[1] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_01.png");
+	this->p1_attack00lft[2] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_02.png");
+	this->p1_attack00lft[3] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_03.png");
+	this->p1_attack00lft[4] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_04.png");
+	this->p1_attack00lft[5] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_05.png");
+	this->p1_attack00lft[6] = LoadTexture("./imgs/edward_elric/ed_attack_lft_00/ed_att_lft_06.png");
 }
 
-void	Player::ftInitImgsIchigo(void)
+void	Player::ftInitImgsIchigo(void) // Ichigo Kurosaki
 {
+	// Idle
 	this->p1_idle_ri[0] = LoadTexture("./imgs/ichigo/ichigo_idleri/ichigo_idleri_00.png");
 	this->p1_idle_ri[1] = LoadTexture("./imgs/ichigo/ichigo_idleri/ichigo_idleri_01.png");
 	this->p1_idle_ri[2] = LoadTexture("./imgs/ichigo/ichigo_idleri/ichigo_idleri_02.png");
@@ -61,6 +83,7 @@ void	Player::ftInitImgsIchigo(void)
 	this->p1_idle_lft[2] = LoadTexture("./imgs/ichigo/ichigo_idlelft/ichigo_idlelft_02.png");
 	this->p1_idle_lft[3] = LoadTexture("./imgs/ichigo/ichigo_idlelft/ichigo_idlelft_03.png");
 
+	// Jump
 	this->p1_jumpr[0] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_00.png");
 	this->p1_jumpr[1] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_01.png");
 	this->p1_jumpr[2] = LoadTexture("./imgs/ichigo/ichigo_jumpri/ichigo_jumpri_02.png");
@@ -69,12 +92,14 @@ void	Player::ftInitImgsIchigo(void)
 	this->p1_jumpl[1] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_01.png");
 	this->p1_jumpl[2] = LoadTexture("./imgs/ichigo/ichigo_jumplft/ichigo_jumplft_02.png");
 
+	// Fall
 	this->p1_falll[0] = LoadTexture("./imgs/ichigo/ichigo_falllft/ichigo_falllft_00.png");
 	this->p1_falll[1] = LoadTexture("./imgs/ichigo/ichigo_falllft/ichigo_falllft_01.png");
 
 	this->p1_fallr[0] = LoadTexture("./imgs/ichigo/ichigo_fallri/ichigo_fallri_00.png");
 	this->p1_fallr[1] = LoadTexture("./imgs/ichigo/ichigo_fallri/ichigo_fallri_01.png");
 
+	//Move
 	this->p1_runRi[0] = LoadTexture("./imgs/ichigo/ichigo_moveri/ichigo_moveri_00.png");
 	this->p1_runRi[1] = LoadTexture("./imgs/ichigo/ichigo_moveri/ichigo_moveri_01.png");
 	this->p1_runRi[2] = LoadTexture("./imgs/ichigo/ichigo_moveri/ichigo_moveri_02.png");
@@ -92,6 +117,23 @@ void	Player::ftInitImgsIchigo(void)
 	this->p1_runLft[5] = LoadTexture("./imgs/ichigo/ichigo_movelft/ichigo_movelft_05.png");
 	this->p1_runLft[6] = LoadTexture("./imgs/ichigo/ichigo_movelft/ichigo_movelft_06.png");
 	this->p1_runLft[7] = LoadTexture("./imgs/ichigo/ichigo_movelft/ichigo_movelft_07.png");
+
+	// Attack 00
+	this->p1_attack00ri[0] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_00.png");
+	this->p1_attack00ri[1] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_01.png");
+	this->p1_attack00ri[2] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_02.png");
+	this->p1_attack00ri[3] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_03.png");
+	this->p1_attack00ri[4] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_04.png");
+	this->p1_attack00ri[5] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_05.png");
+	this->p1_attack00ri[6] = LoadTexture("./imgs/ichigo/ichigo_attack_ri_00/ichigo_sa_ri_06.png");
+
+	this->p1_attack00lft[0] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_00.png");
+	this->p1_attack00lft[1] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_01.png");
+	this->p1_attack00lft[2] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_02.png");
+	this->p1_attack00lft[3] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_03.png");
+	this->p1_attack00lft[4] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_04.png");
+	this->p1_attack00lft[5] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_05.png");
+	this->p1_attack00lft[6] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_06.png");
 }
 
 Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
@@ -112,6 +154,10 @@ Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
 		return (this->p1_fallr[ct]);
 	else if (string == "Fall Lft")
 		return (this->p1_falll[ct]);
+	else if (string == "Attack 00 Lft")
+		return (this->p1_attack00lft[ct]);
+	else if (string == "Attack 00 Ri")
+		return (this->p1_attack00ri[ct]);
 	return (this->p1_idle_ri[0]);
 }
 
@@ -189,19 +235,29 @@ void	Player::ftChangeJump(bool jump)
 	this->canJump = jump;
 }
 
-int		Player::ftReturnCt(void) const
-{
-	return (this->ct);
-}
-
 int		Player::ftReturnFace(void) const
 {
 	return (this->face);
 }
 
+int		Player::ftReturnCt(void) const
+{
+	return (this->ct);
+}
+
 void	Player::ftChangeCt(int ct)
 {
 	this->ct = ct;
+}
+
+int		Player::ftReturnAttackCt(void) const
+{
+	return (this->ctA);
+}
+
+void	Player::ftChangeAttackCt(int ct)
+{
+	this->ctA = ct;
 }
 
 void	Player::ftChangeFace(int face)
@@ -249,6 +305,16 @@ void	Player::ftChangeCtFall(int ct)
 	this->ctFall = ct;
 }
 
+int		Player::ftReturnCtAttack(void) const
+{
+	return (this->ctAttack);
+}
+
+void	Player::ftChangeCtAttack(int ct)
+{
+	this->ctAttack = ct;
+}
+
 void	Player::ftInitCtMoveX(int ct)
 {
 	this->moveX = ct;
@@ -274,4 +340,24 @@ int		Player::ftReturnctMoveY(std::string string) const
 	else if (string == "Move")
 		return (this->moveMoveY);
 	return (0);
+}
+
+int		Player::ftReturnMoveAttackX(void) const
+{
+	return (this->moveAttackX);
+}
+
+void	Player::ftChangeMoveAttackX(int ct)
+{
+	this->moveAttackX = ct;
+}
+
+int		Player::ftReturnMoveAttackY(void) const
+{
+	return (this->moveAttackY);
+}
+
+void	Player::ftChangeMoveAttackY(int ct)
+{
+	this->moveAttackY = ct;
 }

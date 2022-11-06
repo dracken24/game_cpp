@@ -3,6 +3,7 @@
 
 #include "../vendor/raylib/src/raylib.h"
 #include "../vendor/raylib/src/raymath.h"
+#include "../myIncludes/props.hpp"
 #include "menu.hpp"
 
 #include <string>
@@ -22,6 +23,7 @@ typedef struct Game {
     const int   screenWidth = 1200;
     const int   screenHeight = 800;
     int         characterSelection = 0;
+    int         ct_action = 0;
 
     void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int);
 }   Game;
@@ -37,10 +39,10 @@ void	ftChooseMenu(Menu *menu);
 
 void 	ftUpdateCameraCenter(Camera2D *camera, Player *player, EnvItem *envItems,
 		int envItemsLength, float delta, int width, int height);
-void 	ftUpdatePlayer(Player *player, EnvItem *envItems, int envItemsLength, float delta);
-void	ftImgsGestion(Player *player, int *i);
+void 	ftUpdatePlayer(Game *Game, Player *player, EnvItem *envItems, int envItemsLength, float delta);
+void	ftImgsGestion(Game *Game, Player *player);
 
-void	ftRoutine(Game *Game, Player *player, Camera2D *camera);
-void	ftKeyGestion(Player *player, float delta);
+void	ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks);
+void	ftKeyGestion(Game *Game, Player *player, float delta);
 
 #endif

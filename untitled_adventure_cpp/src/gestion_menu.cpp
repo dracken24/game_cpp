@@ -87,6 +87,9 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 		player->ftInitCtMoveX(25);
 		player->ftInitCtMoveY(100, "Idle");
 		player->ftInitCtMoveY(95, "Move");
+		player->ftChangeCtAttack(42 / 7);
+		player->ftChangeMoveAttackX(101);
+		player->ftChangeMoveAttackY(102);
 		menu->ftChangeStart(0);
 	}
 	else if (menu->ftReturnPlayer() == 2)
@@ -99,6 +102,9 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 		player->ftInitCtMoveX(55);
 		player->ftInitCtMoveY(108, "Idle");
 		player->ftInitCtMoveY(86, "Move");
+		player->ftChangeCtAttack(42 / 7);
+		player->ftChangeMoveAttackX(30);
+		player->ftChangeMoveAttackY(100);
 		menu->ftChangeStart(0);
 	}
 }
