@@ -1,7 +1,7 @@
-#include "../myIncludes/player.hpp"
+#include "../myIncludes/class/player.hpp"
+#include "../myIncludes/class/menu.hpp"
+#include "../myIncludes/class/props.hpp"
 #include "../myIncludes/game.hpp"
-#include "../myIncludes/menu.hpp"
-#include "../myIncludes/props.hpp"
 
 void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 {
@@ -25,11 +25,11 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	lastAction = player->ftReturnCt();
 	if (Game->ct_action >= 60 || lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
-	float deltaTime = GetFrameTime();
+	Game->delta = GetFrameTime();
 
-	Game->cameraUpdaters[cameraOption](camera, player, envItems, envItemsLength, deltaTime, Game->screenWidth, Game->screenHeight);
+	Game->cameraUpdaters[cameraOption](camera, player, envItems, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
 
-	ftUpdatePlayer(Game, player, envItems, envItemsLength, deltaTime);
+	ftUpdatePlayer(Game, player, envItems, envItemsLength, Game->delta);
 	if (lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
 
@@ -39,21 +39,31 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	else if (camera->zoom < 0.25f)
 		camera->zoom = 0.25f;
 
+	/***********************************************************************************************************/
+	if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(0), player->ftReturnCollisionBox()))// Test collision
+	{
+		// std::cout << "Collision" << std::endl;
+		if (player->ftReturnFace() == 0)
+			blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, 0);
+		else if (player->ftReturnFace() == 1)
+			blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, 0);
+	}
+	/***********************************************************************************************************/
+
+	ftGestionProps(blocks, envItems, Game->delta, envItemsLength);
+	// DrawRectangle(player->ftReturnPlayerPositionX() + 25, player->ftReturnPlayerPositionY() - 98, player->ftReturnCollBoxSize('W'), player->ftReturnCollBoxSize('H'), BLACK);
+	player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + player->ftReturnAjustCollBox('X'), player->ftReturnPlayerPositionY() - player->ftReturnAjustCollBox('Y')},
+							  {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')}, {player->ftReturnAjustCollBox('X'), player->ftReturnAjustCollBox('Y')});
+	// DrawRectangleRec(player->ftReturnCollisionBox(), BLACK);
+	ftImgsGestion(Game, player);
+
 	if (IsKeyPressed(KEY_R))
 	{
 		camera->zoom = 1.0f;
 		player->ftSetPosition({500.0f, 300.0f});
 		blocks->ftSetPosSquareProp({200, 200}, 0);
 	}
-
-	ftGestionProps(blocks, envItems, deltaTime, envItemsLength);
-	// DrawRectangle(player->ftReturnPlayerPositionX() + 25, player->ftReturnPlayerPositionY() - 98, player->ftReturnCollBoxSize('W'), player->ftReturnCollBoxSize('H'), BLACK);
-	player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + player->ftReturnAjustCollBox('X'), player->ftReturnPlayerPositionY() - player->ftReturnAjustCollBox('Y')},
-							  {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')}, {player->ftReturnAjustCollBox('X'), player->ftReturnAjustCollBox('Y')});
-	DrawRectangleRec(player->ftReturnCollisionBox(), BLACK);
-	ftImgsGestion(Game, player);
-
-	if (IsKeyDown(KEY_I))
+	else if (IsKeyDown(KEY_I))
 	{
 		DrawText("Controls:", 20, 20, 10, BLACK);
 		DrawText("- Right/Left to move", 40, 40, 10, DARKGRAY);
@@ -92,9 +102,9 @@ void	ftImgsGestion(Game *Game, Player *player)
 		}
 		else if (player->ftReturnCt() == 0 && player->ftReturnFace() == 1) // Idle left
 		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Idle"));
+			player->ftMovePosition(-player->ftReturnMoveIdleX(), -player->ftReturnctMoveY("Idle"));
 			DrawTextureEx(player->ftReturnGoodImage("Idle Lft", Game->ct_action / player->ftReturnCtIdle()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Idle"));
+			player->ftMovePosition(player->ftReturnMoveIdleX(), player->ftReturnctMoveY("Idle"));
 		}
 		else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 0) // move right
 		{

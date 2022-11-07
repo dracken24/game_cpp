@@ -3,9 +3,9 @@
 
 #include "../vendor/raylib/src/raylib.h"
 #include "../vendor/raylib/src/raymath.h"
-#include "../myIncludes/player.hpp"
-#include "../myIncludes/props.hpp"
-#include "menu.hpp"
+#include "../myIncludes/class/player.hpp"
+#include "../myIncludes/class/props.hpp"
+#include "../myIncludes/class/menu.hpp"
 
 #include <string>
 #include <iostream>
@@ -23,6 +23,7 @@ typedef struct EnvItem {
 typedef struct Game {
 	const int   screenWidth = 1200;
 	const int   screenHeight = 800;
+	float		delta;
 	int         characterSelection = 0;
 	int         ct_action = 0;
 

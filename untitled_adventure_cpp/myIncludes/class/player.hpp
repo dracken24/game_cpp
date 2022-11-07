@@ -59,9 +59,9 @@ class Player
 		void		ftChangeMoveAttackRiX(int ct);
 		int			ftReturnMoveIdleX(void) const;
 		void		ftChangeMoveIdleX(int ct);
-
 		int			ftReturnMoveAttackY(void) const;
 		void		ftChangeMoveAttackY(int ct);
+
 
 		int			ftReturnCtIdle(void) const;
 		void		ftChangeCtIdle(int ct);
@@ -94,7 +94,6 @@ class Player
 		int			moveAttackLftX = 0;
 		int			moveAttackRiX = 0;
 		int			moveAttackY = 0;
-		int			moveIdleX = 0;
 
 		Vector2		position;
 		Rectangle	collisionBox;
@@ -106,6 +105,7 @@ class Player
 		int			ctJump;
 		int			ctFall;
 		int			ctAttack;
+		int			moveIdleX;
 };
 
 #endif

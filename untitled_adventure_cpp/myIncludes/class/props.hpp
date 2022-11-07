@@ -14,6 +14,7 @@ class Props
         Color       ftReturnRecColorSqPr(int nbr);
         SquareProps *ftReturnSquareProp(int nbr) const;
         void        ftSetPosSquareProp(Vector2 pos, int nbr);
+        void        ftMoveSquareProp(Vector2 pos, int nbr);
 
     private:
         SquareProps *_squareProps;

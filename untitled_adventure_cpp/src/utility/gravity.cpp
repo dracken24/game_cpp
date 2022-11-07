@@ -1,6 +1,6 @@
 #include "../../vendor/raylib/src/raylib.h"
+#include "../../myIncludes/class/player.hpp"
 #include "../../myIncludes/game.hpp"
-#include "../../myIncludes/player.hpp"
 
 void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength)
 {
@@ -23,9 +23,7 @@ void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envI
 	}
 	if (!hitObstacle)
 	{
-		// player->ftMoveCollisionBox({0, player->ftReturnSpeed() * delta});
 		player->ftMovePosition(0, player->ftReturnSpeed() * delta);
-		// player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + 25, player->ftReturnPlayerPositionY() - 97}, {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		player->ftChangeSpeed(G * delta);
 		player->ftChangeJump(false);
 	}
@@ -46,12 +44,15 @@ void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItem
 		if (ei->blocking &&
 			ei->rect.x <= p->x &&
 			ei->rect.x + ei->rect.width >= p->x &&
+			// ei->rect.x + ei->rect.width >= p->x + prop->ftReturnWideorHigh(0) &&
 			ei->rect.y >= p->y &&
 			ei->rect.y <= p->y + prop->ftReturnWideorHigh(0) + prop->ftReturnSpeed() * delta)
 		{
 			hitObstacle = 1;
 			prop->ftSetSpeed(0);
 			p->y = ei->rect.y;
+			Rectangle tmp = prop->ftReturnRectangle();
+			prop->ftInitPosition({tmp.x, p->y - tmp.height});
 		}
 	}
 	if (!hitObstacle)
@@ -59,8 +60,5 @@ void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItem
 		prop->ftMovePosition(0, prop->ftReturnSpeed() * delta);
 		prop->ftChangeSpeed(G * delta);
 	}
-	// else // Rebondit
-	// 	prop->ftMovePosition(0, -1);
 }
 
-// CheckCollisionRecs()

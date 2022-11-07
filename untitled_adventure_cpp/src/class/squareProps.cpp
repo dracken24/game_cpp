@@ -1,4 +1,4 @@
-#include "../../myIncludes/squareProps.hpp"
+#include "../../myIncludes/class/squareProps.hpp"
 
 SquareProps::SquareProps(void)
 {

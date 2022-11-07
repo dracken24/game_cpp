@@ -1,6 +1,6 @@
-#include "../myIncludes/player.hpp"
+#include "../myIncludes/class/player.hpp"
+#include "../myIncludes/class/menu.hpp"
 #include "../myIncludes/game.hpp"
-#include "../myIncludes/menu.hpp"
 
 void	ftChooseMenu(Menu *menu)
 {
@@ -26,16 +26,16 @@ void	ftChooseMenu(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 420, 200, 20, DARKGRAY);
+		DrawText("<---*", 520, 200, 20, DARKGRAY);
 	}
 	else if (ct == -1)
 	{
-		DrawText("<---*", 420, 250, 20, DARKGRAY);
+		DrawText("<---*", 520, 250, 20, DARKGRAY);
 	}
 
 	if (warning >= 1)
 	{
-		DrawText("Please, Choose A Character First", 150, 0, 20, ORANGE);
+		DrawText("Please, Choose A Character First", 250, 0, 20, ORANGE);
 		warning++;
 	}
 }
@@ -62,11 +62,11 @@ void	ftChooseCharacter(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 400, 200, 20, DARKGRAY);
+		DrawText("<---*", 500, 200, 20, DARKGRAY);
 	}
 	else if (ct == -1)
 	{
-		DrawText("<---*", 400, 250, 20, DARKGRAY);
+		DrawText("<---*", 500, 250, 20, DARKGRAY);
 	}
 }
 
@@ -74,9 +74,9 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 {
 	menu->ftChangePlayer(0);
 	ftChooseCharacter(menu);
-	DrawText("Choose Your Character", 150, 100, 40, BLACK);
-	DrawText("Edward Elric", 150, 200, 20, DARKGRAY);
-	DrawText("Ichigo Kurosaki", 150, 250, 20, DARKGRAY);
+	DrawText("Choose Your Character", 250, 100, 40, BLACK);
+	DrawText("Edward Elric", 250, 200, 20, DARKGRAY);
+	DrawText("Ichigo Kurosaki", 250, 250, 20, DARKGRAY);
 	if (menu->ftReturnPlayer() == 1)
 	{
 		player->ftInitPlayerImgs(1);
@@ -85,14 +85,14 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 		player->ftChangeCtMove(10);
 		player->ftChangeCtJump(25);
 		player->ftChangeCtFall(10);
-		player->ftInitCtMoveX(75);
+		player->ftInitCtMoveX(77);
 		player->ftInitCtMoveY(120, "Idle");
 		player->ftInitCtMoveY(120, "Move");
 		player->ftChangeCtAttack(42 / 7);
-		player->ftChangeMoveAttackLftX(55);
-		player->ftChangeMoveAttackRiX(-55);
+		player->ftChangeMoveAttackLftX(20);
+		player->ftChangeMoveAttackRiX(-20);
 		player->ftChangeMoveAttackY(118);
-		// player->ftChangeMoveIdleX(0);
+		player->ftChangeMoveIdleX(0);
 		menu->ftChangeStart(0);
 	}
 	else if (menu->ftReturnPlayer() == 2)
@@ -110,7 +110,7 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 		player->ftChangeMoveAttackLftX(0);
 		player->ftChangeMoveAttackRiX(0);
 		player->ftChangeMoveAttackY(118);
-		// player->ftChangeMoveIdleX(0);
+		player->ftChangeMoveIdleX(-10);
 		menu->ftChangeStart(0);
 	}
 }

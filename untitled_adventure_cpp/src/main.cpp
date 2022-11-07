@@ -1,7 +1,7 @@
-#include "../myIncludes/player.hpp"
+#include "../myIncludes/class/player.hpp"
+#include "../myIncludes/class/menu.hpp"
+#include "../myIncludes/class/props.hpp"
 #include "../myIncludes/game.hpp"
-#include "../myIncludes/menu.hpp"
-#include "../myIncludes/props.hpp"
 
 int main(void)
 {
@@ -50,9 +50,9 @@ int main(void)
 		if (menu.ftReturnStart() == 0) // Meni intro
 		{
 			ftChooseMenu(&menu);
-			DrawText("Untitled Adventure Game", 150, 100, 40, BLACK);
-			DrawText("Choose Your Character", 150, 200, 20, DARKGRAY);
-			DrawText("Start Game", 150, 250, 20, DARKGRAY);
+			DrawText("Untitled Adventure Game", 250, 100, 40, BLACK);
+			DrawText("Choose Your Character", 250, 200, 20, DARKGRAY);
+			DrawText("Start Game", 250, 250, 20, DARKGRAY);
 		}
 		else if (menu.ftReturnStart() == 1)// Menu choose character
 		{

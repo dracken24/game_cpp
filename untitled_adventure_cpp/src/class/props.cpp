@@ -1,4 +1,4 @@
-#include "../../myIncludes/props.hpp"
+#include "../../myIncludes/class/props.hpp"
 
 Props::Props(int nbr)
 {
@@ -35,4 +35,9 @@ SquareProps	*Props::ftReturnSquareProp(int nbr) const
 void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
 {
 	this->_squareProps[nbr].ftInitPosition(pos);
+}
+
+void	Props::ftMoveSquareProp(Vector2 pos, int nbr)
+{
+	this->_squareProps[nbr].ftMovePosition(pos.x, pos.y);
 }
