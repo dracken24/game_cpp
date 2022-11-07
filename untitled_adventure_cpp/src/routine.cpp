@@ -6,7 +6,7 @@
 void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 {
 	// static int i;
-	static int k;
+	static int lastAction;
 	static int cameraOption = 0;
 
 	EnvItem envItems[] = {
@@ -22,36 +22,35 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 
 	int envItemsLength = sizeof(envItems) / sizeof(envItems[0]);
 
-	k = player->ftReturnCt();
-	if (Game->ct_action >= 60 || k != player->ftReturnCt())
+	lastAction = player->ftReturnCt();
+	if (Game->ct_action >= 60 || lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
 	float deltaTime = GetFrameTime();
 
 	Game->cameraUpdaters[cameraOption](camera, player, envItems, envItemsLength, deltaTime, Game->screenWidth, Game->screenHeight);
 
 	ftUpdatePlayer(Game, player, envItems, envItemsLength, deltaTime);
-	if (k != player->ftReturnCt())
+	if (lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
 
 	camera->zoom += ((float)GetMouseWheelMove() * 0.05f);
-
 	if (camera->zoom > 3.0f)
 		camera->zoom = 3.0f;
 	else if (camera->zoom < 0.25f)
 		camera->zoom = 0.25f;
+
 	if (IsKeyPressed(KEY_R))
 	{
 		camera->zoom = 1.0f;
 		player->ftSetPosition({500.0f, 300.0f});
+		blocks->ftSetPosSquareProp({200, 200}, 0);
 	}
 
-	for (int i = 0; i < envItemsLength; i++)
-		DrawRectangleRec(envItems[i].rect, envItems[i].color);
-
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(0), blocks->ftReturnRecColorSqPr(0));
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(1), blocks->ftReturnRecColorSqPr(1));
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(2), blocks->ftReturnRecColorSqPr(2));
-
+	ftGestionProps(blocks, envItems, deltaTime, envItemsLength);
+	// DrawRectangle(player->ftReturnPlayerPositionX() + 25, player->ftReturnPlayerPositionY() - 98, player->ftReturnCollBoxSize('W'), player->ftReturnCollBoxSize('H'), BLACK);
+	player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + player->ftReturnAjustCollBox('X'), player->ftReturnPlayerPositionY() - player->ftReturnAjustCollBox('Y')},
+							  {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')}, {player->ftReturnAjustCollBox('X'), player->ftReturnAjustCollBox('Y')});
+	DrawRectangleRec(player->ftReturnCollisionBox(), BLACK);
 	ftImgsGestion(Game, player);
 
 	if (IsKeyDown(KEY_I))
@@ -64,6 +63,20 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	}
 }
 
+/*******************************************************************************************
+	Gestion Des objets (Plateforms wlakable, objets du decor ...)
+*******************************************************************************************/
+void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength)
+{
+	for (int i = 0; i < envItemsLength; i++)
+		DrawRectangleRec(envItems[i].rect, envItems[i].color);
+
+	DrawRectangleRec(blocks->ftReturnRectangleSqPr(0), blocks->ftReturnRecColorSqPr(0));
+	DrawRectangleRec(blocks->ftReturnRectangleSqPr(1), blocks->ftReturnRecColorSqPr(1));
+	DrawRectangleRec(blocks->ftReturnRectangleSqPr(2), blocks->ftReturnRecColorSqPr(2));
+	ftUseGravity(blocks->ftReturnSquareProp(0), envItems, deltaTime, envItemsLength);
+}
+/******************************************************************************************/
 
 void	ftImgsGestion(Game *Game, Player *player)
 {
@@ -127,9 +140,9 @@ void	ftImgsGestion(Game *Game, Player *player)
 
 	if (player->ftReturnAttackCt() == 1 && player->ftReturnFace() == 1) // Attack left
 	{
-		player->ftMovePosition(-player->ftReturnMoveAttackX(), -player->ftReturnMoveAttackY());
+		player->ftMovePosition(-player->ftReturnMoveAttackLftX(), -player->ftReturnMoveAttackY());
 		DrawTextureEx(player->ftReturnGoodImage("Attack 00 Lft", Game->ct_action / player->ftReturnCtAttack()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(player->ftReturnMoveAttackX(), player->ftReturnMoveAttackY());
+		player->ftMovePosition(player->ftReturnMoveAttackLftX(), player->ftReturnMoveAttackY());
 		if (Game->ct_action >= 35)
 		{
 			player->ftChangeAttackCt(0);
@@ -139,9 +152,9 @@ void	ftImgsGestion(Game *Game, Player *player)
 	}
 	else if (player->ftReturnAttackCt() == 1 && player->ftReturnFace() == 0) // Attack right
 	{
-		player->ftMovePosition(0, -player->ftReturnMoveAttackY());
+		player->ftMovePosition(-player->ftReturnMoveAttackRiX(), -player->ftReturnMoveAttackY());
 		DrawTextureEx(player->ftReturnGoodImage("Attack 00 Ri", Game->ct_action / player->ftReturnCtAttack()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(0, player->ftReturnMoveAttackY());
+		player->ftMovePosition(player->ftReturnMoveAttackRiX(), player->ftReturnMoveAttackY());
 		if (Game->ct_action >= 35)
 		{
 			player->ftChangeAttackCt(0);
@@ -166,6 +179,7 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 		{
 			player->ftChangeFace(1);
 		}
+		player->ftMoveCollisionBox({-(PLAYER_HOR_SPD * delta), 0});
 		player->ftMovePosition(-(PLAYER_HOR_SPD * delta), 0);
 	}
 	if (IsKeyDown(KEY_D)) // Move right
@@ -178,6 +192,7 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 		{
 			player->ftChangeFace(0);
 		}
+		player->ftMoveCollisionBox({PLAYER_HOR_SPD * delta, 0});
 		player->ftMovePosition(PLAYER_HOR_SPD * delta, 0);
 	}
 	if (IsKeyDown(KEY_SPACE) && player->ftReturnJump()) // Jump
@@ -203,33 +218,6 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 	}
 }
 
-// void	ftUseGravity()
-// {
-// 	int hitObstacle = 0;
-
-// 	EnvItem *ei = envItems + i;
-// 	Vector2 *p = player->ftReturnPlayerPositionPtr();
-// 	if (ei->blocking &&
-// 		ei->rect.x <= p->x &&
-// 		ei->rect.x + ei->rect.width >= p->x &&
-// 		ei->rect.y >= p->y &&
-// 		ei->rect.y <= p->y + player->ftReturnSpeed() * delta)
-// 	{
-// 		hitObstacle = 1;
-// 		player->ftSetSpeed(0);
-// 		p->y = ei->rect.y;
-// 	}
-
-// 	if (!hitObstacle)
-// 	{
-// 		player->ftMovePosition(0, player->ftReturnSpeed() * delta);
-// 		player->ftChangeSpeed(G * delta);
-// 		player->ftChangeJump(false);
-// 	}
-// 	else
-// 		player->ftChangeJump(true);
-// }
-
 void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLength, float delta)
 {
 	static float		lastY;
@@ -237,31 +225,9 @@ void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLe
 	if (!lastY)
 		lastY = 0;
 	lastY = player->ftReturnPlayerPositionY();
+
 	ftKeyGestion(Game, player, delta);
-	int hitObstacle = 0;
-	for (int i = 0; i < envItemsLength; i++)
-	{
-		EnvItem *ei = envItems + i;
-		Vector2 *p = player->ftReturnPlayerPositionPtr();
-		if (ei->blocking &&
-			ei->rect.x <= p->x &&
-			ei->rect.x + ei->rect.width >= p->x &&
-			ei->rect.y >= p->y &&
-			ei->rect.y <= p->y + player->ftReturnSpeed() * delta)
-		{
-			hitObstacle = 1;
-			player->ftSetSpeed(0);
-			p->y = ei->rect.y;
-		}
-	}
-	if (!hitObstacle)
-	{
-		player->ftMovePosition(0, player->ftReturnSpeed() * delta);
-		player->ftChangeSpeed(G * delta);
-		player->ftChangeJump(false);
-	}
-	else
-		player->ftChangeJump(true);
+	ftUsePlayerGravity(player, envItems, delta, envItemsLength);
 
 	if (lastY < player->ftReturnPlayerPositionY() && player->ftReturnAttackCt() == 0)
 	{
@@ -278,4 +244,3 @@ void ftUpdateCameraCenter(Camera2D *camera, Player *player, EnvItem *envItems, i
 	camera->offset = (Vector2){width / 2.0f, height / 2.0f};
 	camera->target = player->ftReturnPlayerPosition();
 }
-

@@ -34,6 +34,12 @@ class Player
 		void		ftChangeJump(bool jump);
 
 		Texture2D	ftReturnGoodImage(std::string string, int ct);
+		void		ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust);
+		Rectangle	ftReturnCollisionBox(void) const;
+		void		ftMoveCollisionBox(Vector2 pos);
+		int			ftReturnCollBoxPos(char c) const;
+		int			ftReturnCollBoxSize(char c) const;
+		float		ftReturnAjustCollBox(char c) const;
 
 		int			ftReturnCt(void) const;
 		void		ftChangeCt(int ct);
@@ -46,8 +52,14 @@ class Player
 		void		ftInitCtMoveY(int ct, std::string string);
 		int			ftReturnCtMoveX(void) const;
 		int			ftReturnctMoveY(std::string string) const;
-		int			ftReturnMoveAttackX(void) const;
-		void		ftChangeMoveAttackX(int ct);
+
+		int			ftReturnMoveAttackLftX(void) const;
+		void		ftChangeMoveAttackLftX(int ct);
+		int			ftReturnMoveAttackRiX(void) const;
+		void		ftChangeMoveAttackRiX(int ct);
+		int			ftReturnMoveIdleX(void) const;
+		void		ftChangeMoveIdleX(int ct);
+
 		int			ftReturnMoveAttackY(void) const;
 		void		ftChangeMoveAttackY(int ct);
 
@@ -79,10 +91,14 @@ class Player
 		int			moveX;
 		int			moveIdleY;
 		int			moveMoveY;
-		int			moveAttackX = 0;
+		int			moveAttackLftX = 0;
+		int			moveAttackRiX = 0;
 		int			moveAttackY = 0;
+		int			moveIdleX = 0;
 
 		Vector2		position;
+		Rectangle	collisionBox;
+		Vector2		adjustCollBox;
 		float		speed;
 		bool		canJump;
 		int			ctIdle;

@@ -178,6 +178,54 @@ void	Player::ftInitPlayerImgs(int nbr)
 	}
 }
 
+void	Player::ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust)
+{
+	this->collisionBox.x = pos.x;
+	this->collisionBox.y = pos.y;
+	this->collisionBox.width = size.x;
+	this->collisionBox.height = size.y;
+	this->adjustCollBox.x = ajust.x;
+	this->adjustCollBox.y = ajust.y;
+}
+
+float	Player::ftReturnAjustCollBox(char c) const
+{
+	if (c == 'X')
+		return (this->adjustCollBox.x);
+	if (c == 'Y')
+		return (this->adjustCollBox.y);
+	return (0);
+}
+
+Rectangle	Player::ftReturnCollisionBox(void) const
+{
+	return (this->collisionBox);
+}
+
+void	Player::ftMoveCollisionBox(Vector2 pos)
+{
+	this->collisionBox.x += pos.x;
+	this->collisionBox.y += pos.y;
+}
+
+int		Player::ftReturnCollBoxPos(char c) const
+{
+	if (c == 'X')
+		return (this->collisionBox.x);
+	else if (c == 'Y')
+		return (this->collisionBox.y);
+	return (0);
+}
+
+int		Player::ftReturnCollBoxSize(char c) const
+{
+	if (c == 'W')
+		return (this->collisionBox.width);
+	else if (c == 'H')
+		return (this->collisionBox.height);
+	return (0);
+}
+
 void    Player::ftChangePosition(float x, float y)
 {
 	this->position.x = x;
@@ -342,14 +390,24 @@ int		Player::ftReturnctMoveY(std::string string) const
 	return (0);
 }
 
-int		Player::ftReturnMoveAttackX(void) const
+int		Player::ftReturnMoveAttackLftX(void) const
 {
-	return (this->moveAttackX);
+	return (this->moveAttackLftX);
 }
 
-void	Player::ftChangeMoveAttackX(int ct)
+void	Player::ftChangeMoveAttackLftX(int ct)
 {
-	this->moveAttackX = ct;
+	this->moveAttackLftX = ct;
+}
+
+int		Player::ftReturnMoveAttackRiX(void) const
+{
+	return (this->moveAttackRiX);
+}
+
+void	Player::ftChangeMoveAttackRiX(int ct)
+{
+	this->moveAttackRiX = ct;
 }
 
 int		Player::ftReturnMoveAttackY(void) const
@@ -360,4 +418,14 @@ int		Player::ftReturnMoveAttackY(void) const
 void	Player::ftChangeMoveAttackY(int ct)
 {
 	this->moveAttackY = ct;
+}
+
+int		Player::ftReturnMoveIdleX(void) const
+{
+	return (this->moveIdleX);
+}
+
+void	Player::ftChangeMoveIdleX(int ct)
+{
+	this->moveIdleX = ct;
 }

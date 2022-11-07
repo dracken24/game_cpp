@@ -26,3 +26,13 @@ Color	Props::ftReturnRecColorSqPr(int nbr)
 {
 	return (this->_squareProps[nbr].ftReturnRecColor());
 }
+
+SquareProps	*Props::ftReturnSquareProp(int nbr) const
+{
+	return (&this->_squareProps[nbr]);
+}
+
+void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
+{
+	this->_squareProps[nbr].ftInitPosition(pos);
+}

@@ -80,31 +80,37 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 	if (menu->ftReturnPlayer() == 1)
 	{
 		player->ftInitPlayerImgs(1);
+		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 100}, {-25, 100});
 		player->ftChangeCtIdle(15);
 		player->ftChangeCtMove(10);
 		player->ftChangeCtJump(25);
 		player->ftChangeCtFall(10);
-		player->ftInitCtMoveX(25);
-		player->ftInitCtMoveY(100, "Idle");
-		player->ftInitCtMoveY(95, "Move");
+		player->ftInitCtMoveX(75);
+		player->ftInitCtMoveY(120, "Idle");
+		player->ftInitCtMoveY(120, "Move");
 		player->ftChangeCtAttack(42 / 7);
-		player->ftChangeMoveAttackX(101);
-		player->ftChangeMoveAttackY(102);
+		player->ftChangeMoveAttackLftX(55);
+		player->ftChangeMoveAttackRiX(-55);
+		player->ftChangeMoveAttackY(118);
+		// player->ftChangeMoveIdleX(0);
 		menu->ftChangeStart(0);
 	}
 	else if (menu->ftReturnPlayer() == 2)
 	{
 		player->ftInitPlayerImgs(2);
+		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 110}, {-20, 108});
 		player->ftChangeCtIdle(15);
 		player->ftChangeCtMove(8);
 		player->ftChangeCtJump(15);
 		player->ftChangeCtFall(10);
-		player->ftInitCtMoveX(55);
-		player->ftInitCtMoveY(108, "Idle");
-		player->ftInitCtMoveY(86, "Move");
+		player->ftInitCtMoveX(70);
+		player->ftInitCtMoveY(118, "Idle");
+		player->ftInitCtMoveY(120, "Move");
 		player->ftChangeCtAttack(42 / 7);
-		player->ftChangeMoveAttackX(30);
-		player->ftChangeMoveAttackY(100);
+		player->ftChangeMoveAttackLftX(0);
+		player->ftChangeMoveAttackRiX(0);
+		player->ftChangeMoveAttackY(118);
+		// player->ftChangeMoveIdleX(0);
 		menu->ftChangeStart(0);
 	}
 }
