@@ -429,3 +429,13 @@ void	Player::ftChangeMoveIdleX(int ct)
 {
 	this->moveIdleX = ct;
 }
+
+float	Player::ftReturnLastY(void) const
+{
+	return (this->lastY);
+}
+
+void	Player::ftChangeLastY(int ct)
+{
+	this->lastY = ct;
+}

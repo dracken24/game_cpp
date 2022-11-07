@@ -2,6 +2,49 @@
 #include "../../myIncludes/class/player.hpp"
 #include "../../myIncludes/game.hpp"
 
+void	ftGravityX(Game *Game, Player *player, Props *blocks)
+{
+	int k;
+
+	for (int j = 0; j < blocks->ftReturnNbr(); j++)
+	{
+		Rectangle rect = blocks->ftReturnRectangleSqPr(j);
+		k = 0;
+		if (j == k)
+			k++;
+
+		if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnCollisionBox())) // Test collision
+		{
+
+			if (rect.x - rect.width / 2 > player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('X') / 2) // Right
+			{
+				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
+			}
+			else
+			{
+				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, j);
+			}
+		}
+
+		if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k)))
+		{
+			if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
+			{
+				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
+			}
+			else
+			{
+				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, k);
+			}
+		}
+	}
+}
+
+void	ftGravityGestion(Game *Game, Player *player, Props *blocks)
+{
+	ftGravityX(Game, player, blocks);
+}
+
 void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength)
 {
 	int hitObstacle = 0;
@@ -12,7 +55,7 @@ void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envI
 		Vector2 *p = player->ftReturnPlayerPositionPtr();
 		if (ei->blocking &&
 			ei->rect.x <= p->x &&
-			ei->rect.x + ei->rect.width >= p->x &&
+			ei->rect.x + ei->rect.width >= p->x + player->ftReturnCollBoxSize('w') &&
 			ei->rect.y >= p->y &&
 			ei->rect.y <= p->y + player->ftReturnSpeed() * delta)
 		{
@@ -35,18 +78,20 @@ void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envI
 
 void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItemsLength)
 {
+	// static int	rebound;
 	int 		hitObstacle = 0;
 
+	// if (!rebound)
+	// 	rebound = 0;
 	for (int i = 0; i < envItemsLength; i++)
 	{
 		EnvItem *ei = envItems + i;
 		Vector2 *p = prop->ftReturnPositionPtr();
 		if (ei->blocking &&
-			ei->rect.x <= p->x &&
+			ei->rect.x - prop->ftReturnWideorHigh('W') <= p->x &&
 			ei->rect.x + ei->rect.width >= p->x &&
-			// ei->rect.x + ei->rect.width >= p->x + prop->ftReturnWideorHigh(0) &&
-			ei->rect.y >= p->y &&
-			ei->rect.y <= p->y + prop->ftReturnWideorHigh(0) + prop->ftReturnSpeed() * delta)
+			ei->rect.y - prop->ftReturnWideorHigh('H') >= p->y &&
+			ei->rect.y - prop->ftReturnWideorHigh('H') <= p->y + prop->ftReturnSpeed() * delta)
 		{
 			hitObstacle = 1;
 			prop->ftSetSpeed(0);

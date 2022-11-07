@@ -52,5 +52,6 @@ void	ftKeyGestion(Game *Game, Player *player, float delta);
 
 void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength);
 void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItemsLength);
+void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
 
 #endif

@@ -10,16 +10,17 @@ SquareProps::~SquareProps(void)
 	return ;
 }
 
-void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color)
+void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, int nbr)
 {
+	this->rect.width = size.x - 1;
+	this->rect.height = size.y - 1;
 	this->rect.x = pos.x;
 	this->rect.y = pos.y;
 	this->pos.x = pos.x;
 	this->pos.y = pos.y;
-	this->rect.width = size.x;
-	this->rect.height = size.y;
 	this->color = color;
 	this->speed = 0;
+	this->_nbr = nbr;
 }
 
 Rectangle	SquareProps::ftReturnRectangle(void)
@@ -67,11 +68,44 @@ void	SquareProps::ftInitPosition(Vector2 pos)
 	this->pos.y = pos.y;
 	this->rect.y = pos.y;
 }
-float	SquareProps::ftReturnWideorHigh(int nbr)
+float	SquareProps::ftReturnWideorHigh(char c) const
 {
-	if (nbr == 0) // Width
+	if (c == 'W') // Width
 		return (this->rect.width);
-	if (nbr == 1) // Hight
+	if (c == 'H') // Hight
 		return (this->rect.height);
+	return (0);
+}
+
+float	SquareProps::ftReturnSpeedX(char c) const
+{
+	if (c == 'X')
+		return (this->speedX);
+	return (0);
+}
+
+void	SquareProps::ftSetSpeedX(float speed, char c)
+{
+	if (c == 'X')
+		this->speedX = speed;
+}
+
+void	SquareProps::ftChangeSpeedX(float speed, char c)
+{
+	if (c == 'X')
+		this->speedX += speed;
+}
+
+int		SquareProps::ftReturnNbr(void) const
+{
+	return (this->_nbr);
+}
+
+float	SquareProps::ftReturnSqurtPos(char c) const
+{
+	if (c == 'X')
+		return (this->pos.x);
+	if (c == 'Y')
+		return (this->pos.y);
 	return (0);
 }

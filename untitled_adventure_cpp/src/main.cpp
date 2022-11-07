@@ -8,11 +8,15 @@ int main(void)
 	Game 	Game;
 	Player	*player;
 	Menu	menu;
-	Props	blocks(3);
+	Props	blocks(2);
 
+	// for (int i = 0; i < blocks.ftReturnNbr(); i++)
+	// {
+	// 	blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
+	// }
 	blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
 	blocks.ftAddSquareProps({160, 200}, {24, 24}, RED, 1);
-	blocks.ftAddSquareProps({120, 200}, {24, 24}, YELLOW, 2);
+	// blocks.ftAddSquareProps({120, 200}, {24, 24}, YELLOW, 2);
 
 	InitWindow(Game.screenWidth, Game.screenHeight, "raylib [core] example - 2d camera");
 

@@ -39,15 +39,14 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	else if (camera->zoom < 0.25f)
 		camera->zoom = 0.25f;
 
-	/***********************************************************************************************************/
-	if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(0), player->ftReturnCollisionBox()))// Test collision
+	/*********************************************** Gravity ***************************************************/
+
+	ftGravityGestion(Game, player, blocks);
+	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
-		// std::cout << "Collision" << std::endl;
-		if (player->ftReturnFace() == 0)
-			blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, 0);
-		else if (player->ftReturnFace() == 1)
-			blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, 0);
+		ftUseGravity(blocks->ftReturnSquareProp(i), envItems, Game->delta, envItemsLength);
 	}
+
 	/***********************************************************************************************************/
 
 	ftGestionProps(blocks, envItems, Game->delta, envItemsLength);
@@ -59,9 +58,14 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 
 	if (IsKeyPressed(KEY_R))
 	{
+		float dist = 0;
 		camera->zoom = 1.0f;
 		player->ftSetPosition({500.0f, 300.0f});
-		blocks->ftSetPosSquareProp({200, 200}, 0);
+		for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		{
+			blocks->ftSetPosSquareProp({200 - dist, 200}, i);
+			dist += 50;
+		}
 	}
 	else if (IsKeyDown(KEY_I))
 	{
@@ -84,166 +88,21 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 	DrawRectangleRec(blocks->ftReturnRectangleSqPr(0), blocks->ftReturnRecColorSqPr(0));
 	DrawRectangleRec(blocks->ftReturnRectangleSqPr(1), blocks->ftReturnRecColorSqPr(1));
 	DrawRectangleRec(blocks->ftReturnRectangleSqPr(2), blocks->ftReturnRecColorSqPr(2));
-	ftUseGravity(blocks->ftReturnSquareProp(0), envItems, deltaTime, envItemsLength);
 }
 /******************************************************************************************/
 
-void	ftImgsGestion(Game *Game, Player *player)
-{
-	player->ftMovePosition(-player->ftReturnCtMoveX(), 0);
-
-	if (player->ftReturnAttackCt() == 0)
-	{
-		if (player->ftReturnCt() == 0 && player->ftReturnFace() == 0) // Idle right
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Idle"));
-			DrawTextureEx(player->ftReturnGoodImage("Idle Ri", Game->ct_action / player->ftReturnCtIdle()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Idle"));
-		}
-		else if (player->ftReturnCt() == 0 && player->ftReturnFace() == 1) // Idle left
-		{
-			player->ftMovePosition(-player->ftReturnMoveIdleX(), -player->ftReturnctMoveY("Idle"));
-			DrawTextureEx(player->ftReturnGoodImage("Idle Lft", Game->ct_action / player->ftReturnCtIdle()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(player->ftReturnMoveIdleX(), player->ftReturnctMoveY("Idle"));
-		}
-		else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 0) // move right
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Move Ri", Game->ct_action / player->ftReturnCtMove()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-		}
-		else if (player->ftReturnCt() == 1 && player->ftReturnFace() == 1) // move lft
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Move Lft", Game->ct_action / player->ftReturnCtMove()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-		}
-		else if (player->ftReturnCt() == 4 && player->ftReturnFace() == 0) // Jump right
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Jump Ri", Game->ct_action / player->ftReturnCtJump()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-		}
-		else if (player->ftReturnCt() == 4 && player->ftReturnFace() == 1) // Jump left
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Jump Lft", Game->ct_action / player->ftReturnCtJump()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-		}
-		else if (player->ftReturnCt() == 5 && player->ftReturnFace() == 0) // Fall right
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Fall Ri", Game->ct_action / player->ftReturnCtFall()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-			if (Game->ct_action >= 19)
-				Game->ct_action = 0;
-		}
-		else if (player->ftReturnCt() == 5 && player->ftReturnFace() == 1) // Fall left
-		{
-			player->ftMovePosition(0, -player->ftReturnctMoveY("Move"));
-			DrawTextureEx(player->ftReturnGoodImage("Fall Lft", Game->ct_action / player->ftReturnCtFall()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-			player->ftMovePosition(0, player->ftReturnctMoveY("Move"));
-			if (Game->ct_action >= 19)
-				Game->ct_action = 0;
-		}
-	}
-
-	if (player->ftReturnAttackCt() == 1 && player->ftReturnFace() == 1) // Attack left
-	{
-		player->ftMovePosition(-player->ftReturnMoveAttackLftX(), -player->ftReturnMoveAttackY());
-		DrawTextureEx(player->ftReturnGoodImage("Attack 00 Lft", Game->ct_action / player->ftReturnCtAttack()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(player->ftReturnMoveAttackLftX(), player->ftReturnMoveAttackY());
-		if (Game->ct_action >= 35)
-		{
-			player->ftChangeAttackCt(0);
-			player->ftChangeCt(0);
-			Game->ct_action = 0;
-		}
-	}
-	else if (player->ftReturnAttackCt() == 1 && player->ftReturnFace() == 0) // Attack right
-	{
-		player->ftMovePosition(-player->ftReturnMoveAttackRiX(), -player->ftReturnMoveAttackY());
-		DrawTextureEx(player->ftReturnGoodImage("Attack 00 Ri", Game->ct_action / player->ftReturnCtAttack()), player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
-		player->ftMovePosition(player->ftReturnMoveAttackRiX(), player->ftReturnMoveAttackY());
-		if (Game->ct_action >= 35)
-		{
-			player->ftChangeAttackCt(0);
-			player->ftChangeCt(0);
-			Game->ct_action = 0;
-		}
-	}
-
-	player->ftMovePosition(player->ftReturnCtMoveX(), 0);
-	Game->ct_action += 1;
-}
-
-void	ftKeyGestion(Game *Game, Player *player, float delta)
-{
-	if (IsKeyDown(KEY_A)) // Move left
-	{
-		if (player->ftReturnCt() != 4 && player->ftReturnCt() != 5 && player->ftReturnAttackCt() == 0)
-		{
-			player->ftChangeCt(1);
-		}
-		if (player->ftReturnAttackCt() == 0)
-		{
-			player->ftChangeFace(1);
-		}
-		player->ftMoveCollisionBox({-(PLAYER_HOR_SPD * delta), 0});
-		player->ftMovePosition(-(PLAYER_HOR_SPD * delta), 0);
-	}
-	if (IsKeyDown(KEY_D)) // Move right
-	{
-		if (player->ftReturnCt() != 4 && player->ftReturnCt() != 5 && player->ftReturnAttackCt() == 0)
-		{
-			player->ftChangeCt(1);
-		}
-		if (player->ftReturnAttackCt() == 0)
-		{
-			player->ftChangeFace(0);
-		}
-		player->ftMoveCollisionBox({PLAYER_HOR_SPD * delta, 0});
-		player->ftMovePosition(PLAYER_HOR_SPD * delta, 0);
-	}
-	if (IsKeyDown(KEY_SPACE) && player->ftReturnJump()) // Jump
-	{
-		if (player->ftReturnAttackCt() == 0)
-			player->ftChangeCt(4);
-		player->ftSetSpeed(-PLAYER_JUMP_SPD);
-		player->ftChangeJump(false);
-	}
-	if ((IsKeyReleased(KEY_A) || IsKeyReleased(KEY_D)) && player->ftReturnCt() != 4 && player->ftReturnCt() != 5)
-	{
-		if (player->ftReturnCt() != 4 && player->ftReturnCt() != 5 && player->ftReturnAttackCt() == 0)
-			player->ftChangeCt(0);
-	}
-
-	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) // Attack 1
-	{
-		if (player->ftReturnAttackCt() == 0)
-		{
-			Game->ct_action = 0;
-			player->ftChangeAttackCt(1);
-		}
-	}
-}
-
 void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLength, float delta)
 {
-	static float		lastY;
-
-	if (!lastY)
-		lastY = 0;
-	lastY = player->ftReturnPlayerPositionY();
+	player->ftChangeLastY(player->ftReturnPlayerPositionY());
 
 	ftKeyGestion(Game, player, delta);
 	ftUsePlayerGravity(player, envItems, delta, envItemsLength);
 
-	if (lastY < player->ftReturnPlayerPositionY() && player->ftReturnAttackCt() == 0)
+	if (player->ftReturnLastY() < player->ftReturnPlayerPositionY() && player->ftReturnAttackCt() == 0)
 	{
 		player->ftChangeCt(5);
 	}
-	else if (lastY == player->ftReturnPlayerPositionY() && player->ftReturnCt() == 5 && player->ftReturnAttackCt() == 0)
+	else if (player->ftReturnLastY() == player->ftReturnPlayerPositionY() && player->ftReturnCt() == 5 && player->ftReturnAttackCt() == 0)
 	{
 		player->ftChangeCt(0);
 	}

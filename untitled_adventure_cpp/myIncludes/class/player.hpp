@@ -74,6 +74,9 @@ class Player
 		int			ftReturnCtAttack(void) const;
 		void		ftChangeCtAttack(int ct);
 
+		float		ftReturnLastY(void) const;
+		void		ftChangeLastY(int ct);
+
 	private:
 		Texture2D	p1_idle_ri[4];
 		Texture2D	p1_idle_lft[4];
@@ -106,6 +109,8 @@ class Player
 		int			ctFall;
 		int			ctAttack;
 		int			moveIdleX;
+
+		float		lastY = 0;
 };
 
 #endif
