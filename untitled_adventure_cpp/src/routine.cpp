@@ -100,6 +100,7 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
 		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i), blocks->ftReturnSpeedModifier('Y', i)}, i);
+		
 		DrawRectangleRec(blocks->ftReturnRectangleSqPr(i), blocks->ftReturnRecColorSqPr(i));
 
 		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);

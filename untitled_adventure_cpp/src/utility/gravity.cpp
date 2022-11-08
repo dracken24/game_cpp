@@ -16,7 +16,7 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 
 			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnCollisionBox())) // Collision player
 			{
-
+				// std::cout << "Collision player" << std::endl;
 				if (rect.x - rect.width / 2 > player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('X') / 2) // Right
 				{
 					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
@@ -30,18 +30,20 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 			}
 			if(CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnWeaponCollRect()) && player->ftReturnDoAttack() == true) // Collision weapon
 			{
+				// std::cout << "Collision weapon" << std::endl;
 				if (player->ftReturnFace() == 0) // Right
 				{
-					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 5, 'X', j);
+					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 2, 'X', j);
 				}
 				else
 				{
-					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 5, 'X', j);
+					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 2, 'X', j);
 				}
 			}
 
 			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k))) // Collision block to block
 			{
+				// std::cout << "Collision prop 1" << std::endl;
 				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
 				{
 					blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
@@ -55,6 +57,7 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 			}
 			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block
 			{
+				// std::cout << "Collision prop 2" << std::endl;
 				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
 				{
 					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
