@@ -25,6 +25,17 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, j);
 			}
 		}
+		else if(CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnWeaponCollRect()) && player->ftReturnDoAttack() == true)
+		{
+			if (player->ftReturnFace() == 0) // Right
+			{
+				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta * 20, -5}, j);
+			}
+			else
+			{
+				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta * 20, -5}, j);
+			}
+		}
 
 		if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k)))
 		{
@@ -38,6 +49,7 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 			}
 		}
 	}
+	player->ftChangeDoAttack(false);
 }
 
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks)

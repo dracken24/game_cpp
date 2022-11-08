@@ -47,14 +47,26 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		ftUseGravity(blocks->ftReturnSquareProp(i), envItems, Game->delta, envItemsLength);
 	}
 
-	/***********************************************************************************************************/
+	/********************************************** Collision **************************************************/
 
 	ftGestionProps(blocks, envItems, Game->delta, envItemsLength);
-	// DrawRectangle(player->ftReturnPlayerPositionX() + 25, player->ftReturnPlayerPositionY() - 98, player->ftReturnCollBoxSize('W'), player->ftReturnCollBoxSize('H'), BLACK);
 	player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + player->ftReturnAjustCollBox('X'), player->ftReturnPlayerPositionY() - player->ftReturnAjustCollBox('Y')},
 							  {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')}, {player->ftReturnAjustCollBox('X'), player->ftReturnAjustCollBox('Y')});
-	// DrawRectangleRec(player->ftReturnCollisionBox(), BLACK);
+	// DrawRectangleRec(player->ftReturnCollisionBox(), BLACK); // Player collision box
+	if (player->ftReturnFace() == 0) // Weapon collision box use
+	{
+		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('W'), 'X');
+		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('Y'), 'Y');
+	}
+	else if (player->ftReturnFace() == 1) // Weapon collision box use
+	{
+		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('X') - player->ftReturnWeaponCollBoxSize('W'), 'X');
+		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('Y'), 'Y');
+	}
+	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PINK); // Weapon collision box
 	ftImgsGestion(Game, player);
+
+	/***********************************************************************************************************/
 
 	if (IsKeyPressed(KEY_R))
 	{

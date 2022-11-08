@@ -1,10 +1,11 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
-#include "../vendor/raylib/src/raylib.h"
-#include "../vendor/raylib/src/raymath.h"
+# include "../vendor/raylib/src/raylib.h"
+# include "../vendor/raylib/src/raymath.h"
 // # include "raylib.h"
 // # include "raymath.h"
+#include "weapon.hpp"
 # include <iostream>
 # include <string>
 
@@ -37,9 +38,11 @@ class Player
 		void		ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust);
 		Rectangle	ftReturnCollisionBox(void) const;
 		void		ftMoveCollisionBox(Vector2 pos);
+		void		ftChangeCollisionBoxSize(Vector2 pos);
 		int			ftReturnCollBoxPos(char c) const;
 		int			ftReturnCollBoxSize(char c) const;
 		float		ftReturnAjustCollBox(char c) const;
+		void		ftSetAjustCollBox(Vector2 pos);
 
 		int			ftReturnCt(void) const;
 		void		ftChangeCt(int ct);
@@ -77,7 +80,32 @@ class Player
 		float		ftReturnLastY(void) const;
 		void		ftChangeLastY(int ct);
 
+		bool		ftReturnDoAttack(void) const;
+		void		ftChangeDoAttack(bool ct);
+
+		int			ftReturnNbr(void) const;
+
+	/***************************** Weapon ****************************/
+
+		void		ftInitWeapon(std::string name, Vector2 pos, Vector2 size);
+		
+		Rectangle	ftReturnWeaponCollRect(void) const;
+		float		ftReturnWeaponCollBoxPos(char c) const;
+		float		ftReturnWeaponCollBoxSize(char c) const;
+		float		ftReturnWeaponDamage(void) const;
+		float		ftReturnAddWeaponDamage(void) const;
+		std::string	ftReturnWeaponName(void) const;
+
+		void		ftChangeWeaponCollBoxPos(float pos,char c);
+		void		ftNewWeaponCollBoxPos(float pos,char c);
+		void		ftChangeWeaponCollBoxSize(float size,char c);
+		void		ftChangeWeaponDamage(float damage);
+		void		ftAddWeaponDamage(float damage);
+
+	/*****************************************************************/
 	private:
+		Weapon		_weapon;
+
 		Texture2D	p1_idle_ri[4];
 		Texture2D	p1_idle_lft[4];
 		Texture2D	p1_runLft[8];
@@ -111,6 +139,8 @@ class Player
 		int			moveIdleX;
 
 		float		lastY = 0;
+		int			nbr;
+		bool		doAttack = false;
 };
 
 #endif

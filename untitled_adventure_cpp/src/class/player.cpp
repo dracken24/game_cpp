@@ -10,6 +10,8 @@ Player::~Player()
 	return ;
 }
 
+/***************************************** Init images ********************************************/
+
 void	Player::ftInitImgsEd(void) // Edward Elrick
 {
 	// Idle
@@ -136,6 +138,8 @@ void	Player::ftInitImgsIchigo(void) // Ichigo Kurosaki
 	this->p1_attack00lft[6] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_06.png");
 }
 
+/**************************************** Gestion images *******************************************/
+
 Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
 {
 	if (string == "Idle Lft")
@@ -161,22 +165,21 @@ Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
 	return (this->p1_idle_ri[0]);
 }
 
-void    Player::ftSetPosition(Vector2 pos)
-{
-	this->position = pos;
-}
-
 void	Player::ftInitPlayerImgs(int nbr)
 {
 	if (nbr == 1) // Edward
 	{
 		this->ftInitImgsEd();
+		this->nbr = nbr;
 	}
 	else if (nbr == 2) // Edward
 	{
 		this->ftInitImgsIchigo();
+		this->nbr = nbr;
 	}
 }
+
+/**************************************** Collision Box ********************************************/
 
 void	Player::ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust)
 {
@@ -202,6 +205,12 @@ Rectangle	Player::ftReturnCollisionBox(void) const
 	return (this->collisionBox);
 }
 
+void	Player::ftChangeCollisionBoxSize(Vector2 pos)
+{
+	this->collisionBox.width = pos.x;
+	this->collisionBox.height = pos.y;
+}
+
 void	Player::ftMoveCollisionBox(Vector2 pos)
 {
 	this->collisionBox.x += pos.x;
@@ -224,6 +233,87 @@ int		Player::ftReturnCollBoxSize(char c) const
 	else if (c == 'H')
 		return (this->collisionBox.height);
 	return (0);
+}
+
+void	Player::ftSetAjustCollBox(Vector2 pos)
+{
+	this->adjustCollBox.x = pos.x;
+	this->adjustCollBox.y = pos.y;
+}
+/******************************************** Weapon ***********************************************/
+
+void	Player::ftInitWeapon(std::string name, Vector2 pos, Vector2 size)
+{
+	// Weapon	weapon = new Weapon;
+
+	this->_weapon.ftInitWeapon(name, pos, size);
+	// this->_weapon = weapon;
+}
+
+// Return //
+
+Rectangle	Player::ftReturnWeaponCollRect(void) const
+{
+	return (this->_weapon.ftReturnWeaponCollRect());
+}
+
+float	Player::ftReturnWeaponCollBoxPos(char c) const
+{
+	return (this->_weapon.ftReturnCollBoxPos(c));
+}
+
+float	Player::ftReturnWeaponCollBoxSize(char c) const
+{
+	return (this->_weapon.ftReturnCollBoxSize(c));
+}
+
+float	Player::ftReturnWeaponDamage(void) const
+{
+	return (this->_weapon.ftReturnWeaponDamage());
+}
+
+float	Player::ftReturnAddWeaponDamage(void) const
+{
+	return (this->_weapon.ftReturnAddWeaponDamage());
+}
+
+std::string	Player::ftReturnWeaponName(void) const
+{
+	return (this->_weapon.ftReturnName());
+}
+
+// Change //
+
+void	Player::ftChangeWeaponCollBoxPos(float pos,char c)
+{
+	this->_weapon.ftChangeCollBoxPos(pos, c);
+}
+
+void	Player::ftNewWeaponCollBoxPos(float pos,char c)
+{
+	this->_weapon.ftNewCollBoxPos(pos, c);
+}
+
+void	Player::ftChangeWeaponCollBoxSize(float size,char c)
+{
+	this->_weapon.ftChangeCollBoxSize(size, c);
+}
+
+void	Player::ftChangeWeaponDamage(float damage)
+{
+	this->_weapon.ftChangeWeaponDamage(damage);
+}
+
+void	Player::ftAddWeaponDamage(float damage)
+{
+	this->_weapon.ftAddWeaponDamage(damage);
+}
+
+/***************************************** Player Stats ********************************************/
+
+void    Player::ftSetPosition(Vector2 pos)
+{
+	this->position = pos;
 }
 
 void    Player::ftChangePosition(float x, float y)
@@ -438,4 +528,19 @@ float	Player::ftReturnLastY(void) const
 void	Player::ftChangeLastY(int ct)
 {
 	this->lastY = ct;
+}
+
+int		Player::ftReturnNbr(void) const
+{
+	return (this->nbr);
+}
+
+bool	Player::ftReturnDoAttack(void) const
+{
+	return (this->doAttack);
+}
+
+void	Player::ftChangeDoAttack(bool ct)
+{
+	this->doAttack = ct;
 }

@@ -13,6 +13,8 @@ Props::~Props(void)
 	return ;
 }
 
+/************************************** Gestion square props *****************************************/
+
 void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr)
 {
 	this->_squareProps[nbr].ftInitSquareprops(pos, size, color, nbr);
@@ -70,3 +72,5 @@ float	Props::ftReturnSqurtWorH(char c, int nbr) const
 		return (this->_squareProps[nbr].ftReturnWideorHigh('H'));
 	return (0);
 }
+
+/***************************************** --------- ********************************************/

@@ -81,6 +81,7 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 	{
 		player->ftInitPlayerImgs(1);
 		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 100}, {-25, 100});
+		player->ftInitWeapon("Automail", player->ftReturnPlayerPosition(), {60, (float)player->ftReturnCollBoxSize('H')});
 		player->ftChangeCtIdle(15);
 		player->ftChangeCtMove(10);
 		player->ftChangeCtJump(25);
@@ -99,6 +100,7 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 	{
 		player->ftInitPlayerImgs(2);
 		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 110}, {-20, 108});
+		player->ftInitWeapon("Automail", player->ftReturnPlayerPosition(), {60, (float)player->ftReturnCollBoxSize('H')});
 		player->ftChangeCtIdle(15);
 		player->ftChangeCtMove(8);
 		player->ftChangeCtJump(15);
