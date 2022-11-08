@@ -11,10 +11,10 @@ class SquareProps
 
 		void        ftInitSquareprops(Vector2 pos, Vector2 size, Color color, int nbr);
 		void		ftInitPosition(Vector2 pos);
-		Rectangle	ftReturnRectangle(void);
-		Color		ftReturnRecColor(void);
+		Rectangle	ftReturnRectangle(void) const;
+		Color		ftReturnRecColor(void) const;
 
-		Vector2		*ftReturnPositionPtr(void);
+		Vector2		*ftReturnPositionPtr(void) ;
 		float		ftReturnSpeed(void) const;
 		void		ftChangeSpeed(float speed);
 		void		ftSetSpeed(float speed);
@@ -27,12 +27,17 @@ class SquareProps
 		void		ftSetSpeedX(float speed, char c);
 		void		ftChangeSpeedX(float speed, char c);
 
+		float		ftReturnSpeedModifier(char c) const;
+		void		ftSetSpeedModifier(float speed, char c);
+		void		ftChangeSpeedModifier(float speed, char c);
+
 		float		ftReturnSqurtPos(char c) const;
 
 	private:
 		Rectangle   rect;
-		Vector2		pos;
 		Color		color;
+		Vector2		pos;
+		Vector2		speedModifier = {0, 0};
 		float		speed;
 		float		speedX;
 		int			blocking;

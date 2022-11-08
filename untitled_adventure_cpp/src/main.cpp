@@ -17,6 +17,8 @@ int main(void)
 	blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
 	blocks.ftAddSquareProps({160, 200}, {24, 24}, RED, 1);
 	// blocks.ftAddSquareProps({120, 200}, {24, 24}, YELLOW, 2);
+	// blocks.ftAddSquareProps({240, 200}, {24, 24}, PINK, 3);
+	// blocks.ftAddSquareProps({80, 200}, {24, 24}, PURPLE, 4);
 
 	InitWindow(Game.screenWidth, Game.screenHeight, "raylib [core] example - 2d camera");
 

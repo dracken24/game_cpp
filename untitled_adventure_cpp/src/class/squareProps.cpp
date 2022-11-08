@@ -23,12 +23,12 @@ void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, int 
 	this->_nbr = nbr;
 }
 
-Rectangle	SquareProps::ftReturnRectangle(void)
+Rectangle	SquareProps::ftReturnRectangle(void) const
 {
 	return (this->rect);
 }
 
-Color	SquareProps::ftReturnRecColor(void)
+Color	SquareProps::ftReturnRecColor(void) const
 {
 	return (this->color);
 }
@@ -108,4 +108,29 @@ float	SquareProps::ftReturnSqurtPos(char c) const
 	if (c == 'Y')
 		return (this->pos.y);
 	return (0);
+}
+
+float	SquareProps::ftReturnSpeedModifier(char c) const
+{
+	if (c == 'X')
+		return (this->speedModifier.x);
+	if (c == 'Y')
+		return (this->speedModifier.y);
+	return (0);
+}
+
+void	SquareProps::ftSetSpeedModifier(float speed, char c)
+{
+	if (c == 'X')
+		this->speedModifier.x = speed;
+	if (c == 'Y')
+		this->speedModifier.y = speed;
+}
+
+void	SquareProps::ftChangeSpeedModifier(float speed, char c)
+{
+	if (c == 'X')
+		this->speedModifier.x += speed;
+	if (c == 'Y')
+		this->speedModifier.y += speed;
 }

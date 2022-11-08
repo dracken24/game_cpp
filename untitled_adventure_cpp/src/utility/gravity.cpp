@@ -4,49 +4,71 @@
 
 void	ftGravityX(Game *Game, Player *player, Props *blocks)
 {
-	int k;
-
+	// std::cout << blocks->ftReturnNbr() - 1 << std::endl;
 	for (int j = 0; j < blocks->ftReturnNbr(); j++)
 	{
 		Rectangle rect = blocks->ftReturnRectangleSqPr(j);
-		k = 0;
-		if (j == k)
-			k++;
 
-		if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnCollisionBox())) // Test collision
+		for (int k = 0; k < blocks->ftReturnNbr(); k++)
 		{
+			if (j == k)
+				k++;
 
-			if (rect.x - rect.width / 2 > player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('X') / 2) // Right
+			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnCollisionBox())) // Collision player
 			{
-				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
-			}
-			else
-			{
-				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, j);
-			}
-		}
-		else if(CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnWeaponCollRect()) && player->ftReturnDoAttack() == true)
-		{
-			if (player->ftReturnFace() == 0) // Right
-			{
-				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta * 20, -5}, j);
-			}
-			else
-			{
-				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta * 20, -5}, j);
-			}
-		}
 
-		if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k)))
-		{
-			if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
-			{
-				blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
+				if (rect.x - rect.width / 2 > player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('X') / 2) // Right
+				{
+					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
+					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 1.15, 'X', j);
+				}
+				else
+				{
+					blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, j);
+					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 1.15, 'X', j);
+				}
 			}
-			else
+			if(CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnWeaponCollRect()) && player->ftReturnDoAttack() == true) // Collision weapon
 			{
-				blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, k);
+				if (player->ftReturnFace() == 0) // Right
+				{
+					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 5, 'X', j);
+				}
+				else
+				{
+					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 5, 'X', j);
+				}
 			}
+
+			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k))) // Collision block to block
+			{
+				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
+				{
+					blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
+					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 1.075, 'X', j);
+				}
+				else
+				{
+					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, k);
+					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 1.075, 'X', j);
+				}
+			}
+			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block
+			{
+				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
+				{
+					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
+					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 1.075, 'X', k);
+
+				}
+				else
+				{
+					blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
+					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 1.075, 'X', k);
+
+				}
+			}
+			
 		}
 	}
 	player->ftChangeDoAttack(false);
@@ -110,6 +132,7 @@ void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItem
 			p->y = ei->rect.y;
 			Rectangle tmp = prop->ftReturnRectangle();
 			prop->ftInitPosition({tmp.x, p->y - tmp.height});
+			prop->ftSetSpeedModifier(prop->ftReturnSpeedModifier('X') / 1.1, 'X');
 		}
 	}
 	if (!hitObstacle)

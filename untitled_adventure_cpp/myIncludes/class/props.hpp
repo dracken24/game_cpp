@@ -9,6 +9,7 @@ class Props
 		Props(int nbr);
 		~Props(void);
 
+		// Square props //
 		void        ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr);
 		Rectangle   ftReturnRectangleSqPr(int nbr);
 		Color       ftReturnRecColorSqPr(int nbr);
@@ -19,6 +20,9 @@ class Props
 		int         ftReturnOneNbr(int nbr) const;
 		float       ftReturnSqurtPos(char c, int nbr) const;
 		float       ftReturnSqurtWorH(char c, int nbr) const;
+		float		ftReturnSpeedModifier(char c, int nbr) const;
+		void		ftSetSpeedModifier(float speed, char c, int nbr);
+		void		ftChangeSpeedModifier(float speed, char c, int nbr);
 
 	private:
 		SquareProps *_squareProps;

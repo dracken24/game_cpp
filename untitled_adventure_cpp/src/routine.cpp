@@ -96,10 +96,14 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 {
 	for (int i = 0; i < envItemsLength; i++)
 		DrawRectangleRec(envItems[i].rect, envItems[i].color);
+	
+	for (int i = 0; i < blocks->ftReturnNbr(); i++)
+	{
+		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i), blocks->ftReturnSpeedModifier('Y', i)}, i);
+		DrawRectangleRec(blocks->ftReturnRectangleSqPr(i), blocks->ftReturnRecColorSqPr(i));
 
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(0), blocks->ftReturnRecColorSqPr(0));
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(1), blocks->ftReturnRecColorSqPr(1));
-	DrawRectangleRec(blocks->ftReturnRectangleSqPr(2), blocks->ftReturnRecColorSqPr(2));
+		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);
+	}
 }
 /******************************************************************************************/
 

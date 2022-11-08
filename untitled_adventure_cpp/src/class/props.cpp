@@ -15,10 +15,41 @@ Props::~Props(void)
 
 /************************************** Gestion square props *****************************************/
 
+// Modify //
+
 void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr)
 {
 	this->_squareProps[nbr].ftInitSquareprops(pos, size, color, nbr);
 }
+
+void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
+{
+	this->_squareProps[nbr].ftInitPosition(pos);
+}
+
+void	Props::ftMoveSquareProp(Vector2 pos, int nbr)
+{
+	this->_squareProps[nbr].ftMovePosition(pos.x, pos.y);
+}
+
+void	Props::ftSetSpeedModifier(float speed, char c, int nbr)
+{
+	
+	if (c == 'X')
+		this->_squareProps[nbr].ftSetSpeedModifier(speed, c);
+	else if (c == 'Y')
+		this->_squareProps[nbr].ftSetSpeedModifier(speed, c);
+}
+
+void	Props::ftChangeSpeedModifier(float speed, char c, int nbr)
+{
+	if (c == 'X')
+		this->_squareProps[nbr].ftChangeSpeedModifier(speed, c);
+	else if (c == 'Y')
+		this->_squareProps[nbr].ftChangeSpeedModifier(speed, c);
+}
+
+// Return //
 
 Rectangle	Props::ftReturnRectangleSqPr(int nbr)
 {
@@ -33,16 +64,6 @@ Color	Props::ftReturnRecColorSqPr(int nbr)
 SquareProps	*Props::ftReturnSquareProp(int nbr) const
 {
 	return (&this->_squareProps[nbr]);
-}
-
-void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
-{
-	this->_squareProps[nbr].ftInitPosition(pos);
-}
-
-void	Props::ftMoveSquareProp(Vector2 pos, int nbr)
-{
-	this->_squareProps[nbr].ftMovePosition(pos.x, pos.y);
 }
 
 int		Props::ftReturnNbr(void) const
@@ -70,6 +91,15 @@ float	Props::ftReturnSqurtWorH(char c, int nbr) const
 		return (this->_squareProps[nbr].ftReturnWideorHigh('W'));
 	else if (c == 'H')
 		return (this->_squareProps[nbr].ftReturnWideorHigh('H'));
+	return (0);
+}
+
+float	Props::ftReturnSpeedModifier(char c, int nbr) const
+{
+	if (c == 'X')
+		return (this->_squareProps[nbr].ftReturnSpeedModifier('X'));
+	else if (c == 'Y')
+		return (this->_squareProps[nbr].ftReturnSpeedModifier('Y'));
 	return (0);
 }
 

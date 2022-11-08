@@ -26,6 +26,7 @@ typedef struct Game {
 	float		delta;
 	int         characterSelection = 0;
 	int         ct_action = 0;
+	bool		ctCollision = false;
 
 	void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int);
 }   Game;
