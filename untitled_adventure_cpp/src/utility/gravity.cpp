@@ -4,7 +4,6 @@
 
 void	ftGravityX(Game *Game, Player *player, Props *blocks)
 {
-	// std::cout << blocks->ftReturnNbr() - 1 << std::endl;
 	for (int j = 0; j < blocks->ftReturnNbr(); j++)
 	{
 		Rectangle rect = blocks->ftReturnRectangleSqPr(j);
@@ -16,7 +15,6 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 
 			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnCollisionBox())) // Collision player
 			{
-				// std::cout << "Collision player" << std::endl;
 				if (rect.x - rect.width / 2 > player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('X') / 2) // Right
 				{
 					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
@@ -30,7 +28,6 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 			}
 			if(CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), player->ftReturnWeaponCollRect()) && player->ftReturnDoAttack() == true) // Collision weapon
 			{
-				// std::cout << "Collision weapon" << std::endl;
 				if (player->ftReturnFace() == 0) // Right
 				{
 					blocks->ftChangeSpeedModifier(PLAYER_HOR_SPD * Game->delta * 2, 'X', j);
@@ -43,7 +40,6 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 
 			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(j), blocks->ftReturnRectangleSqPr(k))) // Collision block to block
 			{
-				// std::cout << "Collision prop 1" << std::endl;
 				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
 				{
 					blocks->ftMoveSquareProp({-PLAYER_HOR_SPD * Game->delta, 0}, k);
@@ -55,9 +51,8 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 1.075, 'X', j);
 				}
 			}
-			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block
+			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block correction
 			{
-				// std::cout << "Collision prop 2" << std::endl;
 				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
 				{
 					blocks->ftMoveSquareProp({PLAYER_HOR_SPD * Game->delta, 0}, j);
@@ -90,15 +85,36 @@ void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envI
 	{
 		EnvItem *ei = envItems + i;
 		Vector2 *p = player->ftReturnPlayerPositionPtr();
+
 		if (ei->blocking &&
-			ei->rect.x <= p->x &&
-			ei->rect.x + ei->rect.width >= p->x + player->ftReturnCollBoxSize('w') &&
+			ei->rect.x <= player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('W') &&
+			ei->rect.x + ei->rect.width >= player->ftReturnCollBoxPos('X') &&
 			ei->rect.y >= p->y &&
 			ei->rect.y <= p->y + player->ftReturnSpeed() * delta)
 		{
 			hitObstacle = 1;
 			player->ftSetSpeed(0);
 			p->y = ei->rect.y;
+		}
+		else if (ei->blocking &&
+			ei->rect.x <= p->x &&
+			ei->rect.x + ei->rect.width >= player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('W') &&
+			ei->rect.y + ei->rect.height > player->ftReturnCollBoxPos('Y') &&
+			CheckCollisionRecs(ei->rect, player->ftReturnCollisionBox()))
+		{
+			player->ftSetSpeed(25);
+		}
+		else if (CheckCollisionRecs(ei->rect, player->ftReturnCollisionBox()) && ei->blocking)
+		{
+			if (player->ftReturnFace() == 0 && player->ftReturnCollX() == false)
+			{
+				player->ftMovePosition(-PLAYER_HOR_SPD * delta, 0);
+			}
+			else if (player->ftReturnFace() == 1 && player->ftReturnCollX() == false)
+			{
+				player->ftMovePosition(PLAYER_HOR_SPD * delta, 0);
+			}
+			player->ftChangeCollX(true);
 		}
 	}
 	if (!hitObstacle)
@@ -120,6 +136,7 @@ void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItem
 
 	// if (!rebound)
 	// 	rebound = 0;
+
 	for (int i = 0; i < envItemsLength; i++)
 	{
 		EnvItem *ei = envItems + i;
@@ -136,8 +153,15 @@ void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItem
 			Rectangle tmp = prop->ftReturnRectangle();
 			prop->ftInitPosition({tmp.x, p->y - tmp.height});
 			prop->ftSetSpeedModifier(prop->ftReturnSpeedModifier('X') / 1.1, 'X');
+			// break ;
+		}
+		else if (CheckCollisionRecs(ei->rect, prop->ftReturnRectangle()) && ei->blocking)
+		{
+			// std::cout << "Collision 2: " << i << std::endl;
+			prop->ftSetSpeedModifier(0, 'X');
 		}
 	}
+
 	if (!hitObstacle)
 	{
 		prop->ftMovePosition(0, prop->ftReturnSpeed() * delta);

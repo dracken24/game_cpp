@@ -83,6 +83,9 @@ class Player
 		bool		ftReturnDoAttack(void) const;
 		void		ftChangeDoAttack(bool ct);
 
+		bool		ftReturnCollX(void) const;
+		void		ftChangeCollX(bool ct);
+
 		int			ftReturnNbr(void) const;
 
 	/***************************** Weapon ****************************/
@@ -141,6 +144,7 @@ class Player
 		float		lastY = 0;
 		int			nbr;
 		bool		doAttack = false;
+		bool		collX = false;
 };
 
 #endif

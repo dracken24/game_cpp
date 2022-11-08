@@ -12,10 +12,10 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	EnvItem envItems[] = {
 		{{0, 0, 1000, 400}, 0, LIGHTGRAY},
 		{{0, 400, 1000, 200}, 1, GRAY},
-		{{300, 200, 400, 10}, 1, GRAY},
-		{{250, 300, 100, 10}, 1, GRAY},
-		{{650, 300, 100, 10}, 1, GRAY},
-		{{-850, 550, 700, 25}, 1, GRAY},
+		{{300, 150, 400, 10}, 1, GRAY},
+		{{250, 250, 100, 10}, 1, GRAY},
+		{{650, 250, 100, 10}, 1, GRAY},
+		{{-850, 350, 700, 205}, 1, GRAY},
 		{{1100, 380, 400, 13}, 1, GRAY},
 		{{700, 100, 150, 10}, 1, GRAY},
 		{{450, 500, 180, 15}, 1, GRAY}};
@@ -71,6 +71,15 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	if (IsKeyPressed(KEY_R))
 	{
 		float dist = 0;
+		for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		{
+			blocks->ftSetPosSquareProp({200 - dist, 200}, i);
+			dist += 50;
+		}
+	}
+	if (IsKeyPressed(KEY_P))
+	{
+		float dist = 0;
 		camera->zoom = 1.0f;
 		player->ftSetPosition({500.0f, 300.0f});
 		for (int i = 0; i < blocks->ftReturnNbr(); i++)
@@ -100,7 +109,7 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
 		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i), blocks->ftReturnSpeedModifier('Y', i)}, i);
-		
+
 		DrawRectangleRec(blocks->ftReturnRectangleSqPr(i), blocks->ftReturnRecColorSqPr(i));
 
 		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);

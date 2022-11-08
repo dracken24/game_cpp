@@ -544,3 +544,13 @@ void	Player::ftChangeDoAttack(bool ct)
 {
 	this->doAttack = ct;
 }
+
+bool	Player::ftReturnCollX(void) const
+{
+	return (this->collX);
+}
+
+void	Player::ftChangeCollX(bool ct)
+{
+	this->collX = ct;
+}

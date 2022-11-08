@@ -73,4 +73,5 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 			player->ftChangeAttackCt(1);
 		}
 	}
+	player->ftChangeCollX(false);
 }
