@@ -3,13 +3,14 @@
 void	ftKeyGestion(Game *Game, Player *player, float delta)
 {
 	// std::cout << player->ftReturnNbr() << std::endl;
+/******************************************************************************************************************/
 	if (IsKeyDown(KEY_A)) // Move left
 	{
-		if (player->ftReturnNbr() == 2)
+		if (player->ftReturnNbr() == 2) // If Character 2
 		{
-			player->ftChangeCollisionBoxSize({70, 85});
+			player->ftChangeCollisionBoxSize((Vector2){70, 85});
 			player->ftChangeWeaponCollBoxSize(85, 'H');
-			player->ftSetAjustCollBox({-45, 85});
+			player->ftSetAjustCollBox((Vector2){-45, 85});
 		}
 		if (player->ftReturnCt() != 4 && player->ftReturnCt() != 5 && player->ftReturnAttackCt() == 0)
 		{
@@ -19,17 +20,16 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 		{
 			player->ftChangeFace(1);
 		}
-		player->ftMoveCollisionBox({-(PLAYER_HOR_SPD * delta), 0});
+		player->ftMoveCollisionBox((Vector2){-(PLAYER_HOR_SPD * delta), 0});
 		player->ftMovePosition(-(PLAYER_HOR_SPD * delta), 0);
 	}
-/******************************************************************************************************************/
 	else if (IsKeyDown(KEY_D)) // Move right
 	{
-		if (player->ftReturnNbr() == 2)
+		if (player->ftReturnNbr() == 2) // If Character 2
 		{
-			player->ftChangeCollisionBoxSize({70, 85});
+			player->ftChangeCollisionBoxSize((Vector2){70, 85});
 			player->ftChangeWeaponCollBoxSize(85, 'H');
-			player->ftSetAjustCollBox({-25, 85});
+			player->ftSetAjustCollBox((Vector2){-25, 85});
 		}
 		if (player->ftReturnCt() != 4 && player->ftReturnCt() != 5 && player->ftReturnAttackCt() == 0)
 		{
@@ -39,14 +39,14 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 		{
 			player->ftChangeFace(0);
 		}
-		player->ftMoveCollisionBox({PLAYER_HOR_SPD * delta, 0});
+		player->ftMoveCollisionBox((Vector2){PLAYER_HOR_SPD * delta, 0});
 		player->ftMovePosition(PLAYER_HOR_SPD * delta, 0);
 	}
-	else if (player->ftReturnNbr() == 2)
+	else if (player->ftReturnNbr() == 2) // If Character 2
 	{
-		player->ftSetAjustCollBox({-20, 110});
+		player->ftSetAjustCollBox((Vector2){-20, 110});
 		player->ftChangeWeaponCollBoxSize((float)player->ftReturnCollBoxSize('H'), 'H');
-		player->ftChangeCollisionBoxSize({50, 110});
+		player->ftChangeCollisionBoxSize((Vector2){50, 110});
 	}
 
 /******************************************************************************************************************/

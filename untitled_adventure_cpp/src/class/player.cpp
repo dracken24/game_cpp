@@ -1,4 +1,4 @@
-#include "../myIncludes/class/player.hpp"
+#include "../../myIncludes/class/player.hpp"
 
 Player::Player()
 {
@@ -257,6 +257,11 @@ Rectangle	Player::ftReturnWeaponCollRect(void) const
 	return (this->_weapon.ftReturnWeaponCollRect());
 }
 
+Vector2		Player::ftReturnAjustCollisionBox(void) const
+{
+	return (this->adjustCollBox);
+}
+
 float	Player::ftReturnWeaponCollBoxPos(char c) const
 {
 	return (this->_weapon.ftReturnCollBoxPos(c));
@@ -314,18 +319,24 @@ void	Player::ftAddWeaponDamage(float damage)
 void    Player::ftSetPosition(Vector2 pos)
 {
 	this->position = pos;
+	this->collisionBox.x = pos.x;
+	this->collisionBox.y = pos.y;
 }
 
 void    Player::ftChangePosition(float x, float y)
 {
 	this->position.x = x;
 	this->position.y = y;
+	this->collisionBox.x = x;
+	this->collisionBox.y = y;
 }
 
 void    Player::ftMovePosition(float x, float y)
 {
 	this->position.x += x;
 	this->position.y += y;
+	this->collisionBox.x += x;
+	this->collisionBox.y += y;
 }
 
 Vector2 Player::ftReturnPlayerPosition(void)
@@ -554,3 +565,8 @@ void	Player::ftChangeCollX(bool ct)
 {
 	this->collX = ct;
 }
+
+// void	Player::ftSetSpeed(float speed)
+// {
+// 	this->ftSetSpeed(speed);
+// }

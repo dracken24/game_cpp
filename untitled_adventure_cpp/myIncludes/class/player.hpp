@@ -1,8 +1,8 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
-# include "../vendor/raylib/src/raylib.h"
-# include "../vendor/raylib/src/raymath.h"
+# include "../../vendor/raylib/src/raylib.h"
+# include "../../vendor/raylib/src/raymath.h"
 // # include "raylib.h"
 // # include "raymath.h"
 #include "weapon.hpp"
@@ -37,6 +37,7 @@ class Player
 		Texture2D	ftReturnGoodImage(std::string string, int ct);
 		void		ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust);
 		Rectangle	ftReturnCollisionBox(void) const;
+		Vector2		ftReturnAjustCollisionBox(void) const;
 		void		ftMoveCollisionBox(Vector2 pos);
 		void		ftChangeCollisionBoxSize(Vector2 pos);
 		int			ftReturnCollBoxPos(char c) const;

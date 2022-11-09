@@ -1,7 +1,7 @@
-#include "../myIncludes/class/player.hpp"
-#include "../myIncludes/class/menu.hpp"
-#include "../myIncludes/class/props.hpp"
-#include "../myIncludes/game.hpp"
+#include "../../myIncludes/class/player.hpp"
+#include "../../myIncludes/class/menu.hpp"
+#include "../../myIncludes/class/props.hpp"
+#include "../../myIncludes/game.hpp"
 
 void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 {
@@ -49,19 +49,23 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 
 	/********************************************** Collision **************************************************/
 
+	Rectangle	plyCollBox = player->ftReturnCollisionBox();
+	Vector2		AdjCollBox = player->ftReturnAjustCollisionBox();
+	Vector2		plyPos = player->ftReturnPlayerPosition();
+
 	ftGestionProps(blocks, envItems, Game->delta, envItemsLength);
-	player->ftSetCollosionBox({player->ftReturnPlayerPositionX() + player->ftReturnAjustCollBox('X'), player->ftReturnPlayerPositionY() - player->ftReturnAjustCollBox('Y')},
-							  {(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')}, {player->ftReturnAjustCollBox('X'), player->ftReturnAjustCollBox('Y')});
-	// DrawRectangleRec(player->ftReturnCollisionBox(), BLACK); // Player collision box
-	if (player->ftReturnFace() == 0) // Weapon collision box use
+	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
+							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
+	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
+	if (player->ftReturnFace() == 0) 		// Weapon collision box use
 	{
-		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('X') + player->ftReturnCollBoxSize('W'), 'X');
-		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('Y'), 'Y');
+		player->ftNewWeaponCollBoxPos(plyCollBox.x + plyCollBox.width, 'X');
+		player->ftNewWeaponCollBoxPos(plyCollBox.y, 'Y');
 	}
-	else if (player->ftReturnFace() == 1) // Weapon collision box use
+	else if (player->ftReturnFace() == 1) 	// Weapon collision box use
 	{
-		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('X') - player->ftReturnWeaponCollBoxSize('W'), 'X');
-		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('Y'), 'Y');
+		player->ftNewWeaponCollBoxPos(plyCollBox.x - plyCollBox.width, 'X');
+		player->ftNewWeaponCollBoxPos(plyCollBox.y, 'Y');
 	}
 	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
 	ftImgsGestion(Game, player);
@@ -73,7 +77,8 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		float dist = 0;
 		for (int i = 0; i < blocks->ftReturnNbr(); i++)
 		{
-			blocks->ftSetPosSquareProp({200 - dist, 200}, i);
+			blocks->ftSetPosSquareProp((Vector2){200, 200 - dist}, i);
+			blocks->ftSetPosSquareProp((Vector2){200 - dist, 200}, i);
 			dist += 50;
 		}
 	}
@@ -81,10 +86,13 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	{
 		float dist = 0;
 		camera->zoom = 1.0f;
-		player->ftSetPosition({500.0f, 300.0f});
+		player->ftSetPosition((Vector2){500.0f, 300.0f});
 		for (int i = 0; i < blocks->ftReturnNbr(); i++)
 		{
-			blocks->ftSetPosSquareProp({200 - dist, 200}, i);
+			blocks->ftSetPosSquareProp((Vector2){200 - dist, 200}, i);
+			blocks->ftSetSpeed(0, i);
+			blocks->ftSetSpeedModifier(0, 'X', i);
+
 			dist += 50;
 		}
 	}
@@ -111,10 +119,12 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 	
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
-		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i) + blocks->ftReturnSqurtWorH('W', i) / 2, blocks->ftReturnSpeedModifier('Y', i) + blocks->ftReturnSqurtWorH('H', i) / 2}, i);
+		Rectangle	block = blocks->ftReturnRectangleSqPr(i);
 
-		DrawRectanglePro(blocks->ftReturnRectangleSqPr(i), {blocks->ftReturnSqurtWorH('W', i) / 2, blocks->ftReturnSqurtWorH('H', i) / 2}, 0, blocks->ftReturnRecColorSqPr(i));
-		blocks->ftMoveSquareProp({-blocks->ftReturnSqurtWorH('W', i) / 2, -blocks->ftReturnSqurtWorH('H', i) / 2}, i);
+		blocks->ftMoveSquareProp((Vector2){blocks->ftReturnSpeedModifier('X', i) + block.width / 2, blocks->ftReturnSpeedModifier('Y', i) + block.height / 2}, i);
+		block = blocks->ftReturnRectangleSqPr(i);
+		DrawRectanglePro(block, (Vector2){block.width / 2, block.height / 2}, 0, blocks->ftReturnRecColorSqPr(i));
+		blocks->ftMoveSquareProp((Vector2){-block.width / 2, -block.height / 2}, i);
 		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);
 	}
 	k += 5;

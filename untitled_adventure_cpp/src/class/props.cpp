@@ -27,6 +27,11 @@ void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
 	this->_squareProps[nbr].ftInitPosition(pos);
 }
 
+void	Props::ftSetSpeed(float speed, int nbr)
+{
+	this->_squareProps[nbr].ftSetSpeed(speed);
+}
+
 void	Props::ftMoveSquareProp(Vector2 pos, int nbr)
 {
 	this->_squareProps[nbr].ftMovePosition(pos.x, pos.y);
@@ -59,6 +64,11 @@ Rectangle	Props::ftReturnRectangleSqPr(int nbr)
 Color	Props::ftReturnRecColorSqPr(int nbr)
 {
 	return (this->_squareProps[nbr].ftReturnRecColor());
+}
+
+float	Props::ftReturnSpeed(int nbr) const
+{
+	return (this->_squareProps[nbr].ftReturnSpeed());
 }
 
 SquareProps	*Props::ftReturnSquareProp(int nbr) const

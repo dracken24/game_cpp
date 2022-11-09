@@ -1,7 +1,7 @@
 #ifndef SQUAREPROPS_HPP
 # define SQUAREPROPS_HPP
 
-#include "../vendor/raylib/src/raylib.h"
+#include "../../vendor/raylib/src/raylib.h"
 
 class SquareProps
 {

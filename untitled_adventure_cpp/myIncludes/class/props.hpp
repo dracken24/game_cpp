@@ -22,6 +22,8 @@ class Props
 		float       ftReturnSqurtWorH(char c, int nbr) const;
 		float		ftReturnSpeedModifier(char c, int nbr) const;
 		void		ftSetSpeedModifier(float speed, char c, int nbr);
+		void		ftSetSpeed(float speed, int nbr);
+		float		ftReturnSpeed(int nbr) const;
 		void		ftChangeSpeedModifier(float speed, char c, int nbr);
 
 	private:

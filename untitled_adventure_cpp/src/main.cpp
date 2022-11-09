@@ -14,16 +14,22 @@ int main(void)
 	// {
 	// 	blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
 	// }
-	blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
-	blocks.ftAddSquareProps({160, 200}, {24, 24}, RED, 1);
-	blocks.ftAddSquareProps({120, 200}, {24, 24}, YELLOW, 2);
-	blocks.ftAddSquareProps({240, 200}, {24, 24}, PINK, 3);
-	blocks.ftAddSquareProps({80, 200}, {24, 24}, PURPLE, 4);
+	blocks.ftAddSquareProps((Vector2){200, 200}, (Vector2){24, 24}, BLUE, 0);
+	blocks.ftAddSquareProps((Vector2){160, 200}, (Vector2){24, 24}, RED, 1);
+	blocks.ftAddSquareProps((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, 2);
+	blocks.ftAddSquareProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, 3);
+	blocks.ftAddSquareProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, 4);
+
+	// blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
+	// blocks.ftAddSquareProps({200, 100}, {24, 24}, RED, 1);
+	// blocks.ftAddSquareProps({200, 0}, {24, 24}, YELLOW, 2);
+	// blocks.ftAddSquareProps({200, -100}, {24, 24}, PINK, 3);
+	// blocks.ftAddSquareProps({200, -200}, {24, 24}, PURPLE, 4);
 
 	InitWindow(Game.screenWidth, Game.screenHeight, "raylib [core] example - 2d camera");
 
 	player = new Player;
-	player->ftSetPosition({500, 300});
+	player->ftSetPosition((Vector2){500, 300});
 
 	Camera2D camera = {0};
 	camera.target = player->ftReturnPlayerPosition();
