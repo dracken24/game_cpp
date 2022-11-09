@@ -27,7 +27,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		Game->ct_action = 0;
 	Game->delta = GetFrameTime();
 
-	Game->cameraUpdaters[cameraOption](camera, player, envItems, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
+	Game->cameraUpdaters[cameraOption](Game, camera, player, envItems, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
 
 	ftUpdatePlayer(Game, player, envItems, envItemsLength, Game->delta);
 	if (lastAction != player->ftReturnCt())
@@ -104,6 +104,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		DrawText("- Mouse Wheel to Zoom in-out, R to reset zoom", 40, 80, 10, DARKGRAY);
 		DrawText("- Mouse Button Left to Attack", 40, 100, 10, DARKGRAY);
 	}
+	// ftSideMenu(Game, player);
 }
 
 /*******************************************************************************************
@@ -148,8 +149,8 @@ void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLe
 	}
 }
 
-void ftUpdateCameraCenter(Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
+void ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
 {
-	camera->offset = (Vector2){width / 2.0f, height / 2.0f};
+	camera->offset = (Vector2){Game->screenWidth / 2.0f - 150, Game->screenHeight / 2.0f};
 	camera->target = player->ftReturnPlayerPosition();
 }

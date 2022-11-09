@@ -26,11 +26,11 @@ void	ftChooseMenu(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 520, 200, 20, DARKGRAY);
+		DrawText("<---*", 400, 200, 20, DARKGRAY);
 	}
 	else if (ct == -1)
 	{
-		DrawText("<---*", 520, 250, 20, DARKGRAY);
+		DrawText("<---*", 400, 250, 20, DARKGRAY);
 	}
 
 	if (warning >= 1)
@@ -62,11 +62,11 @@ void	ftChooseCharacter(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 500, 200, 20, DARKGRAY);
+		DrawText("<---*", 400, 200, 20, DARKGRAY);
 	}
 	else if (ct == -1)
 	{
-		DrawText("<---*", 500, 250, 20, DARKGRAY);
+		DrawText("<---*", 400, 250, 20, DARKGRAY);
 	}
 }
 
@@ -74,9 +74,9 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 {
 	menu->ftChangePlayer(0);
 	ftChooseCharacter(menu);
-	DrawText("Choose Your Character", 250, 100, 40, BLACK);
-	DrawText("Edward Elric", 250, 200, 20, DARKGRAY);
-	DrawText("Ichigo Kurosaki", 250, 250, 20, DARKGRAY);
+	DrawText("Choose Your Character", 100, 100, 40, BLACK);
+	DrawText("Edward Elric", 100, 200, 20, DARKGRAY);
+	DrawText("Ichigo Kurosaki", 100, 250, 20, DARKGRAY);
 	if (menu->ftReturnPlayer() == 1)
 	{
 		player->ftInitPlayerImgs(1);

@@ -3,6 +3,34 @@
 #include "../myIncludes/class/props.hpp"
 #include "../myIncludes/game.hpp"
 
+void	ftSideMenu(Game *Game, Player *player, Menu *menu)
+{
+	Vector2	plyPos = player->ftReturnPlayerPosition();
+	int		ct = 0;
+	int		ajustX = 0;
+
+	if (menu->ftReturnStart() == 2)
+	{
+		if (IsKeyDown(KEY_D))
+		{
+			ajustX = -PLAYER_HOR_SPD * Game->delta;
+		}
+		else if (IsKeyDown(KEY_A))
+		{
+			ajustX = PLAYER_HOR_SPD * Game->delta;
+		}
+		else
+			ajustX = 0;
+		ct = 150;
+	}
+	else
+		ct = 300;
+	EnvItem backGroung = {{plyPos.x + Game->screenWidth / 2 - ct, plyPos.y - Game->screenHeight / 2, 300, (float)Game->screenHeight}, 0, DARKGRAY};
+
+	DrawRectangle(backGroung.rect.x + ajustX, backGroung.rect.y, backGroung.rect.width,
+		backGroung.rect.height, backGroung.color);
+}
+
 int main(void)
 {
 	Game 	Game;
@@ -62,9 +90,9 @@ int main(void)
 		if (menu.ftReturnStart() == 0) // Meni intro
 		{
 			ftChooseMenu(&menu);
-			DrawText("Untitled Adventure Game", 250, 100, 40, BLACK);
-			DrawText("Choose Your Character", 250, 200, 20, DARKGRAY);
-			DrawText("Start Game", 250, 250, 20, DARKGRAY);
+			DrawText("Untitled Adventure Game", 100, 100, 40, BLACK);
+			DrawText("Choose Your Character", 100, 200, 20, DARKGRAY);
+			DrawText("Start Game", 100, 250, 20, DARKGRAY);
 		}
 		else if (menu.ftReturnStart() == 1)// Menu choose character
 		{
@@ -74,6 +102,7 @@ int main(void)
 		{
 			ftRoutine(&Game, player, &camera, &blocks);
 		}
+		ftSideMenu(&Game, player, &menu);
 
 		EndMode2D();
 		EndDrawing();

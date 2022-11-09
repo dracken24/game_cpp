@@ -21,14 +21,14 @@ typedef struct EnvItem {
 }   EnvItem;
 
 typedef struct Game {
-	const int   screenWidth = 1200;
+	const int   screenWidth = 1500;
 	const int   screenHeight = 800;
 	float		delta;
 	int         characterSelection = 0;
 	int         ct_action = 0;
 	bool		ctCollision = false;
 
-	void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int);
+	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, EnvItem *, int, float, int, int);
 }   Game;
 
 /**------------------------->> Fonctions <<-------------------------**/
@@ -40,7 +40,7 @@ void	ftChooseMenu(Menu *menu);
 
 /**----------------------------> Game <-----------------------------**/
 
-void 	ftUpdateCameraCenter(Camera2D *camera, Player *player, EnvItem *envItems,
+void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player, EnvItem *envItems,
 		int envItemsLength, float delta, int width, int height);
 void 	ftUpdatePlayer(Game *Game, Player *player, EnvItem *envItems, int envItemsLength, float delta);
 void	ftImgsGestion(Game *Game, Player *player);
