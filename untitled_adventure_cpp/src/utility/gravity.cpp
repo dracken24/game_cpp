@@ -51,7 +51,7 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 					blocks->ftChangeSpeedModifier(-PLAYER_HOR_SPD * Game->delta * 1.075, 'X', j);
 				}
 			}
-			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block correction
+			if (CheckCollisionRecs(blocks->ftReturnRectangleSqPr(k), blocks->ftReturnRectangleSqPr(j))) // Collision block to block ajust
 			{
 				if (blocks->ftReturnSqurtPos('X', j) > blocks->ftReturnSqurtPos('X', k))
 				{

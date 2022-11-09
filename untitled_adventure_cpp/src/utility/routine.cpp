@@ -63,7 +63,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('X') - player->ftReturnWeaponCollBoxSize('W'), 'X');
 		player->ftNewWeaponCollBoxPos(player->ftReturnCollBoxPos('Y'), 'Y');
 	}
-	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PINK); // Weapon collision box
+	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
 	ftImgsGestion(Game, player);
 
 	/***********************************************************************************************************/
@@ -103,17 +103,21 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 *******************************************************************************************/
 void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength)
 {
+	static int k;
+	if (!k || k > 360)
+		k = 0;
 	for (int i = 0; i < envItemsLength; i++)
 		DrawRectangleRec(envItems[i].rect, envItems[i].color);
 	
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
-		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i), blocks->ftReturnSpeedModifier('Y', i)}, i);
+		blocks->ftMoveSquareProp({blocks->ftReturnSpeedModifier('X', i) + blocks->ftReturnSqurtWorH('W', i) / 2, blocks->ftReturnSpeedModifier('Y', i) + blocks->ftReturnSqurtWorH('H', i) / 2}, i);
 
-		DrawRectangleRec(blocks->ftReturnRectangleSqPr(i), blocks->ftReturnRecColorSqPr(i));
-
+		DrawRectanglePro(blocks->ftReturnRectangleSqPr(i), {blocks->ftReturnSqurtWorH('W', i) / 2, blocks->ftReturnSqurtWorH('H', i) / 2}, 0, blocks->ftReturnRecColorSqPr(i));
+		blocks->ftMoveSquareProp({-blocks->ftReturnSqurtWorH('W', i) / 2, -blocks->ftReturnSqurtWorH('H', i) / 2}, i);
 		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);
 	}
+	k += 5;
 }
 /******************************************************************************************/
 

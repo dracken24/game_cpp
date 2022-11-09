@@ -44,7 +44,7 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 	}
 	else if (player->ftReturnNbr() == 2)
 	{
-		player->ftSetAjustCollBox({-25, 110});
+		player->ftSetAjustCollBox({-20, 110});
 		player->ftChangeWeaponCollBoxSize((float)player->ftReturnCollBoxSize('H'), 'H');
 		player->ftChangeCollisionBoxSize({50, 110});
 	}
