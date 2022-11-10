@@ -51,12 +51,12 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 				if (propRect1.x > propRect2.x)
 				{
 					blocks->ftMoveSquareProp((Vector2){-speed / 2, 0.0f}, k);
-					blocks->ftChangeSpeedModifier(speed * 1.075, 'X', j);
+					blocks->ftChangeSpeedModifier(speed * 0.5, 'X', j);
 				}
 				else
 				{
 					blocks->ftMoveSquareProp((Vector2){speed / 2, 0.0f}, k);
-					blocks->ftChangeSpeedModifier(-speed * 1.075, 'X', j);
+					blocks->ftChangeSpeedModifier(-speed * 0.5, 'X', j);
 				}
 			}
 			if (CheckCollisionRecs(propRect2, propRect1)) // Collision block to block ajust
@@ -64,13 +64,13 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 				if (propRect1.x > propRect2.x)
 				{
 					blocks->ftMoveSquareProp((Vector2){speed / 2, 0.0f}, j);
-					blocks->ftChangeSpeedModifier(-speed * 1.075, 'X', k);
+					blocks->ftChangeSpeedModifier(-speed * 0.5, 'X', k);
 
 				}
 				else
 				{
-					blocks->ftMoveSquareProp((Vector2){-speed / 2, 0.0f}, k);
-					blocks->ftChangeSpeedModifier(speed * 1.075, 'X', k);
+					blocks->ftMoveSquareProp((Vector2){-speed / 2, 0.0f}, j);
+					blocks->ftChangeSpeedModifier(speed * 0.5, 'X', k);
 				}
 			}
 			
