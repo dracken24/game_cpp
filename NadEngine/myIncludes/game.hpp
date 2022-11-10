@@ -56,7 +56,7 @@ void	ftChooseMenu(Menu *menu);
 void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
-void	ftSideMenu(Game *Game, Player *player, Menu *menu);
+void	ftSideMenu2D(Game *Game, Player *player, Menu *menu);
 
 /**----------------------------> Game <-----------------------------**/
 
@@ -81,6 +81,6 @@ void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
 
 /**------------------------->> Fonctions <<-------------------------**/
 
-void ftMode3D(void);
+void 	ftMode3D(Game *Game);
 
 #endif

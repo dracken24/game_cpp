@@ -1,4 +1,4 @@
-#include "../../../myIncludes/game.hpp"
+#include "../../myIncludes/game.hpp"
 
 char	*ft_ftoa(float f, int *status)
 {
@@ -120,8 +120,7 @@ void	ftMouseControl(Game *Game)
 	}
 }
 
-void	ftSideMenu(Game *Game, Player *player, Menu *menu)
+void	ftSideMenu2D(Game *Game, Player *player, Menu *menu)
 {
 	ftMouseControl(Game);
-
 }

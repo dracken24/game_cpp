@@ -88,7 +88,7 @@ void	ftMode2D(Game *Game, Menu *menu)
 		ClearBackground(DARKGRAY);
 		BeginMode2D(menuCam);
 
-		ftSideMenu(Game, player, menu);
+		ftSideMenu2D(Game, player, menu);
 
 		EndMode2D();
 		EndTextureMode();

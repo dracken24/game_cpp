@@ -45,7 +45,7 @@ int main(void)
 		}
 		if (menu.ftReturnStart() == 8)
 		{
-			ftMode3D();
+			ftMode3D(&Game);
 			menu.ftChangeStart(10);
 		}
 		EndDrawing();
