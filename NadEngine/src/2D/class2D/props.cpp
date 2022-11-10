@@ -1,4 +1,4 @@
-#include "../../myIncludes/class/props.hpp"
+#include "../../../myIncludes/class2D/props.hpp"
 
 Props::Props(void)
 {

@@ -1,4 +1,4 @@
-#include "../../myIncludes/game.hpp"
+#include "../../../myIncludes/game.hpp"
 
 void	ftImgsGestion(Game *Game, Player *player)
 {

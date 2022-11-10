@@ -3,9 +3,9 @@
 
 # include "../vendor/raylib/src/raylib.h"
 # include "../vendor/raylib/src/raymath.h"
-# include "../myIncludes/class/player.hpp"
-# include "../myIncludes/class/props.hpp"
-# include "../myIncludes/class/menu.hpp"
+# include "../myIncludes/class2D/player.hpp"
+# include "../myIncludes/class2D/props.hpp"
+# include "../myIncludes/class2D/menu.hpp"
 # include "../vendor/raylib/src/rlgl.h"
 
 # include <string>
@@ -43,13 +43,17 @@ typedef struct Game {
 	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, EnvItem *, int, float, int, int);
 }   Game;
 
-/**------------------------->> Fonctions <<-------------------------**/
 
 /**----------------------------> Menu <-----------------------------**/
 void	ftMenuChooseCharacter(Player * player, Menu *menu);
 void	ftChooseCharacter(Menu *menu);
 void	ftChooseMenu(Menu *menu);
 
+//**********************************************************************************//
+//										2D											//
+//**********************************************************************************//
+
+void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
 void	ftSideMenu(Game *Game, Player *player, Menu *menu);
@@ -70,5 +74,13 @@ void	ftKeyGestion(Game *Game, Player *player, float delta);
 void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength);
 void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItemsLength);
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
+
+//**********************************************************************************//
+//										3D											//
+//**********************************************************************************//
+
+/**------------------------->> Fonctions <<-------------------------**/
+
+void ftMode3D(void);
 
 #endif

@@ -1,4 +1,4 @@
-#include "../../myIncludes/class/weapon.hpp"
+#include "../../../myIncludes/class2D/weapon.hpp"
 
 Weapon::Weapon(void)
 {

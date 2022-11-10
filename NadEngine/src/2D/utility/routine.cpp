@@ -1,7 +1,7 @@
-#include "../../myIncludes/class/player.hpp"
-#include "../../myIncludes/class/menu.hpp"
-#include "../../myIncludes/class/props.hpp"
-#include "../../myIncludes/game.hpp"
+#include "../../../myIncludes/class2D/player.hpp"
+#include "../../../myIncludes/class2D/menu.hpp"
+#include "../../../myIncludes/class2D/props.hpp"
+#include "../../../myIncludes/game.hpp"
 
 void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 {

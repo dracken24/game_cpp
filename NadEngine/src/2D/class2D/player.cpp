@@ -1,4 +1,4 @@
-#include "../../myIncludes/class/player.hpp"
+#include "../../../myIncludes/class2D/player.hpp"
 
 Player::Player()
 {
