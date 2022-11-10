@@ -5,30 +5,10 @@
 
 void	ftSideMenu(Game *Game, Player *player, Menu *menu)
 {
-	Vector2	plyPos = player->ftReturnPlayerPosition();
-	int		ct = 0;
-	int		ajustX = 0;
-
-	if (menu->ftReturnStart() == 2)
+	if (IsKeyDown(KEY_T))
 	{
-		if (IsKeyDown(KEY_D))
-		{
-			ajustX = -PLAYER_HOR_SPD * Game->delta;
-		}
-		else if (IsKeyDown(KEY_A))
-		{
-			ajustX = PLAYER_HOR_SPD * Game->delta;
-		}
-		else
-			ajustX = 0;
-		ct = 150;
+		DrawText("Work Alone", 10, 10, 40, BLACK);
 	}
-	else
-		ct = 300;
-	EnvItem backGroung = {{plyPos.x + Game->screenWidth / 2 - ct, plyPos.y - Game->screenHeight / 2, 300, (float)Game->screenHeight}, 0, DARKGRAY};
-
-	DrawRectangle(backGroung.rect.x + ajustX, backGroung.rect.y, backGroung.rect.width,
-		backGroung.rect.height, backGroung.color);
 }
 
 int main(void)
@@ -36,7 +16,7 @@ int main(void)
 	Game 	Game;
 	Player	*player;
 	Menu	menu;
-	Props	blocks(5);
+	Props	blocks(10);
 
 	// for (int i = 0; i < blocks.ftReturnNbr(); i++)
 	// {
@@ -48,22 +28,34 @@ int main(void)
 	blocks.ftAddSquareProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, 3);
 	blocks.ftAddSquareProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, 4);
 
-	// blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 0);
-	// blocks.ftAddSquareProps({200, 100}, {24, 24}, RED, 1);
-	// blocks.ftAddSquareProps({200, 0}, {24, 24}, YELLOW, 2);
-	// blocks.ftAddSquareProps({200, -100}, {24, 24}, PINK, 3);
-	// blocks.ftAddSquareProps({200, -200}, {24, 24}, PURPLE, 4);
+	// blocks.ftAddSquareProps({200, 200}, {24, 24}, BLUE, 5);
+	// blocks.ftAddSquareProps({200, 100}, {24, 24}, RED, 6);
+	// blocks.ftAddSquareProps({200, 0}, {24, 24}, YELLOW, 7);
+	// blocks.ftAddSquareProps({200, -100}, {24, 24}, PINK, 8);
+	// blocks.ftAddSquareProps({200, -200}, {24, 24}, PURPLE, 9);
 
 	InitWindow(Game.screenWidth, Game.screenHeight, "raylib [core] example - 2d camera");
 
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
 
+//--------------------------------------------------------------------------------------//
+	// Init Camera and windows
 	Camera2D camera = {0};
 	camera.target = player->ftReturnPlayerPosition();
 	camera.offset = (Vector2){Game.screenWidth / 2.0f, Game.screenHeight / 2.0f};
 	camera.rotation = 0.0f;
 	camera.zoom = 1.0f;
+	RenderTexture playing = LoadRenderTexture(Game.screenWidth - 300, Game.screenHeight);
+	Rectangle splitScreenRectPlay = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
+
+	Camera2D menuCam = {0};
+	menuCam.target = {0, 0};
+	menuCam.offset = (Vector2){0.0f, 0.0f};
+	menuCam.rotation = 0.0f;
+	menuCam.zoom = 1.0f;
+	RenderTexture menuText = LoadRenderTexture(300, Game.screenHeight);
+	Rectangle splitScreenRectPan = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
 
 	// Multiple camera
 	// void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int) = {
@@ -72,19 +64,17 @@ int main(void)
 
 	int cameraUpdatersLength = sizeof(1) / sizeof(Game.cameraUpdaters[0]);
 
-	// SetTargetFPS(60);
-	//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------
 	SetTargetFPS(60);
 
 	// Main game loop
 	while (!WindowShouldClose())
 	{
-		// Draw
-		//----------------------------------------------------------------------------------
-		BeginDrawing();
+		//** Drawning **//
 
+		//Draw Play screen
+		BeginTextureMode(playing);
 		ClearBackground(LIGHTGRAY);
-
 		BeginMode2D(camera);
 
 		if (menu.ftReturnStart() == 0) // Meni intro
@@ -102,13 +92,32 @@ int main(void)
 		{
 			ftRoutine(&Game, player, &camera, &blocks);
 		}
+		EndMode2D();
+		EndTextureMode();
+
+//--------------------------------------------------------------------------------------//
+
+		// Draw Control Panel
+		BeginTextureMode(menuText);
+		ClearBackground(DARKGRAY);
+		BeginMode2D(menuCam);
+
 		ftSideMenu(&Game, player, &menu);
 
 		EndMode2D();
+		EndTextureMode();
+
+//--------------------------------------------------------------------------------------//
+
+		// Draw both views render textures to the screen side by side
+		BeginDrawing();
+		ClearBackground(BLACK);
+		DrawTextureRec(playing.texture, splitScreenRectPlay, (Vector2){0, 0}, WHITE);
+		DrawTextureRec(menuText.texture, splitScreenRectPan, (Vector2){Game.screenWidth - 300.0f, 0}, WHITE);
 		EndDrawing();
 	}
 	CloseWindow();
 	delete player;
-	//--------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------//
 	return 0;
 }
