@@ -53,7 +53,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	Vector2		AdjCollBox = player->ftReturnAjustCollisionBox();
 	Vector2		plyPos = player->ftReturnPlayerPosition();
 
-	ftGestionProps(blocks, envItems, Game->delta, envItemsLength);
+	ftGestionProps(Game, blocks, envItems, Game->delta, envItemsLength);
 	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
 							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
 	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
@@ -110,9 +110,9 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 /*******************************************************************************************
 	Gestion Des objets (Plateforms wlakable, objets du decor ...)
 *******************************************************************************************/
-void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength)
+void	ftGestionProps(Game *Game, Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength)
 {
-	static int k;
+	static float k;
 	if (!k || k > 360)
 		k = 0;
 	for (int i = 0; i < envItemsLength; i++)
@@ -124,11 +124,11 @@ void	ftGestionProps(Props *blocks, EnvItem *envItems, float deltaTime, int envIt
 
 		blocks->ftMoveSquareProp((Vector2){blocks->ftReturnSpeedModifier('X', i) + block.width / 2, blocks->ftReturnSpeedModifier('Y', i) + block.height / 2}, i);
 		block = blocks->ftReturnRectangleSqPr(i);
-		DrawRectanglePro(block, (Vector2){block.width / 2, block.height / 2}, 0, blocks->ftReturnRecColorSqPr(i));
+		DrawRectanglePro(block, (Vector2){block.width / 2, block.height / 2}, k, blocks->ftReturnRecColorSqPr(i));
 		blocks->ftMoveSquareProp((Vector2){-block.width / 2, -block.height / 2}, i);
 		blocks->ftSetSpeedModifier(blocks->ftReturnSpeedModifier('X', i) / 1.01, 'X', i);
 	}
-	k += 5;
+	k += atof(Game->rotation);
 }
 /******************************************************************************************/
 

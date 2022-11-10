@@ -1,4 +1,4 @@
-#include "../myIncludes/class/menu.hpp"
+#include "../../myIncludes/class/menu.hpp"
 
 Menu::Menu(void)
 {
