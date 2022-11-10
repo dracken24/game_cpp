@@ -16,7 +16,7 @@ int main(void)
 	Game 	Game;
 	Player	*player;
 	Menu	menu;
-	Props	blocks(10);
+	Props	blocks(5);
 
 	// for (int i = 0; i < blocks.ftReturnNbr(); i++)
 	// {
@@ -116,8 +116,10 @@ int main(void)
 		DrawTextureRec(menuText.texture, splitScreenRectPan, (Vector2){Game.screenWidth - 300.0f, 0}, WHITE);
 		EndDrawing();
 	}
+//--------------------------------------------------------------------------------------//
 	CloseWindow();
+	UnloadRenderTexture(playing);
+	UnloadRenderTexture(menuText);
 	delete player;
-	//--------------------------------------------------------------------------------------//
 	return 0;
 }

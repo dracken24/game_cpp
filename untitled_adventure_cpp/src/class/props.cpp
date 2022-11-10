@@ -9,7 +9,7 @@ Props::Props(int nbr)
 
 Props::~Props(void)
 {
-	// delete this->_squareProps;
+	delete this->_squareProps;
 	return ;
 }
 
