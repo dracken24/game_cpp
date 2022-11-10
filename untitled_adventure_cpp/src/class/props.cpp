@@ -1,21 +1,29 @@
 #include "../../myIncludes/class/props.hpp"
 
-Props::Props(int nbr)
+Props::Props(void)
 {
-	this->_squareProps = new SquareProps[nbr];
-	this->_nbr = nbr;
 	return ;
 }
 
 Props::~Props(void)
 {
-	delete this->_squareProps;
 	return ;
 }
 
 /************************************** Gestion square props *****************************************/
 
 // Modify //
+
+void	Props::ftInitSquareProps(int nbr)
+{
+	this->_squareProps = new SquareProps[nbr];
+	this->_nbr = nbr;
+}
+
+void	Props::ftKillSquareProps(void)
+{
+	delete this->_squareProps;
+}
 
 void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr)
 {

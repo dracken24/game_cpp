@@ -565,8 +565,3 @@ void	Player::ftChangeCollX(bool ct)
 {
 	this->collX = ct;
 }
-
-// void	Player::ftSetSpeed(float speed)
-// {
-// 	this->ftSetSpeed(speed);
-// }

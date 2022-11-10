@@ -17,7 +17,7 @@ class Menu
 		int		ftReturnPlayer(void);
 
 	private:
-		int     menuCt = 0;
+		int     menuCt = 10;
 		int		chooseCt = 0;
 		int		player = 0;
 };

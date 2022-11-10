@@ -6,10 +6,12 @@
 class Props
 {
 	public:
-		Props(int nbr);
+		Props(void);
 		~Props(void);
 
 		// Square props //
+		void		ftInitSquareProps(int nbr);
+		void		ftKillSquareProps(void);
 		void        ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr);
 		Rectangle   ftReturnRectangleSqPr(int nbr);
 		Color       ftReturnRecColorSqPr(int nbr);
