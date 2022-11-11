@@ -56,7 +56,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	ftGestionProps(Game, blocks, envItems, Game->delta, envItemsLength);
 	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
 							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
-	DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
+	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
 	if (player->ftReturnFace() == 0) 		// Weapon collision box use
 	{
 		player->ftNewWeaponCollBoxPos(plyCollBox.x + plyCollBox.width, 'X');
@@ -67,7 +67,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		player->ftNewWeaponCollBoxPos(plyCollBox.x - plyCollBox.width - 5, 'X');
 		player->ftNewWeaponCollBoxPos(plyCollBox.y, 'Y');
 	}
-	DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
+	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
 	ftImgsGestion(Game, player);
 
 	/***********************************************************************************************************/

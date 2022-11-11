@@ -1,5 +1,6 @@
 #include "../../myIncludes/game.hpp"
 
+// Fonction Raylib modified for change grid color
 static void ftDrawGrid(int slices, float spacing)
 {
 	int halfSlices = slices / 2;
@@ -41,10 +42,9 @@ void ftMode3D(Game *Game)
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
-	const int screenWidth = 1500;
-	const int screenHeight = 800;
 
 	// Init Camera and windows
+
 	// Define the camera to look into our 3d world
 	Camera3D camera = { 0 };
 	camera.position = (Vector3){ 10.0f, 10.0f, 10.0f }; // Camera position
@@ -55,6 +55,7 @@ void ftMode3D(Game *Game)
 	RenderTexture playing = LoadRenderTexture(Game->screenWidth - 300, Game->screenHeight);
 	Rectangle splitScreenRectPlay = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
 
+	// Camera panel
 	Camera2D menuCam = {0};
 	menuCam.target = {0, 0};
 	menuCam.offset = (Vector2){0.0f, 0.0f};
@@ -69,87 +70,6 @@ void ftMode3D(Game *Game)
 
 	SetCameraMode(camera, CAMERA_FREE); // Set a free camera mode
 
-	// //--------------------------------------------------------------------------------------//
-	// // Init Camera and windows
-	// Camera2D camera = {0};
-	// camera.target = player->ftReturnPlayerPosition();
-	// camera.offset = (Vector2){Game->screenWidth / 2.0f, Game->screenHeight / 2.0f};
-	// camera.rotation = 0.0f;
-	// camera.zoom = 1.0f;
-	// RenderTexture playing = LoadRenderTexture(Game->screenWidth - 300, Game->screenHeight);
-	// Rectangle splitScreenRectPlay = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
-
-	// Camera2D menuCam = {0};
-	// menuCam.target = {0, 0};
-	// menuCam.offset = (Vector2){0.0f, 0.0f};
-	// menuCam.rotation = 0.0f;
-	// menuCam.zoom = 1.0f;
-	// RenderTexture menuText = LoadRenderTexture(300, Game->screenHeight);
-	// Rectangle splitScreenRectPan = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
-
-	// // Multiple camera
-	// // void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int) = {
-	// // 	ftUpdateCameraCenter};
-	// Game->cameraUpdaters[0] = {ftUpdateCameraCenter};
-
-	// int cameraUpdatersLength = sizeof(1) / sizeof(Game->cameraUpdaters[0]);
-
-	// //--------------------------------------------------------------------------------------
-	// // SetTargetFPS(60);
-
-	// // Main game loop
-	// while (!WindowShouldClose())
-	// {
-	// 	//** Drawning **//
-
-	// 	// Draw Play screen
-	// 	BeginTextureMode(playing);
-	// 	ClearBackground(LIGHTGRAY);
-	// 	BeginMode2D(camera);
-
-	// 	if (menu->ftReturnStart() == 0) // Meni intro
-	// 	{
-	// 		ftChooseMenu(menu);
-	// 		DrawText("Untitled Adventure Game", 100, 100, 40, BLACK);
-	// 		DrawText("Choose Your Character", 100, 200, 20, DARKGRAY);
-	// 		DrawText("Start Game", 100, 250, 20, DARKGRAY);
-	// 	}
-	// 	else if (menu->ftReturnStart() == 1) // Menu choose character
-	// 	{
-	// 		ftMenuChooseCharacter(player, menu);
-	// 	}
-	// 	else // Main loop
-	// 	{
-	// 		ftRoutine(Game, player, &camera, &blocks);
-	// 	}
-	// 	EndMode2D();
-	// 	EndTextureMode();
-
-	// 	//--------------------------------------------------------------------------------------//
-
-	// 	// Draw Control Panel
-	// 	BeginTextureMode(menuText);
-	// 	ClearBackground(DARKGRAY);
-	// 	BeginMode2D(menuCam);
-
-	// 	ftSideMenu(Game, player, menu);
-
-	// 	EndMode2D();
-	// 	EndTextureMode();
-
-	// 	//--------------------------------------------------------------------------------------//
-
-	// 	// Draw both views render textures to the screen side by side
-	// 	BeginDrawing();
-	// 	ClearBackground(BLACK);
-	// 	DrawTextureRec(playing.texture, splitScreenRectPlay, (Vector2){0, 0}, WHITE);
-	// 	DrawTextureRec(menuText.texture, splitScreenRectPan, (Vector2){Game->screenWidth - 300.0f, 0}, WHITE);
-	// 	EndDrawing();
-	// }
-	// //--------------------------------------------------------------------------------------//
-	// // CloseWindow();
-	// UnloadRenderTexture(playing);
-	// UnloadRenderTexture(menuText);
 
 	SetTargetFPS(60);                   // Set our game to run at 60 frames-per-second
 	//--------------------------------------------------------------------------------------
@@ -212,9 +132,4 @@ void ftMode3D(Game *Game)
 		EndDrawing();
 		//----------------------------------------------------------------------------------
 	}
-
-	// De-Initialization
-	//--------------------------------------------------------------------------------------
-	// CloseWindow();        // Close window and OpenGL context
-	//--------------------------------------------------------------------------------------
 }
