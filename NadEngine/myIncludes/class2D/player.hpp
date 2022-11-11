@@ -18,6 +18,7 @@ class Player
 		void		ftInitPlayerImgs(int nbr);
 		void		ftInitImgsEd(void);
 		void		ftInitImgsIchigo(void);
+		void		ftInitImgsMeliodas(void);
 		void		ftSetPosition(Vector2 pos);
 
 		Vector2		ftReturnPlayerPosition(void);

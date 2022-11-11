@@ -12,13 +12,20 @@ void	ftChooseMenu(Menu *menu)
 	if (!warning || warning > 80)
 		warning = 0;
 
-	if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S))
-		ct *= -1;
+	if (IsKeyPressed(KEY_W))
+		ct--;
+	else if (IsKeyPressed(KEY_S))
+		ct++;
+	if (ct > 2)
+		ct = 1;
+	else if (ct < 1)
+	ct = 2;
+
 	if (IsKeyPressed(KEY_ENTER))
 	{
 		if (ct == 1)
 			menu->ftChangeStart(1);
-		else if (ct == -1 && menu->ftReturnPlayer() != 0)
+		else if (ct == 2 && menu->ftReturnPlayer() != 0)
 			menu->ftChangeStart(2);
 		else
 			warning = 1;
@@ -28,7 +35,7 @@ void	ftChooseMenu(Menu *menu)
 	{
 		DrawText("<---*", 400, 200, 20, DARKGRAY);
 	}
-	else if (ct == -1)
+	else if (ct == 2)
 	{
 		DrawText("<---*", 400, 250, 20, DARKGRAY);
 	}
@@ -48,25 +55,36 @@ void	ftChooseCharacter(Menu *menu)
 	if (!ct)
 		ct = 1;
 
-	if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_S))
-	{
-		ct *= -1;
-	}
+	if (IsKeyPressed(KEY_W))
+		ct--;
+	else if (IsKeyPressed(KEY_S))
+		ct++;
+	if (ct > 3)
+		ct = 1;
+	else if (ct < 1)
+		ct = 3;
+
 	if (IsKeyPressed(KEY_ENTER))
 	{
 		if (ct == 1)
 			menu->ftChangePlayer(1);
-		if (ct == -1)
+		else if (ct == 2)
 			menu->ftChangePlayer(2);
+		else if (ct == 3)
+			menu->ftChangePlayer(3);
 	}
 
 	if (ct == 1)
 	{
 		DrawText("<---*", 400, 200, 20, DARKGRAY);
 	}
-	else if (ct == -1)
+	else if (ct == 2)
 	{
 		DrawText("<---*", 400, 250, 20, DARKGRAY);
+	}
+	else if (ct == 3)
+	{
+		DrawText("<---*", 400, 300, 20, DARKGRAY);
 	}
 }
 
@@ -77,6 +95,7 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 	DrawText("Choose Your Character", 100, 100, 40, BLACK);
 	DrawText("Edward Elric", 100, 200, 20, DARKGRAY);
 	DrawText("Ichigo Kurosaki", 100, 250, 20, DARKGRAY);
+	DrawText("Meliodas Lostvayne", 100, 300, 20, DARKGRAY);
 	if (menu->ftReturnPlayer() == 1)
 	{
 		player->ftInitPlayerImgs(1);
@@ -113,6 +132,25 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 		player->ftChangeMoveAttackRiX(0);
 		player->ftChangeMoveAttackY(118);
 		player->ftChangeMoveIdleX(-10);
+		menu->ftChangeStart(0);
+	}
+	else if (menu->ftReturnPlayer() == 3)
+	{
+		player->ftInitPlayerImgs(3);
+		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {45, 95}, {-72, 95});
+		player->ftInitWeapon("Brocken Sword", {(float)player->ftReturnCollBoxPos('X'), (float)player->ftReturnCollBoxPos('Y')}, {50, (float)player->ftReturnCollBoxSize('H')});
+		player->ftChangeCtIdle(30);
+		player->ftChangeCtMove(8);
+		player->ftChangeCtJump(20);
+		player->ftChangeCtFall(60);
+		player->ftInitCtMoveX(70);
+		player->ftInitCtMoveY(98, "Idle");
+		player->ftInitCtMoveY(82, "Move");
+		player->ftChangeCtAttack(9);
+		player->ftChangeMoveAttackLftX(40);
+		player->ftChangeMoveAttackRiX(40);
+		player->ftChangeMoveAttackY(90);
+		player->ftChangeMoveIdleX(-2);
 		menu->ftChangeStart(0);
 	}
 }

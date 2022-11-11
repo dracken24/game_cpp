@@ -138,6 +138,60 @@ void	Player::ftInitImgsIchigo(void) // Ichigo Kurosaki
 	this->p1_attack00lft[6] = LoadTexture("./imgs/ichigo/ichigo_attack_lft_00/ichigo_sa_lft_06.png");
 }
 
+void Player::ftInitImgsMeliodas(void) // Meliodas Lostvayne
+{
+	// Idle
+	this->p1_idle_ri[0] = LoadTexture("./imgs/meliodas/idle_ri/meliodas_idle_ri_00.png");
+	this->p1_idle_ri[1] = LoadTexture("./imgs/meliodas/idle_ri/meliodas_idle_ri_01.png");
+
+	this->p1_idle_lft[0] = LoadTexture("./imgs/meliodas/idle_lft/meliodas_idle_lft_00.png");
+	this->p1_idle_lft[1] = LoadTexture("./imgs/meliodas/idle_lft/meliodas_idle_lft_01.png");
+
+	// Jump
+	this->p1_jumpr[0] = LoadTexture("./imgs/meliodas/jump_ri/meliodas_jump_ri_00.png");
+	this->p1_jumpr[1] = LoadTexture("./imgs/meliodas/jump_ri/meliodas_jump_ri_01.png");
+
+	this->p1_jumpl[0] = LoadTexture("./imgs/meliodas/jump_lft/meliodas_jump_lft_00.png");
+	this->p1_jumpl[1] = LoadTexture("./imgs/meliodas/jump_lft/meliodas_jump_lft_01.png");
+
+	// Fall
+	this->p1_fallr[0] = LoadTexture("./imgs/meliodas/jump_ri/meliodas_jump_ri_00.png");
+	// this->p1_fallr[1] = LoadTexture("./imgs/meliodas/jump_ri/meliodas_jump_ri_01.png");
+
+	this->p1_falll[0] = LoadTexture("./imgs/meliodas/jump_lft/meliodas_jump_lft_00.png");
+	// this->p1_falll[1] = LoadTexture("./imgs/meliodas/jump_lft/meliodas_jump_lft_01.png");
+
+	// Move
+	this->p1_runRi[0] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_00.png");
+	this->p1_runRi[1] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_01.png");
+	this->p1_runRi[2] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_02.png");
+	this->p1_runRi[3] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_03.png");
+	this->p1_runRi[4] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_04.png");
+	this->p1_runRi[5] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_05.png");
+	this->p1_runRi[6] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_06.png");
+	this->p1_runRi[7] = LoadTexture("./imgs/meliodas/move_ri/meliodas_move_ri_07.png");
+
+	this->p1_runLft[0] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_00.png");
+	this->p1_runLft[1] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_01.png");
+	this->p1_runLft[2] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_02.png");
+	this->p1_runLft[3] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_03.png");
+	this->p1_runLft[4] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_04.png");
+	this->p1_runLft[5] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_05.png");
+	this->p1_runLft[6] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_06.png");
+	this->p1_runLft[7] = LoadTexture("./imgs/meliodas/move_lft/meliodas_move_lft_07.png");
+
+	// Attack 00
+	this->p1_attack00ri[0] = LoadTexture("./imgs/meliodas/attack_00_ri/meliodas_attack_00_ri_00.png");
+	this->p1_attack00ri[1] = LoadTexture("./imgs/meliodas/attack_00_ri/meliodas_attack_00_ri_01.png");
+	this->p1_attack00ri[2] = LoadTexture("./imgs/meliodas/attack_00_ri/meliodas_attack_00_ri_02.png");
+	this->p1_attack00ri[3] = LoadTexture("./imgs/meliodas/attack_00_ri/meliodas_attack_00_ri_03.png");
+
+	this->p1_attack00lft[0] = LoadTexture("./imgs/meliodas/attack_00_lft/meliodas_attack_00_lft_00.png");
+	this->p1_attack00lft[1] = LoadTexture("./imgs/meliodas/attack_00_lft/meliodas_attack_00_lft_01.png");
+	this->p1_attack00lft[2] = LoadTexture("./imgs/meliodas/attack_00_lft/meliodas_attack_00_lft_02.png");
+	this->p1_attack00lft[3] = LoadTexture("./imgs/meliodas/attack_00_lft/meliodas_attack_00_lft_03.png");
+}
+
 /**************************************** Gestion images *******************************************/
 
 Texture2D	Player::ftReturnGoodImage(std::string string, int ct)
@@ -175,6 +229,11 @@ void	Player::ftInitPlayerImgs(int nbr)
 	else if (nbr == 2) // Edward
 	{
 		this->ftInitImgsIchigo();
+		this->nbr = nbr;
+	}
+	else if (nbr == 3) // Meliodas
+	{
+		this->ftInitImgsMeliodas();
 		this->nbr = nbr;
 	}
 }
