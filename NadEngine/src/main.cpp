@@ -1,6 +1,6 @@
 #include "../myIncludes/class2D/player.hpp"
 #include "../myIncludes/class2D/menu.hpp"
-#include "../myIncludes/class2D/props.hpp"
+// #include "../myIncludes/class2D/props.hpp"
 #include "../myIncludes/game.hpp"
 
 //**************************************************************************************************//
@@ -54,6 +54,8 @@ int main(void)
 {
 	Game	Game;
 	Menu	menu;
+
+	Game.font1 = LoadFontEx("../fonts/Greenscr.ttf", 32, 0, 250);
 
 	InitWindow(Game.screenWidth, Game.screenHeight, "BANKAI");
 	SetTargetFPS(60);

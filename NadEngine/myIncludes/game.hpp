@@ -3,9 +3,9 @@
 
 # include "../vendor/raylib/src/raylib.h"
 # include "../vendor/raylib/src/raymath.h"
-# include "../myIncludes/class2D/player.hpp"
-# include "../myIncludes/class2D/props.hpp"
-# include "../myIncludes/class2D/menu.hpp"
+# include "./class2D/player.hpp"
+# include "./class2D/props.hpp"
+# include "./class2D/menu.hpp"
 # include "../vendor/raylib/src/rlgl.h"
 
 # include <string>
@@ -18,6 +18,9 @@
 # define PLAYER_JUMP_SPD 600.0f
 # define PLAYER_HOR_SPD 200.0f
 #define MAX_INPUT_CHARS 12
+
+#define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
+#define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
 
 typedef struct EnvItem {
 	Rectangle rect;
@@ -38,6 +41,8 @@ typedef struct Game {
 	bool		ctCollision = false;
 
 	Mouse		mouse;
+	Font		font1;
+
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
 	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, EnvItem *, int, float, int, int);
@@ -57,6 +62,9 @@ void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
 void	ftSideMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftDrawBoarders(Game *Game);
 
 /**----------------------------> Game <-----------------------------**/
 

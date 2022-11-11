@@ -10,7 +10,7 @@ platformpth = $(subst /,$(PATHSEP),$1)
 
 # Set global macros
 buildDir := bin
-executable := Untitled_Adventure
+executable := NadEngine
 target := $(buildDir)/$(executable)
 sources := $(call rwildcard,src/,*.cpp)
 objects := $(patsubst src/%, $(buildDir)/%, $(patsubst %.cpp, %.o, $(sources)))
