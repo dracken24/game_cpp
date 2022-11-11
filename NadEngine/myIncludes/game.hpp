@@ -7,6 +7,7 @@
 # include "./class2D/props.hpp"
 # include "./class2D/menu.hpp"
 # include "./class2D/envitems.hpp"
+# include "./class2D/stopGame.hpp"
 # include "../vendor/raylib/src/rlgl.h"
 
 # include <string>
@@ -33,13 +34,17 @@ typedef struct Mouse{
 	Vector2	pos;
 }	Mouse;
 
-typedef struct Game {
+class Game {
+	public:
+	
 	const int   screenWidth = 1500;
 	const int   screenHeight = 800;
 	float		delta;
 	int         characterSelection = 0;
 	int         ct_action = 0;
 	bool		ctCollision = false;
+	int			ctPlayStop = 1;
+	int			ctImgBuildGame = 1;
 
 	Mouse		mouse;
 	Font		font1;
@@ -47,7 +52,7 @@ typedef struct Game {
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
 	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, int, float, int, int);
-}   Game;
+};
 
 
 /**----------------------------> Menu <-----------------------------**/
@@ -66,6 +71,10 @@ void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftDrawBoarders(Game *Game);
+
+/**-------------------------> Build Game <--------------------------**/
+
+// void	ftRunBuildMode(Game *Game,Stop *buildGame);
 
 /**----------------------------> Game <-----------------------------**/
 

@@ -1,8 +1,10 @@
 #include "../../myIncludes/game.hpp"
 #include "../../myIncludes/class2D/squareProps.hpp"
 #include "../../myIncludes/class2D/envitems.hpp"
+#include "../../myIncludes/class2D/stopGame.hpp"
 
 // void	ftRoutine(Game *Game, Player *player, Camera2D *camera, SquareProps *blocks, SquareProps *platforms);
+void	ftRunBuildMode(Game *Game,Stop *buildGame);
 
 void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 {
@@ -29,6 +31,7 @@ void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 
 void	ftMode2D(Game *Game, Menu *menu)
 {
+	static Stop	saveGame;
 	Player	*player;
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
@@ -83,7 +86,10 @@ void	ftMode2D(Game *Game, Menu *menu)
 
 	int cameraUpdatersLength = sizeof(1) / sizeof(Game->cameraUpdaters[0]);
 //--------------------------------------------------------------------------------------
-	// SetTargetFPS(60);
+	
+	saveGame.ftSaveBlocks(&blocks);
+	saveGame.ftSaveEnvItems(envItems);
+	saveGame.ftSavePlayer(player);
 
 	// Main game loop
 	while (!WindowShouldClose())
@@ -109,7 +115,8 @@ void	ftMode2D(Game *Game, Menu *menu)
 				}
 				else // Main loop
 				{
-					ftRoutine(Game, player, &camera, &blocks, envItems);
+					ftRunBuildMode(Game, &saveGame);
+					// ftRoutine(Game, player, &camera, &blocks, envItems);
 				}
 			EndMode2D();
 		EndTextureMode();
@@ -183,10 +190,20 @@ void	ftDrawBoarders(Game *Game)
 
 void	ftUpMenu2D(Game *Game, Player *player, Menu *menu)
 {
-	DrawText("Test Up", 10, 10, 20, WHITE);
+	static Texture play;
+	static Texture stop;
+	if (Game->ctPlayStop == 1)
+	{
+		play = LoadTexture("./imgs/buttons/play_00.png");
+		stop = LoadTexture("./imgs/buttons/stop_00.png");
+		Game->ctPlayStop = 0;
+	}
+	DrawTextureEx(play,{(float)Game->screenWidth - 300, 5}, 0, 1, WHITE);
+	DrawTextureEx(stop,{(float)Game->screenWidth - 260, 5}, 0, 1, WHITE);
+	DrawText("Panel Up", 10, 10, 20, WHITE);
 }
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu)
 {
-	DrawText("Test down", 10, 10, 20, BLACK);
+	DrawText("Panel Side down", 10, 10, 20, BLACK);
 }
