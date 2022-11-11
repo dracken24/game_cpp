@@ -2,6 +2,7 @@
 # define PROPS_HPP
 
 #include "squareProps.hpp"
+#include <iostream>
 
 
 class Props
@@ -11,9 +12,9 @@ class Props
 		~Props(void);
 
 		// Square props //
-		void		ftInitSquareProps(int nbr);
+		void		ftInitSquareProps(int nbr, std::string type);
 		void		ftKillSquareProps(void);
-		void        ftAddSquareProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr);
+		void        ftAddProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string type);
 		Rectangle   ftReturnRectangleSqPr(int nbr);
 		Color       ftReturnRecColorSqPr(int nbr);
 		SquareProps *ftReturnSquareProp(int nbr) const;

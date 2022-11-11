@@ -14,9 +14,12 @@ Props::~Props(void)
 
 // Modify //
 
-void	Props::ftInitSquareProps(int nbr)
+void	Props::ftInitSquareProps(int nbr, std::string type)
 {
-	this->_squareProps = new SquareProps[nbr];
+	if (type == "blocks")
+		this->_squareProps = new SquareProps[nbr];
+	else if (type == "plateforms")
+		this->_platforms = new SquareProps[nbr];
 	this->_nbr = nbr;
 }
 
@@ -25,9 +28,12 @@ void	Props::ftKillSquareProps(void)
 	delete this->_squareProps;
 }
 
-void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
+void	Props::ftAddProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string type)
 {
-	this->_squareProps[nbr].ftInitSquareprops(pos, size, color, blocking, nbr);
+	if (type == "blocks")
+		this->_squareProps[nbr].ftInitSquareprops(pos, size, color, blocking, nbr);
+	else if (type == "plateforms")
+		this->_platforms[nbr].ftInitSquareprops(pos, size, color, blocking, nbr);
 }
 
 void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)

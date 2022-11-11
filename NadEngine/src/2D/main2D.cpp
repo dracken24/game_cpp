@@ -7,19 +7,30 @@ void	ftRoutine(Game *Game, Player *player, Camera2D *camera, SquareProps *blocks
 void	ftMode2D(Game *Game, Menu *menu)
 {
 	Player	*player;
-	Props	blocks;
-
-	blocks.ftInitSquareProps(5);
-	blocks.ftAddSquareProps((Vector2){200, 200}, (Vector2){24, 24}, BLUE, true, 0);
-	blocks.ftAddSquareProps((Vector2){160, 200}, (Vector2){24, 24}, RED, true, 1);
-	blocks.ftAddSquareProps((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, true, 2);
-	blocks.ftAddSquareProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, true, 3);
-	blocks.ftAddSquareProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, true, 4);
-
-
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
-//--------------------------------------------------------------------------------------//
+
+	Props	blocks;
+	blocks.ftInitSquareProps(5, "blocks");
+	blocks.ftAddProps((Vector2){200, 200}, (Vector2){24, 24}, BLUE, true, 0, "blocks");
+	blocks.ftAddProps((Vector2){160, 200}, (Vector2){24, 24}, RED, true, 1, "blocks");
+	blocks.ftAddProps((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, true, 2, "blocks");
+	blocks.ftAddProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, true, 3, "blocks");
+	blocks.ftAddProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, true, 4, "blocks");
+
+	Props	plateforms;
+	plateforms.ftInitSquareProps(9, "plateforms");
+	plateforms.ftAddProps((Vector2){0, 0}, (Vector2){1000, 400}, LIGHTGRAY, false, 0, "plateforms");
+	plateforms.ftAddProps((Vector2){0, 400}, (Vector2){1000, 200}, LIGHTGRAY, true, 1, "plateforms");
+	plateforms.ftAddProps((Vector2){300, 150}, (Vector2){400, 10}, LIGHTGRAY, true, 2, "plateforms");
+	plateforms.ftAddProps((Vector2){250, 250}, (Vector2){100, 10}, LIGHTGRAY, true, 3, "plateforms");
+	plateforms.ftAddProps((Vector2){650, 250}, (Vector2){100, 10}, LIGHTGRAY, true, 4, "plateforms");
+	plateforms.ftAddProps((Vector2){-850, 350}, (Vector2){100, 10}, LIGHTGRAY, true, 5, "plateforms");
+	plateforms.ftAddProps((Vector2){1100, 380}, (Vector2){400, 13}, LIGHTGRAY, true, 6, "plateforms");
+	plateforms.ftAddProps((Vector2){700, 100}, (Vector2){150, 10}, LIGHTGRAY, true, 7, "plateforms");
+	plateforms.ftAddProps((Vector2){450, 500}, (Vector2){180, 15}, LIGHTGRAY, true, 8, "plateforms");
+
+	//--------------------------------------------------------------------------------------//
 	// Init Camera and windows
 	// Camera player
 	Camera2D camera = {0};
