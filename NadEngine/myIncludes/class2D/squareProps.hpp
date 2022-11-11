@@ -3,11 +3,11 @@
 
 #include "../../vendor/raylib/src/raylib.h"
 
-typedef struct EnvItem {
-	Rectangle rect;
-	bool blocking;
-	Color color;
-}   EnvItem;
+// typedef struct EnvItem {
+// 	Rectangle rect;
+// 	bool blocking;
+// 	Color color;
+// }   EnvItem;
 
 class SquareProps
 {
@@ -38,17 +38,16 @@ class SquareProps
 		void		ftChangeSpeedModifier(float speed, char c);
 
 		float		ftReturnSqurtPos(char c) const;
-		EnvItem		*ftReturnEnvitemPtr(void);
 
 	private:
-		EnvItem		_envItem;
-		// Rectangle   rect;
-		// Color		color;
+		// EnvItem		_envItem;
+		Rectangle   rect;
+		Color		color;
 		Vector2		pos;
 		Vector2		speedModifier = {0, 0};
 		float		speed;
 		float		speedX;
-		// int			blocking;
+		int			blocking;
 		int			_nbr;
 };
 

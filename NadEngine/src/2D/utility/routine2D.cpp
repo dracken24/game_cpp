@@ -3,31 +3,18 @@
 #include "../../../myIncludes/class2D/props.hpp"
 #include "../../../myIncludes/game.hpp"
 
-void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
+void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvItems *envItems)
 {
-	// static int i;
 	static int lastAction;
 	static int cameraOption = 0;
 
-	EnvItem envItems[] = {
-		{{0, 0, 1000, 400}, 0, LIGHTGRAY},
-		{{0, 400, 1000, 200}, 1, GRAY},
-		{{300, 150, 400, 10}, 1, GRAY},
-		{{250, 250, 100, 10}, 1, GRAY},
-		{{650, 250, 100, 10}, 1, GRAY},
-		{{-850, 350, 700, 205}, 1, GRAY},
-		{{1100, 380, 400, 13}, 1, GRAY},
-		{{700, 100, 150, 10}, 1, GRAY},
-		{{450, 500, 180, 15}, 1, GRAY}};
-
-	int envItemsLength = sizeof(envItems) / sizeof(envItems[0]);
-
+	int envItemsLength = envItems->ftReturnEnviAllNbr();
 	lastAction = player->ftReturnCt();
 	if (Game->ct_action >= 60 || lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
 	Game->delta = GetFrameTime();
 
-	Game->cameraUpdaters[cameraOption](Game, camera, player, envItems, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
+	Game->cameraUpdaters[cameraOption](Game, camera, player, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
 
 	ftUpdatePlayer(Game, player, envItems, envItemsLength, Game->delta);
 	if (lastAction != player->ftReturnCt())
@@ -56,6 +43,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 	ftGestionProps(Game, blocks, envItems, Game->delta, envItemsLength);
 	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
 							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
+	
 	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
 	if (player->ftReturnFace() == 0) 		// Weapon collision box use
 	{
@@ -68,6 +56,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 		player->ftNewWeaponCollBoxPos(plyCollBox.y, 'Y');
 	}
 	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
+	
 	ftImgsGestion(Game, player);
 
 	/***********************************************************************************************************/
@@ -110,13 +99,13 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks)
 /*******************************************************************************************
 	Gestion Des objets (Plateforms wlakable, objets du decor ...)
 *******************************************************************************************/
-void	ftGestionProps(Game *Game, Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength)
+void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength)
 {
 	static float k;
 	if (!k || k > 360)
 		k = 0;
 	for (int i = 0; i < envItemsLength; i++)
-		DrawRectangleRec(envItems[i].rect, envItems[i].color);
+		DrawRectangleRec(envItems->ftReturnRectangle(i), envItems->ftReturnEnviColor(i));
 	
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
@@ -132,7 +121,7 @@ void	ftGestionProps(Game *Game, Props *blocks, EnvItem *envItems, float deltaTim
 }
 /******************************************************************************************/
 
-void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLength, float delta)
+void	ftUpdatePlayer(Game *Game,Player *player, EnvItems *envItems, int envItemsLength, float delta)
 {
 	player->ftChangeLastY(player->ftReturnPlayerPositionY());
 
@@ -149,7 +138,7 @@ void	ftUpdatePlayer(Game *Game,Player *player, EnvItem *envItems, int envItemsLe
 	}
 }
 
-void ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player, EnvItem *envItems, int envItemsLength, float delta, int width, int height)
+void ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player, int envItemsLength, float delta, int width, int height)
 {
 	camera->offset = (Vector2){Game->screenWidth / 2.0f - 150, Game->screenHeight / 2.0f};
 	camera->target = player->ftReturnPlayerPosition();

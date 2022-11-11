@@ -66,7 +66,7 @@ void	ftMouseControl(Game *Game)
 		letterCount = 0;
 		framesCounter = 0;
 	}
-	textBox1 = {1320, 40, 100, 20};
+	textBox1 = {1320, 70, 100, 20};
 	if (CheckCollisionPointRec(Game->mouse.pos, textBox1))
 		mouseOnText = true;
 	else

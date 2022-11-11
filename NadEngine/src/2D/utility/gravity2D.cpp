@@ -84,14 +84,14 @@ void	ftGravityGestion(Game *Game, Player *player, Props *blocks)
 	ftGravityX(Game, player, blocks);
 }
 
-void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength)
+void	ftUsePlayerGravity(Player *player, EnvItems *envItems, float delta, int envItemsLength)
 {
 	int			hitObstacle = 0;
 	Rectangle	tmpCollBox = player->ftReturnCollisionBox();
 
 	for (int i = 0; i < envItemsLength; i++)
 	{
-		EnvItem *ei = envItems + i;
+		EnvItem *ei = envItems->ftReturnEnvitemPtr(i);
 		Vector2 *p = player->ftReturnPlayerPositionPtr();
 
 		if (ei->blocking &&             							// Stop Player falling
@@ -137,14 +137,14 @@ void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envI
 	}
 }
 
-void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItemsLength)
+void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envItemsLength)
 {
 	int 		hitObstacle = 0;
 	Rectangle tmpProp = prop->ftReturnRectangle();
 
 	for (int i = 0; i < envItemsLength; i++)
 	{
-		EnvItem *ei = envItems + i;
+		EnvItem *ei = envItems->ftReturnEnvitemPtr(i);
 		Vector2 *p = prop->ftReturnPositionPtr();
 		if (ei->blocking &&
 			ei->rect.x - tmpProp.width <= p->x &&

@@ -6,6 +6,7 @@
 # include "./class2D/player.hpp"
 # include "./class2D/props.hpp"
 # include "./class2D/menu.hpp"
+# include "./class2D/envitems.hpp"
 # include "../vendor/raylib/src/rlgl.h"
 
 # include <string>
@@ -45,7 +46,7 @@ typedef struct Game {
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
-	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, EnvItem *, int, float, int, int);
+	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, int, float, int, int);
 }   Game;
 
 
@@ -61,26 +62,26 @@ void	ftChooseMenu(Menu *menu);
 void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
-// void	ftSideMenu2D(Game *Game, Player *player, Menu *menu);
-void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftDrawBoarders(Game *Game);
 
 /**----------------------------> Game <-----------------------------**/
 
-void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player, EnvItem *envItems,
+void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player,
 		int envItemsLength, float delta, int width, int height);
-void 	ftUpdatePlayer(Game *Game, Player *player, EnvItem *envItems, int envItemsLength, float delta);
+void 	ftUpdatePlayer(Game *Game, Player *player, EnvItems *envItems, int envItemsLength, float delta);
 void	ftImgsGestion(Game *Game, Player *player);
 
-void	ftGestionProps(Game *Game, Props *blocks, EnvItem *envItems, float deltaTime, int envItemsLength);
-void	ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks);
+void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength);
+void	ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvItems *envItems);
 void	ftKeyGestion(Game *Game, Player *player, float delta);
 
 /**---------------------------> Utility <----------------------------**/
 
-void	ftUsePlayerGravity(Player *player, EnvItem *envItems, float delta, int envItemsLength);
-void	ftUseGravity(SquareProps *prop, EnvItem *envItems, float delta, int envItemsLength);
+void	ftUsePlayerGravity(Player *player, EnvItems *envItems, float delta, int envItemsLength);
+void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envItemsLength);
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
 
 //**********************************************************************************//

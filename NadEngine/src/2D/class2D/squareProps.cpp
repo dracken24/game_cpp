@@ -12,26 +12,26 @@ SquareProps::~SquareProps(void)
 
 void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
 {
-	this->_envItem.rect.width = size.x - 1;
-	this->_envItem.rect.height = size.y - 1;
-	this->_envItem.rect.x = pos.x;
-	this->_envItem.rect.y = pos.y;
+	this->rect.width = size.x - 1;
+	this->rect.height = size.y - 1;
+	this->rect.x = pos.x;
+	this->rect.y = pos.y;
 	this->pos.x = pos.x;
 	this->pos.y = pos.y;
-	this->_envItem.color = color;
+	this->color = color;
 	this->speed = 0;
 	this->_nbr = nbr;
-	this->_envItem.blocking = blocking;
+	this->blocking = blocking;
 }
 
 Rectangle	SquareProps::ftReturnRectangle(void) const
 {
-	return (this->_envItem.rect);
+	return (this->rect);
 }
 
 Color	SquareProps::ftReturnRecColor(void) const
 {
-	return (this->_envItem.color);
+	return (this->color);
 }
 
 Vector2	*SquareProps::ftReturnPositionPtr(void)
@@ -57,24 +57,24 @@ void	SquareProps::ftChangeSpeed(float speed)
 void	SquareProps::ftMovePosition(float x, float y)
 {
 	this->pos.x += x;
-	this->_envItem.rect.x += x;
+	this->rect.x += x;
 	this->pos.y += y;
-	this->_envItem.rect.y += y;
+	this->rect.y += y;
 }
 
 void	SquareProps::ftInitPosition(Vector2 pos)
 {
 	this->pos.x = pos.x;
-	this->_envItem.rect.x = pos.x;
+	this->rect.x = pos.x;
 	this->pos.y = pos.y;
-	this->_envItem.rect.y = pos.y;
+	this->rect.y = pos.y;
 }
 float	SquareProps::ftReturnWideorHigh(char c) const
 {
 	if (c == 'W') // Width
-		return (this->_envItem.rect.width);
+		return (this->rect.width);
 	if (c == 'H') // Hight
-		return (this->_envItem.rect.height);
+		return (this->rect.height);
 	return (0);
 }
 
@@ -134,9 +134,4 @@ void	SquareProps::ftChangeSpeedModifier(float speed, char c)
 		this->speedModifier.x += speed;
 	if (c == 'Y')
 		this->speedModifier.y += speed;
-}
-
-EnvItem *SquareProps::ftReturnEnvitemPtr(void)
-{
-	return (&this->_envItem);
 }
