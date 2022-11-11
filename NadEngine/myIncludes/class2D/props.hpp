@@ -3,6 +3,7 @@
 
 #include "squareProps.hpp"
 
+
 class Props
 {
 	public:
@@ -12,7 +13,7 @@ class Props
 		// Square props //
 		void		ftInitSquareProps(int nbr);
 		void		ftKillSquareProps(void);
-		void        ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr);
+		void        ftAddSquareProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr);
 		Rectangle   ftReturnRectangleSqPr(int nbr);
 		Color       ftReturnRecColorSqPr(int nbr);
 		SquareProps *ftReturnSquareProp(int nbr) const;
@@ -30,6 +31,7 @@ class Props
 
 	private:
 		SquareProps *_squareProps;
+		SquareProps *_platforms;
 		int         _nbr;
 };
 

@@ -120,7 +120,7 @@ void	ftMouseControl(Game *Game)
 	}
 }
 
-void	ftSideMenu2D(Game *Game, Player *player, Menu *menu)
+void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu)
 {
 	ftMouseControl(Game);
 }

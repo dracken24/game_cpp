@@ -22,11 +22,11 @@
 #define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
 #define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
 
-typedef struct EnvItem {
-	Rectangle rect;
-	int blocking;
-	Color color;
-}   EnvItem;
+// typedef struct EnvItem {
+// 	Rectangle rect;
+// 	int blocking;
+// 	Color color;
+// }   EnvItem;
 
 typedef struct Mouse{
 	Vector2	pos;
@@ -61,7 +61,7 @@ void	ftChooseMenu(Menu *menu);
 void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
-void	ftSideMenu2D(Game *Game, Player *player, Menu *menu);
+// void	ftSideMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftDrawBoarders(Game *Game);

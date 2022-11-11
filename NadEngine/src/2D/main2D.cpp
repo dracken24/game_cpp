@@ -10,33 +10,12 @@ void	ftMode2D(Game *Game, Menu *menu)
 	Props	blocks;
 
 	blocks.ftInitSquareProps(5);
-	blocks.ftAddSquareProps((Vector2){200, 200}, (Vector2){24, 24}, BLUE, 0);
-	blocks.ftAddSquareProps((Vector2){160, 200}, (Vector2){24, 24}, RED, 1);
-	blocks.ftAddSquareProps((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, 2);
-	blocks.ftAddSquareProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, 3);
-	blocks.ftAddSquareProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, 4);
-	// SquareProps	*blocks;
-	// std::cout << "Help 1" << std::endl;
-	// blocks = new SquareProps[5];
-	// blocks[0].ftInitSquareprops((Vector2){200, 200}, (Vector2){24, 24}, BLUE, "Blue", true, 0);
-	// blocks[1].ftInitSquareprops((Vector2){160, 200}, (Vector2){24, 24}, RED, "Red", true, 1);
-	// std::cout << "Help 2" << std::endl;
-	// blocks[2].ftInitSquareprops((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, "Yellow", true, 2);
-	// blocks[3].ftInitSquareprops((Vector2){240, 200}, (Vector2){24, 24}, PINK, "Pink", true, 3);
-	// blocks[4].ftInitSquareprops((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, "Purple", true, 4);
+	blocks.ftAddSquareProps((Vector2){200, 200}, (Vector2){24, 24}, BLUE, true, 0);
+	blocks.ftAddSquareProps((Vector2){160, 200}, (Vector2){24, 24}, RED, true, 1);
+	blocks.ftAddSquareProps((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, true, 2);
+	blocks.ftAddSquareProps((Vector2){240, 200}, (Vector2){24, 24}, PINK, true, 3);
+	blocks.ftAddSquareProps((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, true, 4);
 
-	// SquareProps	*platforms;
-
-	// platforms = new SquareProps[9];
-	// platforms[0].ftInitSquareprops({0, 0}, {1000, 400}, LIGHTGRAY, "Back", 0, 0);
-	// platforms[1].ftInitSquareprops({0, 400}, {1000, 200}, GRAY, "Platform 00", 1, 1);
-	// platforms[2].ftInitSquareprops({300, 150}, {400, 10}, GRAY, "Platform 01", 1, 2);
-	// platforms[3].ftInitSquareprops({250, 250}, {100, 10}, GRAY, "Platform 02", 1, 3);
-	// platforms[4].ftInitSquareprops({650, 250}, {100, 10}, GRAY, "Platform 03", 1, 4);
-	// platforms[5].ftInitSquareprops({-850, 350}, {700, 205}, GRAY, "Platform 04", 1, 5);
-	// platforms[6].ftInitSquareprops({1100, 380}, {400, 13}, GRAY, "Platform 05", 1, 6);
-	// platforms[7].ftInitSquareprops({700, 100}, {150, 10}, GRAY, "Platform 06", 1, 7);
-	// platforms[8].ftInitSquareprops({450, 500}, {180, 15}, GRAY, "Platform 07", 1, 8);
 
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
@@ -162,10 +141,10 @@ void	ftDrawBoarders(Game *Game)
 	DrawLineEx({(float)Game->screenWidth - 300, (float)Game->screenHeight - 2}, {(float)Game->screenWidth, (float)Game->screenHeight - 2}, 5, DARKGRAY1);
 }
 
-void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu)
-{
-	DrawText("Test up", 10, 10, 20, BLACK);
-}
+// void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu)
+// {
+// 	ftMouseControl(Game, player, menu);
+// }
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu)
 {

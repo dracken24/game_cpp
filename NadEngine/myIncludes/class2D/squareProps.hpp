@@ -3,13 +3,19 @@
 
 #include "../../vendor/raylib/src/raylib.h"
 
+typedef struct EnvItem {
+	Rectangle rect;
+	bool blocking;
+	Color color;
+}   EnvItem;
+
 class SquareProps
 {
 	public:
 		SquareProps(void);
 		~SquareProps(void);
 
-		void        ftInitSquareprops(Vector2 pos, Vector2 size, Color color, int nbr);
+		void        ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr);
 		void		ftInitPosition(Vector2 pos);
 		Rectangle	ftReturnRectangle(void) const;
 		Color		ftReturnRecColor(void) const;
@@ -32,15 +38,17 @@ class SquareProps
 		void		ftChangeSpeedModifier(float speed, char c);
 
 		float		ftReturnSqurtPos(char c) const;
+		EnvItem		*ftReturnEnvitemPtr(void);
 
 	private:
-		Rectangle   rect;
-		Color		color;
+		EnvItem		_envItem;
+		// Rectangle   rect;
+		// Color		color;
 		Vector2		pos;
 		Vector2		speedModifier = {0, 0};
 		float		speed;
 		float		speedX;
-		int			blocking;
+		// int			blocking;
 		int			_nbr;
 };
 

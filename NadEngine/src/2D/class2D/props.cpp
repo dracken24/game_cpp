@@ -25,9 +25,9 @@ void	Props::ftKillSquareProps(void)
 	delete this->_squareProps;
 }
 
-void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, int nbr)
+void	Props::ftAddSquareProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
 {
-	this->_squareProps[nbr].ftInitSquareprops(pos, size, color, nbr);
+	this->_squareProps[nbr].ftInitSquareprops(pos, size, color, blocking, nbr);
 }
 
 void	Props::ftSetPosSquareProp(Vector2 pos, int nbr)
