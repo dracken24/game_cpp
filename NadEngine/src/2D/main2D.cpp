@@ -51,7 +51,7 @@ void	ftMode2D(Game *Game, Menu *menu)
 	camera.zoom = 1.0f;
 	RenderTexture playing = LoadRenderTexture(Game->screenWidth - 300, Game->screenHeight);
 	Rectangle splitScreenRectPlay = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
-
+	
 	// Camera panel side up
 	Camera2D menuCamSideUp = {0};
 	menuCamSideUp.target = {0, 0};
@@ -111,13 +111,48 @@ void	ftMode2D(Game *Game, Menu *menu)
 				}
 				else if (menu->ftReturnStart() == 1)// Menu choose character
 				{
-					ftMenuChooseCharacter(player, menu);
+					ftMenuChooseCharacter(Game, player, menu);
 				}
 				else // Main loop
 				{
-					ftRunBuildMode(Game, &saveGame, &camera);
-					camera.target = Game->posCam;
-					// ftRoutine(Game, player, &camera, &blocks, envItems);
+					if (Game->ctMode == 1)
+					{
+						// player->ftSetPosition((Vector2){430, 200});
+						ftRunBuildMode(Game, &saveGame, &camera);
+						camera.target = Game->posCam;
+					}
+					else if (Game->ctMode == -1)
+					{
+						pid_t pid;
+						int fd[2];
+
+						if (pipe(fd) == -1)
+						{
+							std::cout << "error, pipe <main2D>" << std::endl;
+							exit (-1);
+						}
+						pid = fork();
+						if (pid == -1)
+						{
+							std::cout << "error, fork <main2D>" << std::endl;
+							exit(-1);
+						}
+						if (pid == 0)
+						{
+							close(fd[0]);
+							dup2(fd[1], STDOUT_FILENO);
+							ftRoutine(Game, player, &camera, &blocks, envItems);
+						}
+						else
+						{
+							close(fd[1]);
+							dup2(fd[0], STDIN_FILENO);
+							waitpid(pid, NULL, 0);
+						}
+
+						// ftRoutine(Game, player, &camera, &blocks, envItems);
+					}
+					ftKeyGestionBuildMode(Game);
 				}
 			EndMode2D();
 		EndTextureMode();
@@ -178,6 +213,14 @@ void	ftMode2D(Game *Game, Menu *menu)
 	UnloadRenderTexture(menuTextUp);
 	delete player;
 	delete envItems;
+}
+
+void	ftKeyGestionBuildMode(Game *Game)
+{
+	if (IsKeyPressed(KEY_M))
+	{
+		Game->ctMode *= -1;
+	}
 }
 
 void	ftDrawBoarders(Game *Game)

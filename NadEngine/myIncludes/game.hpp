@@ -15,6 +15,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 
 # define G 800
 # define PLAYER_JUMP_SPD 600.0f
@@ -24,15 +26,8 @@
 #define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
 #define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
 
-// typedef struct EnvItem {
-// 	Rectangle rect;
-// 	int blocking;
-// 	Color color;
-// }   EnvItem;
-
 typedef struct Mouse{
 	Vector2	pos;
-	// Vector2 lastPos;
 }	Mouse;
 
 class Game {
@@ -46,10 +41,11 @@ class Game {
 	bool		ctCollision = false;
 	int			ctPlayStop = 1;
 	int			ctImgBuildGame = 1;
+	int			ctMode = 1;
 
 	Mouse		mouse;
 	Font		font1;
-	Vector2		posCam = {(float)screenWidth / 2 - 150, (float)screenHeight / 2};
+	Vector2		posCam = {500, 300};
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
@@ -58,7 +54,7 @@ class Game {
 
 
 /**----------------------------> Menu <-----------------------------**/
-void	ftMenuChooseCharacter(Player * player, Menu *menu);
+void	ftMenuChooseCharacter(Game *Game, Player * player, Menu *menu);
 void	ftChooseCharacter(Menu *menu);
 void	ftChooseMenu(Menu *menu);
 
@@ -94,6 +90,7 @@ void	ftKeyGestion(Game *Game, Player *player, float delta);
 void	ftUsePlayerGravity(Player *player, EnvItems *envItems, float delta, int envItemsLength);
 void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envItemsLength);
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
+void	ftKeyGestionBuildMode(Game *Game);
 
 //**********************************************************************************//
 //										3D											//

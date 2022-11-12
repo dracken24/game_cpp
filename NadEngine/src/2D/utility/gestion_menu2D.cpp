@@ -88,7 +88,7 @@ void	ftChooseCharacter(Menu *menu)
 	}
 }
 
-void	ftMenuChooseCharacter(Player * player, Menu * menu)
+void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 {
 	menu->ftChangePlayer(0);
 	ftChooseCharacter(menu);
@@ -96,6 +96,7 @@ void	ftMenuChooseCharacter(Player * player, Menu * menu)
 	DrawText("Edward Elric", 100, 200, 20, DARKGRAY);
 	DrawText("Ichigo Kurosaki", 100, 250, 20, DARKGRAY);
 	DrawText("Meliodas Lostvayne", 100, 300, 20, DARKGRAY);
+
 	if (menu->ftReturnPlayer() == 1)
 	{
 		player->ftInitPlayerImgs(1);
