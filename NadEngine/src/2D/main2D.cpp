@@ -4,7 +4,7 @@
 #include "../../myIncludes/class2D/stopGame.hpp"
 
 // void	ftRoutine(Game *Game, Player *player, Camera2D *camera, SquareProps *blocks, SquareProps *platforms);
-void	ftRunBuildMode(Game *Game,Stop *buildGame);
+void	ftRunBuildMode(Game *Game,Stop *buildGame, Camera2D *camera);
 
 void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 {
@@ -115,7 +115,8 @@ void	ftMode2D(Game *Game, Menu *menu)
 				}
 				else // Main loop
 				{
-					ftRunBuildMode(Game, &saveGame);
+					ftRunBuildMode(Game, &saveGame, &camera);
+					camera.target = Game->posCam;
 					// ftRoutine(Game, player, &camera, &blocks, envItems);
 				}
 			EndMode2D();

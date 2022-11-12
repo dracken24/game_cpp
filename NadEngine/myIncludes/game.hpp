@@ -32,6 +32,7 @@
 
 typedef struct Mouse{
 	Vector2	pos;
+	// Vector2 lastPos;
 }	Mouse;
 
 class Game {
@@ -48,6 +49,7 @@ class Game {
 
 	Mouse		mouse;
 	Font		font1;
+	Vector2		posCam = {(float)screenWidth / 2 - 150, (float)screenHeight / 2};
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
