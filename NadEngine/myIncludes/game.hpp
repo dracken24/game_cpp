@@ -103,6 +103,7 @@ void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftDrawBoarders(Game *Game);
 void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks);
+void	ftDrawVarsRiDownPanel(Game *game);
 
 /**-------------------------> Build Game <--------------------------**/
 
@@ -130,6 +131,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 void	ftUsePlayerGravity(Player *player, EnvItems *envItems, float delta, int envItemsLength);
 void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envItemsLength);
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
+char	*ft_ftoa(float f, int *status);
 // void	ftKeyGestionBuildMode(Game *Game);
 
 //**********************************************************************************//

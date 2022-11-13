@@ -20,7 +20,6 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.type = 3;
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
-				std::cout << "Hit Envi: " << i << std::endl;
 				touch = 1;
 			}
 
@@ -32,7 +31,6 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 					game->selected2D.type = 2;
 					game->selected2D.nbr = i;
 					game->selected2D.prop = blocks->ftReturnSquareProp(i);
-					std::cout << "Hit Blocks: " << i << std::endl;
 					touch = 1;
 				}
 			}
@@ -41,7 +39,6 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			{
 				game->selected2D.type = 1;
 				game->selected2D.player = player->ftReturnPlayer();
-				std::cout << "Hit Player: " << std::endl;
 				touch = 1;
 			}
 			if (touch == 0) // Not select or deselect item

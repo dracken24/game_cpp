@@ -128,7 +128,6 @@ void	ftMode2D(Game *game, Menu *menu)
 						allCameras->camera00.camera.target = game->posCam;
 						ftRunBuildMode(game, player, envItems, blocks, &allCameras->camera00.camera);
 						ftControlItems(game, player, envItems, blocks);
-						// std::cout << game->selected2D.type << std::endl;
 					}
 					else if (game->ctMode == -1)
 					{
@@ -348,5 +347,9 @@ void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop)
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu)
 {
-	DrawText("Panel Side down", 10, 10, 20, BLACK);
+	// DrawText("Panel Side down", 10, 10, 20, BLACK);
+	if (Game->selected2D.type != 0) // Draw variables on side right down panel
+	{
+		ftDrawVarsRiDownPanel(Game);
+	}
 }

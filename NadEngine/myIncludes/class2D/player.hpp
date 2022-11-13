@@ -9,6 +9,27 @@
 # include <iostream>
 # include <string>
 
+#define MAX_INPUT_CHAR 12
+
+typedef struct VarChar
+{
+	char plyPosX[MAX_INPUT_CHAR + 1] = "\0";
+	char plyPosY[MAX_INPUT_CHAR + 1] = "\0";
+	char plyWidth[MAX_INPUT_CHAR + 1] = "\0";
+	char plyHeight[MAX_INPUT_CHAR + 1] = "\0";
+	char collBoxPosX[MAX_INPUT_CHAR + 1] = "\0";
+	char collBoxPosY[MAX_INPUT_CHAR + 1] = "\0";
+	char collBoxWidth[MAX_INPUT_CHAR + 1] = "\0";
+	char collBoxHeight[MAX_INPUT_CHAR + 1] = "\0";
+}	VarChar;
+
+typedef struct VarsSideDownPanel
+{
+	Rectangle	_playerBox;
+	Rectangle	collisionBox;
+	VarChar		varChar;
+}	VarsSideDownPanel;
+
 class Player
 {
 	public:
@@ -22,6 +43,7 @@ class Player
 		void		ftSetPosition(Vector2 pos);
 
 		Player		*ftReturnPlayer(void);
+		VarChar		*ftReturnVarsChar(void);
 
 		Vector2		ftReturnPlayerPosition(void);
 		Vector2		*ftReturnPlayerPositionPtr(void);
@@ -141,8 +163,6 @@ class Player
 		int			moveAttackY = 0;
 
 		Vector2		position;
-		Rectangle	_playerBox;
-		Rectangle	collisionBox;
 		Vector2		adjustCollBox;
 		float		speed;
 		bool		canJump;
@@ -157,7 +177,9 @@ class Player
 		int			nbr;
 		bool		doAttack = false;
 		bool		collX = false;
-		Player		*_playet;
+		Player		*_player;
+
+		VarsSideDownPanel	_varsSideDownPanel;
 };
 
 #endif

@@ -242,20 +242,20 @@ void	Player::ftInitPlayerImgs(int nbr)
 
 void	Player::ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust)
 {
-	this->collisionBox.x = pos.x;
-	this->collisionBox.y = pos.y;
-	this->collisionBox.width = size.x;
-	this->collisionBox.height = size.y;
+	this->_varsSideDownPanel.collisionBox.x = pos.x;
+	this->_varsSideDownPanel.collisionBox.y = pos.y;
+	this->_varsSideDownPanel.collisionBox.width = size.x;
+	this->_varsSideDownPanel.collisionBox.height = size.y;
 	this->adjustCollBox.x = ajust.x;
 	this->adjustCollBox.y = ajust.y;
 }
 
 void	Player::ftInitRectanglePlayer(Vector2 pos, Vector2 size)
 {
-	this->_playerBox.x = pos.x;
-	this->_playerBox.y = pos.y;
-	this->_playerBox.width = size.x;
-	this->_playerBox.height = size.y;
+	this->_varsSideDownPanel._playerBox.x = pos.x;
+	this->_varsSideDownPanel._playerBox.y = pos.y;
+	this->_varsSideDownPanel._playerBox.width = size.x;
+	this->_varsSideDownPanel._playerBox.height = size.y;
 }
 
 float	Player::ftReturnAjustCollBox(char c) const
@@ -269,46 +269,46 @@ float	Player::ftReturnAjustCollBox(char c) const
 
 Rectangle	Player::ftReturnRectangleCollBox(void) const
 {
-	return (this->collisionBox);
+	return (this->_varsSideDownPanel.collisionBox);
 }
 
 Rectangle	Player::FtReturnRectanglePlayer(void) const
 {
-	return (this->_playerBox);
+	return (this->_varsSideDownPanel._playerBox);
 }
 
 Rectangle	Player::ftReturnCollisionBox(void) const
 {
-	return (this->collisionBox);
+	return (this->_varsSideDownPanel.collisionBox);
 }
 
 void	Player::ftChangeCollisionBoxSize(Vector2 pos)
 {
-	this->collisionBox.width = pos.x;
-	this->collisionBox.height = pos.y;
+	this->_varsSideDownPanel.collisionBox.width = pos.x;
+	this->_varsSideDownPanel.collisionBox.height = pos.y;
 }
 
 void	Player::ftMoveCollisionBox(Vector2 pos)
 {
-	this->collisionBox.x += pos.x;
-	this->collisionBox.y += pos.y;
+	this->_varsSideDownPanel.collisionBox.x += pos.x;
+	this->_varsSideDownPanel.collisionBox.y += pos.y;
 }
 
 int		Player::ftReturnCollBoxPos(char c) const
 {
 	if (c == 'X')
-		return (this->collisionBox.x);
+		return (this->_varsSideDownPanel.collisionBox.x);
 	else if (c == 'Y')
-		return (this->collisionBox.y);
+		return (this->_varsSideDownPanel.collisionBox.y);
 	return (0);
 }
 
 int		Player::ftReturnCollBoxSize(char c) const
 {
 	if (c == 'W')
-		return (this->collisionBox.width);
+		return (this->_varsSideDownPanel.collisionBox.width);
 	else if (c == 'H')
-		return (this->collisionBox.height);
+		return (this->_varsSideDownPanel.collisionBox.height);
 	return (0);
 }
 
@@ -395,7 +395,8 @@ void	Player::ftAddWeaponDamage(float damage)
 
 Vector2		Player::ftReturnCollisionBoxPos(void) const
 {
-	return ((Vector2){this->collisionBox.width, this->collisionBox.height});
+	return ((Vector2){this->_varsSideDownPanel.collisionBox.width,
+		this->_varsSideDownPanel.collisionBox.height});
 }
 
 Player	*Player::ftReturnPlayer(void)
@@ -406,33 +407,38 @@ Player	*Player::ftReturnPlayer(void)
 	return (ret);
 }
 
+VarChar		*Player::ftReturnVarsChar(void)
+{
+	return (&this->_varsSideDownPanel.varChar);
+}
+
 void    Player::ftSetPosition(Vector2 pos)
 {
 	this->position = pos;
-	this->collisionBox.x = pos.x;
-	this->collisionBox.y = pos.y;
-	this->_playerBox.x = pos.x;
-	this->_playerBox.y = pos.y;
+	this->_varsSideDownPanel.collisionBox.x = pos.x;
+	this->_varsSideDownPanel.collisionBox.y = pos.y;
+	this->_varsSideDownPanel._playerBox.x = pos.x;
+	this->_varsSideDownPanel._playerBox.y = pos.y;
 }
 
 void    Player::ftChangePosition(float x, float y)
 {
 	this->position.x = x;
 	this->position.y = y;
-	this->collisionBox.x = x;
-	this->collisionBox.y = y;
-	this->_playerBox.x = x;
-	this->_playerBox.y = y;
+	this->_varsSideDownPanel.collisionBox.x = x;
+	this->_varsSideDownPanel.collisionBox.y = y;
+	this->_varsSideDownPanel._playerBox.x = x;
+	this->_varsSideDownPanel._playerBox.y = y;
 }
 
 void    Player::ftMovePosition(float x, float y)
 {
 	this->position.x += x;
 	this->position.y += y;
-	this->collisionBox.x += x;
-	this->collisionBox.y += y;
-	this->_playerBox.x += x;
-	this->_playerBox.y += y;
+	this->_varsSideDownPanel.collisionBox.x += x;
+	this->_varsSideDownPanel.collisionBox.y += y;
+	this->_varsSideDownPanel._playerBox.x += x;
+	this->_varsSideDownPanel._playerBox.y += y;
 }
 
 Vector2 Player::ftReturnPlayerPosition(void)

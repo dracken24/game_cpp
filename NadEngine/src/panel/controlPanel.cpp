@@ -48,7 +48,6 @@ void	ftMousePos(Game *Game)
 	}
 }
 
-// void	ft
 
 void	ftMouseControl(Game *Game)
 {
