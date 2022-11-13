@@ -10,7 +10,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 
 	// InitWindow(Game->screenWidth, Game->screenHeight, "Play");
 	// SetTargetFPS(60);
-	while (Game->ctMode == -1)
+	while (!WindowShouldClose() && Game->ctMode == -1)
 	{
 		//** Drawning **//
 		// Draw Play screen

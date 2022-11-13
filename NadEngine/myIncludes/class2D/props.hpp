@@ -15,6 +15,7 @@ class Props
 		void		ftInitSquareProps(int nbr, std::string type);
 		void		ftKillSquareProps(void);
 		void        ftAddProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string type);
+		Props		ftReturnCopyProps(void);
 		Rectangle   ftReturnRectangleSqPr(int nbr);
 		Color       ftReturnRecColorSqPr(int nbr);
 		SquareProps *ftReturnSquareProp(int nbr) const;

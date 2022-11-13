@@ -21,6 +21,8 @@ class Player
 		void		ftInitImgsMeliodas(void);
 		void		ftSetPosition(Vector2 pos);
 
+		Player		*ftReturnPlayer(void);
+
 		Vector2		ftReturnPlayerPosition(void);
 		Vector2		*ftReturnPlayerPositionPtr(void);
 		float		ftReturnPlayerPositionX(void);
@@ -43,6 +45,7 @@ class Player
 		void		ftInitRectanglePlayer(Vector2 pos, Vector2 size);
 
 		Vector2		ftReturnAjustCollisionBox(void) const;
+		Vector2		ftReturnCollisionBoxPos(void) const;
 		void		ftMoveCollisionBox(Vector2 pos);
 		void		ftChangeCollisionBoxSize(Vector2 pos);
 		int			ftReturnCollBoxPos(char c) const;
@@ -154,6 +157,7 @@ class Player
 		int			nbr;
 		bool		doAttack = false;
 		bool		collX = false;
+		Player		*_playet;
 };
 
 #endif

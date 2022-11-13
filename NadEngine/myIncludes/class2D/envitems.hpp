@@ -27,6 +27,7 @@ class EnvItems
 		Color		ftReturnEnviColor(int nbr) const;
 		Texture2D	ftReturnEnviTexture(int nbr) const;
 		EnvItem		*ftReturnEnvitemPtr(int nbr);
+		EnvItems	*ftReturnCopyEnvItems(void);
 		int			ftReturnEnviAllNbr(void) const;
 
 		// One item

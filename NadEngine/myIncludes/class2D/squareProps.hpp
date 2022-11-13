@@ -38,6 +38,7 @@ class SquareProps
 		void		ftChangeSpeedModifier(float speed, char c);
 
 		float		ftReturnSqurtPos(char c) const;
+		SquareProps *ftReturnCopySquareProp(void);
 
 	private:
 		// EnvItem		_envItem;

@@ -70,6 +70,24 @@ void	Props::ftChangeSpeedModifier(float speed, char c, int nbr)
 
 // Return //
 
+Props		Props::ftReturnCopyProps(void)
+{
+	Props  ret;
+	ret._squareProps = this->_squareProps;
+	ret._platforms = this->_platforms;
+	ret._nbr = this->_nbr;
+
+	return (ret);
+}
+
+// Props		*Props::ftReturnCopyProps(void)
+// {
+// 	Props *ret = new Props;
+// 	ret = this;
+
+// 	return (ret);
+// }
+
 Rectangle	Props::ftReturnRectangleSqPr(int nbr)
 {
 	return (this->_squareProps[nbr].ftReturnRectangle());

@@ -17,6 +17,15 @@ void	EnvItems::ftNewEnvItem(int nbr)
 	this->_allNbr = nbr;
 }
 
+EnvItems	*EnvItems::ftReturnCopyEnvItems(void)
+{
+
+	EnvItems *ret = new EnvItems;
+
+	ret = this;
+	return (ret);
+}
+
 void 	EnvItems::ftInitEnvitem(Vector2 pos, Vector2 size,
 			int blocking, Color color, Texture texture, int nbr)
 {

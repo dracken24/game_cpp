@@ -28,6 +28,7 @@ struct MultipleCam2D;
 
 typedef struct Mouse{
 	Vector2	pos;
+	float	camZoom;
 }	Mouse;
 
 typedef struct NeedBy2DCam{
@@ -49,6 +50,15 @@ typedef struct MultipleCam2D{
 	NeedBy2DCam camera09;
 }	MultipleCam2D;
 
+typedef struct Select
+{
+	int			type = 0;	// Select witch
+	int			nbr = 0;		// Nbr of prop
+	Player		*player;	// 1
+	SquareProps	*prop;		// 2
+	EnvItem	*item;		// 3
+}	Select;
+
 class Game {
 	public:
 	
@@ -65,6 +75,7 @@ class Game {
 	Mouse			mouse;
 	Font			font1;
 	Vector2			posCam = {650, 300};
+	Select			selected2D;
 
 	// MultipleCam2D	allCameras;
 
@@ -91,6 +102,7 @@ void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftDrawBoarders(Game *Game);
+void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks);
 
 /**-------------------------> Build Game <--------------------------**/
 

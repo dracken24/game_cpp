@@ -45,7 +45,7 @@ void	ftMode2D(Game *game, Menu *menu)
 	// Camera player
 	allCameras->camera00.camera = {0};
 	allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
-	allCameras->camera00.camera.offset = (Vector2){game->screenWidth / 2.0f - 150, game->screenHeight / 2.0f};
+	allCameras->camera00.camera.offset = (Vector2){game->screenWidth / 2.0f - 150, game->screenHeight / 2.0f - 40};
 	allCameras->camera00.camera.rotation = 0.0f;
 	allCameras->camera00.camera.zoom = 1.0f;
 	allCameras->camera00.textForCam = LoadRenderTexture(game->screenWidth - 300, game->screenHeight - 40);
@@ -127,6 +127,8 @@ void	ftMode2D(Game *game, Menu *menu)
 					{
 						allCameras->camera00.camera.target = game->posCam;
 						ftRunBuildMode(game, player, envItems, blocks, &allCameras->camera00.camera);
+						ftControlItems(game, player, envItems, blocks);
+						// std::cout << game->selected2D.type << std::endl;
 					}
 					else if (game->ctMode == -1)
 					{
@@ -139,7 +141,7 @@ void	ftMode2D(Game *game, Menu *menu)
 						tmpMenu = *menu;
 						tmpPlayer = *player;
 						tmpEnvItems = *envItems;
-						tmpBlocks = *blocks;
+						tmpBlocks = blocks->ftReturnCopyProps();
 						tmpAllCameras = *allCameras;
 
 						// pid_t pid;
@@ -164,7 +166,7 @@ void	ftMode2D(Game *game, Menu *menu)
 						allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
 						ftRunGameMode(game, tmpMenu, tmpPlayer, tmpEnvItems,
 							tmpBlocks, tmpAllCameras, &play, &stop);
-
+					
 						game->ctMode = 1;
 					}
 					// ftKeyGestionBuildMode(game);
@@ -236,14 +238,77 @@ void	ftMode2D(Game *game, Menu *menu)
 	delete allCameras;
 }
 
-// void	ftKeyGestionBuildMode(Game *Game)
-// {
-// 	if (IsKeyPressed(KEY_M))
-// 	{
-// 		Game->ctMode *= -1;
-// 	}
-// }
+//*** Move items on Build Mode ***/
+void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks)
+{
+	Vector2 mousePos = GetMousePosition();
+	Vector2 lastPos = game->mouse.pos;
+	Vector2 forMove = {lastPos.x - mousePos.x, lastPos.y - mousePos.y};
 
+	if (game->selected2D.type == 1) // Player selected
+	{
+		Rectangle	posPly = game->selected2D.player->ftReturnRectangleCollBox();
+
+		posPly.x -= 4;
+		posPly.y -= 3;
+		DrawLineEx({posPly.x, posPly.y}, {posPly.x + posPly.width + 7, posPly.y}, 2, RED); // Up
+		posPly.y += posPly.height + 6;
+		DrawLineEx({posPly.x, posPly.y}, {posPly.x + posPly.width + 7, posPly.y}, 2, RED); // down
+		posPly = game->selected2D.player->ftReturnRectangleCollBox();
+		posPly.x -= 3;
+		posPly.y -= 3;
+		DrawLineEx({posPly.x, posPly.y - 1}, {posPly.x, posPly.y + posPly.height + 7}, 2, RED); // Left
+		posPly.x += posPly.width + 6;
+		DrawLineEx({posPly.x, posPly.y - 1}, {posPly.x, posPly.y + posPly.height + 7}, 2, RED); // Right
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			player->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
+		}
+	}
+	else if (game->selected2D.type == 2) // Items Blocks Props
+	{
+		Rectangle	posBlock = game->selected2D.prop->ftReturnRectangle();
+
+		posBlock.x -= 4;
+		posBlock.y -= 3;
+		DrawLineEx({posBlock.x, posBlock.y}, {posBlock.x + posBlock.width + 7, posBlock.y}, 2, RED); // Up
+		posBlock.y += posBlock.height + 6;
+		DrawLineEx({posBlock.x, posBlock.y}, {posBlock.x + posBlock.width + 7, posBlock.y}, 2, RED); // down
+		posBlock = game->selected2D.prop->ftReturnRectangle();
+		posBlock.x -= 3;
+		posBlock.y -= 3;
+		DrawLineEx({posBlock.x, posBlock.y - 1}, {posBlock.x, posBlock.y + posBlock.height + 7}, 2, RED); // Left
+		posBlock.x += posBlock.width + 6;
+		DrawLineEx({posBlock.x, posBlock.y - 1}, {posBlock.x, posBlock.y + posBlock.height + 7}, 2, RED); // Right
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			game->selected2D.prop->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
+		}
+	}
+	else if (game->selected2D.type == 3) // Platforms
+	{
+		Rectangle	posWalkable = game->selected2D.item->rect;
+
+		posWalkable.x -= 4;
+		posWalkable.y -= 3;
+		DrawLineEx({posWalkable.x, posWalkable.y}, {posWalkable.x + posWalkable.width + 7, posWalkable.y}, 2, RED); // Up
+		posWalkable.y += posWalkable.height + 6;
+		DrawLineEx({posWalkable.x, posWalkable.y}, {posWalkable.x + posWalkable.width + 7, posWalkable.y}, 2, RED); // down
+		posWalkable = game->selected2D.item->rect;
+		posWalkable.x -= 3;
+		posWalkable.y -= 3;
+		DrawLineEx({posWalkable.x, posWalkable.y - 1}, {posWalkable.x, posWalkable.y + posWalkable.height + 7}, 2, RED); // Left
+		posWalkable.x += posWalkable.width + 6;
+		DrawLineEx({posWalkable.x, posWalkable.y - 1}, {posWalkable.x, posWalkable.y + posWalkable.height + 7}, 2, RED); // Right
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			game->selected2D.item->rect.x += (-(int)(forMove.x / game->mouse.camZoom));
+			game->selected2D.item->rect.y += (-(int)(forMove.y / game->mouse.camZoom));
+		}
+	}
+}
+
+//*** Draw borders for menu ***//
 void	ftDrawBoarders(Game *Game)
 {
 	DrawLineEx({(float)Game->screenWidth - 302, 40}, {(float)Game->screenWidth - 302, (float)Game->screenHeight}, 5, DARKGRAY1);

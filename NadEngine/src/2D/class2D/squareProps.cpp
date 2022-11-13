@@ -10,10 +10,18 @@ SquareProps::~SquareProps(void)
 	return ;
 }
 
+SquareProps	*SquareProps::ftReturnCopySquareProp(void)
+{
+	SquareProps *ret = new SquareProps;
+
+	ret = this;
+	return (ret);
+}
+
 void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
 {
-	this->rect.width = size.x - 1;
-	this->rect.height = size.y - 1;
+	this->rect.width = size.x;
+	this->rect.height = size.y;
 	this->rect.x = pos.x;
 	this->rect.y = pos.y;
 	this->pos.x = pos.x;

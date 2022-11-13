@@ -393,6 +393,19 @@ void	Player::ftAddWeaponDamage(float damage)
 
 /***************************************** Player Stats ********************************************/
 
+Vector2		Player::ftReturnCollisionBoxPos(void) const
+{
+	return ((Vector2){this->collisionBox.width, this->collisionBox.height});
+}
+
+Player	*Player::ftReturnPlayer(void)
+{
+	Player *ret = new Player;
+	ret = this;
+
+	return (ret);
+}
+
 void    Player::ftSetPosition(Vector2 pos)
 {
 	this->position = pos;
