@@ -28,6 +28,14 @@ void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_bloc
 				}
 			}
 			Rectangle	ply = player->FtReturnRectanglePlayer();
+			// std::cout << 'X' << player->ftReturnPlayerPositionX() << std::endl;
+			// std::cout << 'Y' << player->ftReturnPlayerPositionY() << std::endl;
+			// std::cout << 'W' << ply.width << std::endl;
+			// std::cout << 'H' << ply.height << std::endl;
+			// std::cout << "Mx" << rayPos.x << std::endl;
+			// std::cout << "My" << rayPos.y << std::endl;
+			// ply.x += player->ftReturnAjustCollBox('X');
+			// ply.y += player->ftReturnAjustCollBox('Y');
 			if (CheckCollisionPointRec(rayPos, ply))
 			{
 				std::cout << "Hit Player: " << std::endl;
@@ -56,9 +64,9 @@ void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_bloc
 	void ftRunBuildMode(Game *game, Player *player, EnvItems *envItems, Props *blocks, Camera2D *camera)
 	{
 		ftMoveScreen(game, camera);
-		ftSelectItems(game, player, camera, envItems, blocks);
 
 		ftDrawAll(game, player, envItems, blocks); // Draw all imgs
+		ftSelectItems(game, player, camera, envItems, blocks);
 	}
 
 	void ftDrawAll(Game * oldGame, Player * _player, EnvItems * _envItems, Props * _blocks)
@@ -70,10 +78,17 @@ void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_bloc
 		{
 			Rectangle block = _blocks->ftReturnRectangleSqPr(i);
 			DrawRectanglePro(block, (Vector2){block.width / 2, block.height / 2},
-							 0, _blocks->ftReturnRecColorSqPr(i));
+				0, _blocks->ftReturnRecColorSqPr(i));
 		}
 
 		DrawTextureEx(_player->ftReturnGoodImage("Idle Ri", oldGame->ct_action / _player->ftReturnCtIdle()),
-					  _player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
+			_player->ftReturnPlayerPosition(), 0.0f, 2, WHITE);
+
+		Rectangle	plyCollBox = _player->ftReturnCollisionBox();
+		plyCollBox.x += _player->ftReturnAjustCollBox('X');
+		plyCollBox.x += _player->ftReturnAjustCollBox('y');
+		DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
+		// plyCollBox.x -= _player->ftReturnAjustCollBox('X');
+		// plyCollBox.x -= _player->ftReturnAjustCollBox('y');
 	}
 

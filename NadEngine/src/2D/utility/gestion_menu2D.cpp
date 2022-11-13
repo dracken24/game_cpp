@@ -33,16 +33,16 @@ void	ftChooseMenu(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 400, 200, 20, DARKGRAY);
+		DrawText("<---*", 550, 200, 20, DARKGRAY);
 	}
 	else if (ct == 2)
 	{
-		DrawText("<---*", 400, 250, 20, DARKGRAY);
+		DrawText("<---*", 550, 250, 20, DARKGRAY);
 	}
 
 	if (warning >= 1)
 	{
-		DrawText("Please, Choose A Character First", 250, 0, 20, ORANGE);
+		DrawText("Please, Choose A Character First", 400, 0, 20, ORANGE);
 		warning++;
 	}
 }
@@ -76,15 +76,15 @@ void	ftChooseCharacter(Menu *menu)
 
 	if (ct == 1)
 	{
-		DrawText("<---*", 400, 200, 20, DARKGRAY);
+		DrawText("<---*", 550, 200, 20, DARKGRAY);
 	}
 	else if (ct == 2)
 	{
-		DrawText("<---*", 400, 250, 20, DARKGRAY);
+		DrawText("<---*", 550, 250, 20, DARKGRAY);
 	}
 	else if (ct == 3)
 	{
-		DrawText("<---*", 400, 300, 20, DARKGRAY);
+		DrawText("<---*", 550, 300, 20, DARKGRAY);
 	}
 }
 
@@ -92,10 +92,10 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 {
 	menu->ftChangePlayer(0);
 	ftChooseCharacter(menu);
-	DrawText("Choose Your Character", 100, 100, 40, BLACK);
-	DrawText("Edward Elric", 100, 200, 20, DARKGRAY);
-	DrawText("Ichigo Kurosaki", 100, 250, 20, DARKGRAY);
-	DrawText("Meliodas Lostvayne", 100, 300, 20, DARKGRAY);
+	DrawText("Choose Your Character", 250, 100, 40, BLACK);
+	DrawText("Edward Elric", 250, 200, 20, DARKGRAY);
+	DrawText("Ichigo Kurosaki", 250, 250, 20, DARKGRAY);
+	DrawText("Meliodas Lostvayne", 250, 300, 20, DARKGRAY);
 
 	if (menu->ftReturnPlayer() == 1)
 	{
@@ -114,6 +114,8 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 		player->ftChangeMoveAttackRiX(-20);
 		player->ftChangeMoveAttackY(118);
 		player->ftChangeMoveIdleX(0);
+		player->ftInitRectanglePlayer(player->ftReturnPlayerPosition(),
+		{(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		menu->ftChangeStart(0);
 	}
 	else if (menu->ftReturnPlayer() == 2)
@@ -133,6 +135,8 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 		player->ftChangeMoveAttackRiX(0);
 		player->ftChangeMoveAttackY(118);
 		player->ftChangeMoveIdleX(-10);
+		player->ftInitRectanglePlayer(player->ftReturnPlayerPosition(),
+		{(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		menu->ftChangeStart(0);
 	}
 	else if (menu->ftReturnPlayer() == 3)
@@ -152,6 +156,8 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 		player->ftChangeMoveAttackRiX(40);
 		player->ftChangeMoveAttackY(90);
 		player->ftChangeMoveIdleX(-2);
+		player->ftInitRectanglePlayer(player->ftReturnPlayerPosition(),
+		{(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		menu->ftChangeStart(0);
 	}
 }

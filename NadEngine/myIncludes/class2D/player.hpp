@@ -39,6 +39,7 @@ class Player
 		void		ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust);
 		Rectangle	ftReturnCollisionBox(void) const;
 		Rectangle	FtReturnRectanglePlayer(void) const;
+		Rectangle	ftReturnRectangleCollBox(void) const;
 		void		ftInitRectanglePlayer(Vector2 pos, Vector2 size);
 
 		Vector2		ftReturnAjustCollisionBox(void) const;

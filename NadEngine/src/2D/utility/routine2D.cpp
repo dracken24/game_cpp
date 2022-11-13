@@ -42,7 +42,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
 							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
 
-	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
+	DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
 	if (player->ftReturnFace() == 0) 		// Weapon collision box use
 	{
 		player->ftNewWeaponCollBoxPos(plyCollBox.x + plyCollBox.width, 'X');

@@ -226,7 +226,7 @@ void	Player::ftInitPlayerImgs(int nbr)
 		this->ftInitImgsEd();
 		this->nbr = nbr;
 	}
-	else if (nbr == 2) // Edward
+	else if (nbr == 2) // Ichigo
 	{
 		this->ftInitImgsIchigo();
 		this->nbr = nbr;
@@ -265,6 +265,11 @@ float	Player::ftReturnAjustCollBox(char c) const
 	if (c == 'Y')
 		return (this->adjustCollBox.y);
 	return (0);
+}
+
+Rectangle	Player::ftReturnRectangleCollBox(void) const
+{
+	return (this->collisionBox);
 }
 
 Rectangle	Player::FtReturnRectanglePlayer(void) const

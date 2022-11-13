@@ -28,12 +28,9 @@ void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 
 void	ftMode2D(Game *game, Menu *menu)
 {
-	// static Stop	saveGame;
 	Player	*player;
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
-	player->ftInitRectanglePlayer(player->ftReturnPlayerPosition(),
-		{(float)player->ftReturnCollBoxSize('X'), (float)player->ftReturnCollBoxSize('Y')});
 
 	Props	*blocks;
 	EnvItems *envItems;
@@ -43,11 +40,12 @@ void	ftMode2D(Game *game, Menu *menu)
 
 	//--------------------------------------------------------------------------------------//
 	// Init Camera and windows
+
 	MultipleCam2D	*allCameras = new MultipleCam2D;
 	// Camera player
 	allCameras->camera00.camera = {0};
 	allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
-	allCameras->camera00.camera.offset = (Vector2){game->screenWidth / 2.0f, game->screenHeight / 2.0f};
+	allCameras->camera00.camera.offset = (Vector2){game->screenWidth / 2.0f - 150, game->screenHeight / 2.0f};
 	allCameras->camera00.camera.rotation = 0.0f;
 	allCameras->camera00.camera.zoom = 1.0f;
 	allCameras->camera00.textForCam = LoadRenderTexture(game->screenWidth - 300, game->screenHeight - 40);
@@ -98,10 +96,7 @@ void	ftMode2D(Game *game, Menu *menu)
 
 //--------------------------------------------------------------------------------------//
 	int cameraUpdatersLength = sizeof(1) / sizeof(game->cameraUpdaters[0]);
-	
-	// saveGame.ftSaveBlocks(&blocks);
-	// saveGame.ftSaveEnvItems(envItems);
-	// saveGame.ftSavePlayer(player);
+	game->posCam = player->ftReturnPlayerPosition();
 
 	// Main game loop
 	while (!WindowShouldClose())
@@ -116,10 +111,10 @@ void	ftMode2D(Game *game, Menu *menu)
 				if (menu->ftReturnStart() == 0) // Menu intro
 				{
 					ftChooseMenu(menu);
-					DrawTextEx(game->font1 ,"Untitled Adventure Game", {100, 100}, 40, 2, BLACK);
+					DrawTextEx(game->font1 ,"Untitled Adventure Game", {250, 100}, 40, 2, BLACK);
 					// DrawText("Untitled Adventure Game", 100, 100, 40, BLACK);
-					DrawText("Choose Your Character", 100, 200, 20, DARKGRAY);
-					DrawText("Start Game", 100, 250, 20, DARKGRAY);
+					DrawText("Choose Your Character", 250, 200, 20, DARKGRAY);
+					DrawText("Start Game", 250, 250, 20, DARKGRAY);
 				}
 				else if (menu->ftReturnStart() == 1)// Menu choose character
 				{
@@ -213,9 +208,9 @@ void	ftMode2D(Game *game, Menu *menu)
 			EndMode2D();
 		EndTextureMode();
 
-		//--------------------------------------------------------------------------------------//
+//--------------------------------------------------------------------------------------//
 
-		// Draw both views render textures to the screen side by side
+		// Draw render textures to the screen for all cameras
 		BeginDrawing();
 			ClearBackground(BLACK);
 			DrawTextureRec(allCameras->camera00.textForCam.texture, allCameras->camera00.rectForCam,

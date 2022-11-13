@@ -17,7 +17,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 		BeginTextureMode(allCameras.camera00.textForCam);
 			ClearBackground(LIGHTGRAY);
 			BeginMode2D(allCameras.camera00.camera);
-
+				
 				ftRoutine(Game, &player, tmpCam, &blocks, &envItems);
 				// ftKeyGestionBuildMode(Game);
 
