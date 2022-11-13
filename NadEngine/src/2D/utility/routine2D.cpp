@@ -15,7 +15,6 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 	Game->delta = GetFrameTime();
 
 	Game->cameraUpdaters[cameraOption](Game, camera, player, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
-
 	ftUpdatePlayer(Game, player, envItems, envItemsLength, Game->delta);
 	if (lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
@@ -27,7 +26,6 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 		camera->zoom = 0.25f;
 
 	/*********************************************** Gravity ***************************************************/
-
 	ftGravityGestion(Game, player, blocks);
 	for (int i = 0; i < blocks->ftReturnNbr(); i++)
 	{
@@ -43,7 +41,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 	ftGestionProps(Game, blocks, envItems, Game->delta, envItemsLength);
 	player->ftSetCollosionBox((Vector2){plyPos.x + AdjCollBox.x, plyPos.y - AdjCollBox.y},
 							  (Vector2){plyCollBox.width, plyCollBox.height}, (Vector2){AdjCollBox.x, AdjCollBox.y});
-	
+
 	// DrawRectangleRec(plyCollBox, BLACK); 	// Player collision box
 	if (player->ftReturnFace() == 0) 		// Weapon collision box use
 	{

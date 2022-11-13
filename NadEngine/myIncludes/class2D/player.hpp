@@ -38,6 +38,9 @@ class Player
 		Texture2D	ftReturnGoodImage(std::string string, int ct);
 		void		ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust);
 		Rectangle	ftReturnCollisionBox(void) const;
+		Rectangle	FtReturnRectanglePlayer(void) const;
+		void		ftInitRectanglePlayer(Vector2 pos, Vector2 size);
+
 		Vector2		ftReturnAjustCollisionBox(void) const;
 		void		ftMoveCollisionBox(Vector2 pos);
 		void		ftChangeCollisionBoxSize(Vector2 pos);
@@ -90,6 +93,8 @@ class Player
 
 		int			ftReturnNbr(void) const;
 
+		// Player		ftReturnPlayerCpy(void);
+
 	/***************************** Weapon ****************************/
 
 		void		ftInitWeapon(std::string name, Vector2 pos, Vector2 size);
@@ -132,6 +137,7 @@ class Player
 		int			moveAttackY = 0;
 
 		Vector2		position;
+		Rectangle	_playerBox;
 		Rectangle	collisionBox;
 		Vector2		adjustCollBox;
 		float		speed;

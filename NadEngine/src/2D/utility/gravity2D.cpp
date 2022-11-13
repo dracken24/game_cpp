@@ -10,7 +10,6 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 	for (int j = 0; j < blocks->ftReturnNbr(); j++)
 	{
 		Rectangle propRect1 = blocks->ftReturnRectangleSqPr(j);
-
 		for (int k = 0; k < blocks->ftReturnNbr(); k++)
 		{
 			if (j == k)

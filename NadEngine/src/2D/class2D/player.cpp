@@ -250,6 +250,14 @@ void	Player::ftSetCollosionBox(Vector2 pos, Vector2 size, Vector2 ajust)
 	this->adjustCollBox.y = ajust.y;
 }
 
+void	Player::ftInitRectanglePlayer(Vector2 pos, Vector2 size)
+{
+	this->_playerBox.x = pos.x;
+	this->_playerBox.y = pos.y;
+	this->_playerBox.width = size.x;
+	this->_playerBox.height = size.y;
+}
+
 float	Player::ftReturnAjustCollBox(char c) const
 {
 	if (c == 'X')
@@ -257,6 +265,11 @@ float	Player::ftReturnAjustCollBox(char c) const
 	if (c == 'Y')
 		return (this->adjustCollBox.y);
 	return (0);
+}
+
+Rectangle	Player::FtReturnRectanglePlayer(void) const
+{
+	return (this->_playerBox);
 }
 
 Rectangle	Player::ftReturnCollisionBox(void) const
@@ -380,6 +393,8 @@ void    Player::ftSetPosition(Vector2 pos)
 	this->position = pos;
 	this->collisionBox.x = pos.x;
 	this->collisionBox.y = pos.y;
+	this->_playerBox.x = pos.x;
+	this->_playerBox.y = pos.y;
 }
 
 void    Player::ftChangePosition(float x, float y)
@@ -388,6 +403,8 @@ void    Player::ftChangePosition(float x, float y)
 	this->position.y = y;
 	this->collisionBox.x = x;
 	this->collisionBox.y = y;
+	this->_playerBox.x = x;
+	this->_playerBox.y = y;
 }
 
 void    Player::ftMovePosition(float x, float y)
@@ -396,6 +413,8 @@ void    Player::ftMovePosition(float x, float y)
 	this->position.y += y;
 	this->collisionBox.x += x;
 	this->collisionBox.y += y;
+	this->_playerBox.x += x;
+	this->_playerBox.y += y;
 }
 
 Vector2 Player::ftReturnPlayerPosition(void)

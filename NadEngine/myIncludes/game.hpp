@@ -7,7 +7,6 @@
 # include "./class2D/props.hpp"
 # include "./class2D/menu.hpp"
 # include "./class2D/envitems.hpp"
-# include "./class2D/stopGame.hpp"
 # include "../vendor/raylib/src/rlgl.h"
 
 # include <string>
@@ -25,10 +24,30 @@
 
 #define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
 #define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
+struct MultipleCam2D;
 
 typedef struct Mouse{
 	Vector2	pos;
 }	Mouse;
+
+typedef struct NeedBy2DCam{
+	Camera2D 		camera;
+	RenderTexture 	textForCam;
+	Rectangle		rectForCam;
+}	NeedBy2DCam;
+
+typedef struct MultipleCam2D{
+	NeedBy2DCam	camera00;
+	NeedBy2DCam camera01;
+	NeedBy2DCam camera02;
+	NeedBy2DCam camera03;
+	NeedBy2DCam camera04;
+	NeedBy2DCam camera05;
+	NeedBy2DCam camera06;
+	NeedBy2DCam camera07;
+	NeedBy2DCam camera08;
+	NeedBy2DCam camera09;
+}	MultipleCam2D;
 
 class Game {
 	public:
@@ -43,9 +62,11 @@ class Game {
 	int			ctImgBuildGame = 1;
 	int			ctMode = 1;
 
-	Mouse		mouse;
-	Font		font1;
-	Vector2		posCam = {500, 300};
+	Mouse			mouse;
+	Font			font1;
+	Vector2			posCam = {650, 300};
+
+	// MultipleCam2D	allCameras;
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
@@ -67,17 +88,21 @@ void	ftMode2D(Game *Game, Menu *menu);
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
 void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
-void	ftUpMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
+void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftDrawBoarders(Game *Game);
 
 /**-------------------------> Build Game <--------------------------**/
 
 // void	ftRunBuildMode(Game *Game,Stop *buildGame);
+void	ftRunBuildMode(Game *game, Player *player, EnvItems *envItems,
+			Props *blocks, Camera2D *camera);
+void	ftMoveScreen(Game *game, Camera2D *camera);
 
 /**----------------------------> Game <-----------------------------**/
 
 void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player,
-		int envItemsLength, float delta, int width, int height);
+			int envItemsLength, float delta, int width, int height);
 void 	ftUpdatePlayer(Game *Game, Player *player, EnvItems *envItems, int envItemsLength, float delta);
 void	ftImgsGestion(Game *Game, Player *player);
 
@@ -85,12 +110,15 @@ void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTi
 void	ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvItems *envItems);
 void	ftKeyGestion(Game *Game, Player *player, float delta);
 
+void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
+			Props blocks, MultipleCam2D allCameras, EnvItems *play, EnvItems *stop);
+
 /**---------------------------> Utility <----------------------------**/
 
 void	ftUsePlayerGravity(Player *player, EnvItems *envItems, float delta, int envItemsLength);
 void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envItemsLength);
 void	ftGravityGestion(Game *Game, Player *player, Props *blocks);
-void	ftKeyGestionBuildMode(Game *Game);
+// void	ftKeyGestionBuildMode(Game *Game);
 
 //**********************************************************************************//
 //										3D											//

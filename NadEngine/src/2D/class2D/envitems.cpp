@@ -29,6 +29,17 @@ void 	EnvItems::ftInitEnvitem(Vector2 pos, Vector2 size,
 	this->_envItems[nbr].blocking = blocking;
 	this->_envItems[nbr].nbr = nbr;
 }
+void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
+			int blocking, Color color, Texture texture)
+{
+	this->_item.rect.x = pos.x;
+	this->_item.rect.y = pos.y;
+	this->_item.rect.width = size.x;
+	this->_item.rect.height = size.y;
+	this->_item.color = color;
+	this->_item.texture = texture;
+	this->_item.blocking = blocking;
+}
 
 EnvItem		*EnvItems::ftReturnEnvitemPtr(int nbr)
 {
@@ -55,7 +66,7 @@ Color		EnvItems::ftReturnEnviColor(int nbr) const
 	return (this->_envItems[nbr].color);
 }
 
-Texture		EnvItems::ftReturnEnviTexture(int nbr) const
+Texture2D	EnvItems::ftReturnEnviTexture(int nbr) const
 {
 	return (this->_envItems[nbr].texture);
 }
@@ -63,4 +74,36 @@ Texture		EnvItems::ftReturnEnviTexture(int nbr) const
 int			EnvItems::ftReturnEnviAllNbr(void) const
 {
 	return (this->_allNbr);
+}
+
+//=-= One item =-=//
+
+EnvItem		*EnvItems::ftReturnOneEnvitemPtr(void)
+{
+	return (&this->_item);
+}
+
+Rectangle	EnvItems::ftReturnOneRectangle(void) const
+{
+	return (this->_item.rect);
+}
+
+Vector2		EnvItems::ftReturnOneEnviPos(void) const
+{
+	return ((Vector2){this->_item.rect.x, _item.rect.y});
+}
+
+Vector2		EnvItems::ftReturnOneEnviSize(void) const
+{
+	return ((Vector2){this->_item.rect.width, _item.rect.height});
+}
+
+Color		EnvItems::ftReturnOneEnviColor(void) const
+{
+	return (this->_item.color);
+}
+
+Texture2D	EnvItems::ftReturnOneEnviTexture(void) const
+{
+	return (this->_item.texture);
 }

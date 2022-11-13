@@ -1,10 +1,7 @@
 #include "../../myIncludes/game.hpp"
 #include "../../myIncludes/class2D/squareProps.hpp"
 #include "../../myIncludes/class2D/envitems.hpp"
-#include "../../myIncludes/class2D/stopGame.hpp"
-
-// void	ftRoutine(Game *Game, Player *player, Camera2D *camera, SquareProps *blocks, SquareProps *platforms);
-void	ftRunBuildMode(Game *Game,Stop *buildGame, Camera2D *camera);
+#include <string.h>
 
 void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 {
@@ -29,67 +26,82 @@ void	ftInitBlocks(Props *blocks, EnvItems *envItems)
 	envItems->ftInitEnvitem((Vector2){450, 500}, (Vector2){180, 15}, 1, GRAY, tmp, 8);
 }
 
-void	ftMode2D(Game *Game, Menu *menu)
+void	ftMode2D(Game *game, Menu *menu)
 {
-	static Stop	saveGame;
+	// static Stop	saveGame;
 	Player	*player;
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
+	player->ftInitRectanglePlayer(player->ftReturnPlayerPosition(),
+		{(float)player->ftReturnCollBoxSize('X'), (float)player->ftReturnCollBoxSize('Y')});
 
-	Props	blocks;
+	Props	*blocks;
 	EnvItems *envItems;
+	blocks = new Props;
 	envItems = new EnvItems;
-	ftInitBlocks(&blocks, envItems);
+	ftInitBlocks(blocks, envItems);
 
 	//--------------------------------------------------------------------------------------//
 	// Init Camera and windows
+	MultipleCam2D	*allCameras = new MultipleCam2D;
 	// Camera player
-	Camera2D camera = {0};
-	camera.target = player->ftReturnPlayerPosition();
-	camera.offset = (Vector2){Game->screenWidth / 2.0f, Game->screenHeight / 2.0f};
-	camera.rotation = 0.0f;
-	camera.zoom = 1.0f;
-	RenderTexture playing = LoadRenderTexture(Game->screenWidth - 300, Game->screenHeight);
-	Rectangle splitScreenRectPlay = {0.0f, 0.0f, (float)playing.texture.width, (float)-playing.texture.height};
-	
+	allCameras->camera00.camera = {0};
+	allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
+	allCameras->camera00.camera.offset = (Vector2){game->screenWidth / 2.0f, game->screenHeight / 2.0f};
+	allCameras->camera00.camera.rotation = 0.0f;
+	allCameras->camera00.camera.zoom = 1.0f;
+	allCameras->camera00.textForCam = LoadRenderTexture(game->screenWidth - 300, game->screenHeight - 40);
+	allCameras->camera00.rectForCam = {0.0f, 0.0f, (float)allCameras->camera00.textForCam.texture.width, (float)-allCameras->camera00.textForCam.texture.height};
+
 	// Camera panel side up
-	Camera2D menuCamSideUp = {0};
-	menuCamSideUp.target = {0, 0};
-	menuCamSideUp.offset = (Vector2){0.0f, 0.0f};
-	menuCamSideUp.rotation = 0.0f;
-	menuCamSideUp.zoom = 1.0f;
-	RenderTexture menuTextSideUp = LoadRenderTexture(300, Game->screenHeight / 3);
-	Rectangle splitScreenRectPanSideUp = {0.0f, 0.0f, (float)menuTextSideUp.texture.width, (float)-menuTextSideUp.texture.height};
+	allCameras->camera01.camera = {0};
+	allCameras->camera01.camera.target = {0, 0};
+	allCameras->camera01.camera.offset = (Vector2){0.0f, 0.0f};
+	allCameras->camera01.camera.rotation = 0.0f;
+	allCameras->camera01.camera.zoom = 1.0f;
+	allCameras->camera01.textForCam = LoadRenderTexture(300, game->screenHeight / 3);
+	allCameras->camera01.rectForCam = {0.0f, 0.0f, (float)allCameras->camera01.textForCam.texture.width, (float)-allCameras->camera01.textForCam.texture.height};
 
 	// Camera panel side down
-	Camera2D menuCamSideDown = {0};
-	menuCamSideDown.target = {0, 0};
-	menuCamSideDown.offset = (Vector2){0.0f, 0.0f};
-	menuCamSideDown.rotation = 0.0f;
-	menuCamSideDown.zoom = 1.0f;
-	RenderTexture menuTextSideDown = LoadRenderTexture(300, Game->screenHeight / 3 * 2 - 40);
-	Rectangle splitScreenRectPanSideDown = {0.0f, 0.0f, (float)menuTextSideDown.texture.width, (float)-menuTextSideDown.texture.height};
+	allCameras->camera02.camera = {0};
+	allCameras->camera02.camera.target = {0, 0};
+	allCameras->camera02.camera.offset = (Vector2){0.0f, 0.0f};
+	allCameras->camera02.camera.rotation = 0.0f;
+	allCameras->camera02.camera.zoom = 1.0f;
+	allCameras->camera02.textForCam = LoadRenderTexture(300, game->screenHeight / 3 * 2 - 40);
+	allCameras->camera02.rectForCam = {0.0f, 0.0f, (float)allCameras->camera02.textForCam.texture.width, (float)-allCameras->camera02.textForCam.texture.height};
 
 	// Camera panel up
-	Camera2D menuCamUp = {0};
-	menuCamUp.target = {0, 0};
-	menuCamUp.offset = (Vector2){0.0f, 0.0f};
-	menuCamUp.rotation = 0.0f;
-	menuCamUp.zoom = 1.0f;
-	RenderTexture menuTextUp = LoadRenderTexture(Game->screenWidth, 40);
-	Rectangle splitScreenRectPanUp = {0.0f, 0.0f, (float)menuTextUp.texture.width, (float)-menuTextUp.texture.height};
+	allCameras->camera03.camera = {0};
+	allCameras->camera03.camera.target = {0, 0};
+	allCameras->camera03.camera.offset = (Vector2){0.0f, 0.0f};
+	allCameras->camera03.camera.rotation = 0.0f;
+	allCameras->camera03.camera.zoom = 1.0f;
+	allCameras->camera03.textForCam = LoadRenderTexture(game->screenWidth, 40);
+	allCameras->camera03.rectForCam = {0.0f, 0.0f, (float)allCameras->camera03.textForCam.texture.width, (float)-allCameras->camera03.textForCam.texture.height};
 
 	// Multiple camera
 	// void (*cameraUpdaters[])(Camera2D *, Player *, EnvItem *, int, float, int, int) = {
 	// 	ftUpdateCameraCenter};
-	Game->cameraUpdaters[0] = {ftUpdateCameraCenter};
+	game->cameraUpdaters[0] = {ftUpdateCameraCenter};
 
-	int cameraUpdatersLength = sizeof(1) / sizeof(Game->cameraUpdaters[0]);
-//--------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------//
+	// buttons top
+	EnvItems	play;
+	EnvItems	stop;
+
+	play.ftInitOneEnvitem({(float)game->screenWidth - 300, 5}, {30, 30}, 0, WHITE,
+		LoadTexture("./imgs/buttons/play_00.png"));
+	stop.ftInitOneEnvitem({(float)game->screenWidth - 260, 5}, {30, 30}, 0, WHITE,
+		LoadTexture("./imgs/buttons/stop_00.png"));
+
+
+//--------------------------------------------------------------------------------------//
+	int cameraUpdatersLength = sizeof(1) / sizeof(game->cameraUpdaters[0]);
 	
-	saveGame.ftSaveBlocks(&blocks);
-	saveGame.ftSaveEnvItems(envItems);
-	saveGame.ftSavePlayer(player);
+	// saveGame.ftSaveBlocks(&blocks);
+	// saveGame.ftSaveEnvItems(envItems);
+	// saveGame.ftSavePlayer(player);
 
 	// Main game loop
 	while (!WindowShouldClose())
@@ -97,62 +109,70 @@ void	ftMode2D(Game *Game, Menu *menu)
 		//** Drawning **//
 
 		//Draw Play screen
-		BeginTextureMode(playing);
+		BeginTextureMode(allCameras->camera00.textForCam);
 			ClearBackground(LIGHTGRAY);
-			BeginMode2D(camera);
+			BeginMode2D(allCameras->camera00.camera);
 
-				if (menu->ftReturnStart() == 0) // Meni intro
+				if (menu->ftReturnStart() == 0) // Menu intro
 				{
 					ftChooseMenu(menu);
-					DrawTextEx(Game->font1 ,"Untitled Adventure Game", {100, 100}, 40, 2, BLACK);
+					DrawTextEx(game->font1 ,"Untitled Adventure Game", {100, 100}, 40, 2, BLACK);
 					// DrawText("Untitled Adventure Game", 100, 100, 40, BLACK);
 					DrawText("Choose Your Character", 100, 200, 20, DARKGRAY);
 					DrawText("Start Game", 100, 250, 20, DARKGRAY);
 				}
 				else if (menu->ftReturnStart() == 1)// Menu choose character
 				{
-					ftMenuChooseCharacter(Game, player, menu);
+					ftMenuChooseCharacter(game, player, menu);
 				}
 				else // Main loop
 				{
-					if (Game->ctMode == 1)
+					// std::cout << "Help 00" << std::endl;
+					if (game->ctMode == 1)
 					{
-						// player->ftSetPosition((Vector2){430, 200});
-						ftRunBuildMode(Game, &saveGame, &camera);
-						camera.target = Game->posCam;
+						allCameras->camera00.camera.target = game->posCam;
+						ftRunBuildMode(game, player, envItems, blocks, &allCameras->camera00.camera);
 					}
-					else if (Game->ctMode == -1)
+					else if (game->ctMode == -1)
 					{
-						pid_t pid;
-						int fd[2];
+						Menu			tmpMenu;
+						Player			tmpPlayer;
+						EnvItems		tmpEnvItems;
+						Props			tmpBlocks;
+						MultipleCam2D	tmpAllCameras;
 
-						if (pipe(fd) == -1)
-						{
-							std::cout << "error, pipe <main2D>" << std::endl;
-							exit (-1);
-						}
-						pid = fork();
-						if (pid == -1)
-						{
-							std::cout << "error, fork <main2D>" << std::endl;
-							exit(-1);
-						}
-						if (pid == 0)
-						{
-							close(fd[0]);
-							dup2(fd[1], STDOUT_FILENO);
-							ftRoutine(Game, player, &camera, &blocks, envItems);
-						}
-						else
-						{
-							close(fd[1]);
-							dup2(fd[0], STDIN_FILENO);
-							waitpid(pid, NULL, 0);
-						}
+						tmpMenu = *menu;
+						tmpPlayer = *player;
+						tmpEnvItems = *envItems;
+						tmpBlocks = *blocks;
+						tmpAllCameras = *allCameras;
 
-						// ftRoutine(Game, player, &camera, &blocks, envItems);
+						// pid_t pid;
+						// pid = fork();
+						// if (pid == -1)
+						// {
+						// 	std::cout << "error" << std::endl;
+						// 	exit(-1);
+						// }
+						// if (pid == 0)
+						// {
+						// 	allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
+						// 	ftRunGameMode(game, tmpMenu, tmpPlayer, tmpEnvItems, tmpBlocks, tmpAllCameras);
+						// }
+						// else
+						// {
+						// 	close(fd[1]);
+						// 	dup2(fd[0], STDIN_FILENO);
+						// 	waitpid(pid, NULL, 0);
+						// }
+						
+						allCameras->camera00.camera.target = player->ftReturnPlayerPosition();
+						ftRunGameMode(game, tmpMenu, tmpPlayer, tmpEnvItems,
+							tmpBlocks, tmpAllCameras, &play, &stop);
+
+						game->ctMode = 1;
 					}
-					ftKeyGestionBuildMode(Game);
+					// ftKeyGestionBuildMode(game);
 				}
 			EndMode2D();
 		EndTextureMode();
@@ -160,11 +180,11 @@ void	ftMode2D(Game *Game, Menu *menu)
 //--------------------------------------------------------------------------------------//
 
 		// Draw Control Panel side up
-		BeginTextureMode(menuTextSideUp);
+		BeginTextureMode(allCameras->camera01.textForCam);
 			ClearBackground(DARKGRAY);
-			BeginMode2D(menuCamSideUp);
+			BeginMode2D(allCameras->camera01.camera);
 
-				ftSideUpMenu2D(Game, player, menu);
+				ftSideUpMenu2D(game, player, menu);
 
 			EndMode2D();
 		EndTextureMode();
@@ -172,11 +192,11 @@ void	ftMode2D(Game *Game, Menu *menu)
 //--------------------------------------------------------------------------------------//
 
 		// Draw Control Panel side down
-		BeginTextureMode(menuTextSideDown);
+		BeginTextureMode(allCameras->camera02.textForCam);
 			ClearBackground(DARKGRAY2);
-			BeginMode2D(menuCamSideDown);
+			BeginMode2D(allCameras->camera02.camera);
 
-				ftSideDownMenu2D(Game, player, menu);
+				ftSideDownMenu2D(game, player, menu);
 
 			EndMode2D();
 		EndTextureMode();
@@ -184,11 +204,11 @@ void	ftMode2D(Game *Game, Menu *menu)
 //--------------------------------------------------------------------------------------//
 
 		// Draw Control Panel Up
-		BeginTextureMode(menuTextUp);
+		BeginTextureMode(allCameras->camera03.textForCam);
 			ClearBackground(DARKGRAY1);
-			BeginMode2D(menuCamUp);
+			BeginMode2D(allCameras->camera03.camera);
 
-				ftUpMenu2D(Game, player, menu);
+				ftUpMenu2D(game, &allCameras->camera03.camera, &play, &stop);
 
 			EndMode2D();
 		EndTextureMode();
@@ -198,30 +218,36 @@ void	ftMode2D(Game *Game, Menu *menu)
 		// Draw both views render textures to the screen side by side
 		BeginDrawing();
 			ClearBackground(BLACK);
-			DrawTextureRec(playing.texture, splitScreenRectPlay, (Vector2){0, 40}, WHITE);
-			DrawTextureRec(menuTextSideUp.texture, splitScreenRectPanSideUp, (Vector2){(float)Game->screenWidth - 300.0f, 40}, WHITE);
-			DrawTextureRec(menuTextSideDown.texture, splitScreenRectPanSideDown, (Vector2){(float)Game->screenWidth - 300.0f, (float)Game->screenHeight / 3 + 40}, WHITE);
-			DrawTextureRec(menuTextUp.texture, splitScreenRectPanUp, (Vector2){0, 0}, WHITE);
-			ftDrawBoarders(Game);
+			DrawTextureRec(allCameras->camera00.textForCam.texture, allCameras->camera00.rectForCam,
+				(Vector2){0, 40}, WHITE);
+			DrawTextureRec(allCameras->camera01.textForCam.texture, allCameras->camera01.rectForCam,
+				(Vector2){(float)game->screenWidth - 300.0f, 40}, WHITE);
+			DrawTextureRec(allCameras->camera02.textForCam.texture, allCameras->camera02.rectForCam,
+				(Vector2){(float)game->screenWidth - 300.0f, (float)game->screenHeight / 3 + 40}, WHITE);
+			DrawTextureRec(allCameras->camera03.textForCam.texture, allCameras->camera03.rectForCam,
+				(Vector2){0, 0}, WHITE);
+			ftDrawBoarders(game);
 		EndDrawing();
 	}
 //--------------------------------------------------------------------------------------//
 	// CloseWindow();
-	UnloadRenderTexture(playing);
-	UnloadRenderTexture(menuTextSideUp);
-	UnloadRenderTexture(menuTextSideDown);
-	UnloadRenderTexture(menuTextUp);
+	UnloadRenderTexture(allCameras->camera00.textForCam);
+	UnloadRenderTexture(allCameras->camera00.textForCam);
+	UnloadRenderTexture(allCameras->camera00.textForCam);
+	UnloadRenderTexture(allCameras->camera00.textForCam);
 	delete player;
+	delete blocks;
 	delete envItems;
+	delete allCameras;
 }
 
-void	ftKeyGestionBuildMode(Game *Game)
-{
-	if (IsKeyPressed(KEY_M))
-	{
-		Game->ctMode *= -1;
-	}
-}
+// void	ftKeyGestionBuildMode(Game *Game)
+// {
+// 	if (IsKeyPressed(KEY_M))
+// 	{
+// 		Game->ctMode *= -1;
+// 	}
+// }
 
 void	ftDrawBoarders(Game *Game)
 {
@@ -232,18 +258,31 @@ void	ftDrawBoarders(Game *Game)
 	DrawLineEx({(float)Game->screenWidth - 300, (float)Game->screenHeight - 2}, {(float)Game->screenWidth, (float)Game->screenHeight - 2}, 5, DARKGRAY1);
 }
 
-void	ftUpMenu2D(Game *Game, Player *player, Menu *menu)
+void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop)
 {
-	static Texture play;
-	static Texture stop;
-	if (Game->ctPlayStop == 1)
+	Vector2 mousePos = game->mouse.pos;
+	Vector2 rayPos = GetScreenToWorld2D(mousePos, *camera);
+
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
-		play = LoadTexture("./imgs/buttons/play_00.png");
-		stop = LoadTexture("./imgs/buttons/stop_00.png");
-		Game->ctPlayStop = 0;
+		Rectangle item = play->ftReturnOneRectangle();
+		if (CheckCollisionPointRec(rayPos, item) && game->ctMode != -1)
+		{
+			game->ctMode = -1;
+		}
+		item = stop->ftReturnOneRectangle();
+		if (CheckCollisionPointRec(rayPos, item) && game->ctMode != 1)
+		{
+			game->ctMode = 1;
+		}
 	}
-	DrawTextureEx(play,{(float)Game->screenWidth - 300, 5}, 0, 1, WHITE);
-	DrawTextureEx(stop,{(float)Game->screenWidth - 260, 5}, 0, 1, WHITE);
+}
+
+void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop)
+{
+	ftSelectItemsTop(Game, camera, play, stop);
+	DrawTextureEx(play->ftReturnOneEnviTexture(),{(float)Game->screenWidth - 300, 5}, 0, 1, WHITE);
+	DrawTextureEx(stop->ftReturnOneEnviTexture(),{(float)Game->screenWidth - 260, 5}, 0, 1, WHITE);
 	DrawText("Panel Up", 10, 10, 20, WHITE);
 }
 
