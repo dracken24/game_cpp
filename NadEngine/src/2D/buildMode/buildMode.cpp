@@ -1,7 +1,5 @@
 #include "../../../myIncludes/game.hpp"
 
-void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_blocks);
-
 void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envItems, Props *blocks)
 {
 	Vector2 mousePos = game->mouse.pos;
@@ -12,6 +10,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
+		game->selected2D.lastNbr = game->selected2D.nbr;
 		for (int i = 1; i < envItems->ftReturnEnviAllNbr(); i++)
 		{
 			Rectangle item = envItems->ftReturnRectangle(i);
@@ -20,31 +19,34 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.type = 3;
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
+				// std::cout << "Hit Envi: " << i << std::endl;
 				touch = 1;
 			}
-
-			for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		}
+		for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		{
+			Rectangle item = blocks->ftReturnRectangleSqPr(i);
+			if (CheckCollisionPointRec(rayPos, item))
 			{
-				Rectangle item = blocks->ftReturnRectangleSqPr(i);
-				if (CheckCollisionPointRec(rayPos, item))
-				{
-					game->selected2D.type = 2;
-					game->selected2D.nbr = i;
-					game->selected2D.prop = blocks->ftReturnSquareProp(i);
-					touch = 1;
-				}
-			}
-			Rectangle	ply = player->ftReturnRectangleCollBox();
-			if (CheckCollisionPointRec(rayPos, ply))
-			{
-				game->selected2D.type = 1;
-				game->selected2D.player = player->ftReturnPlayer();
+				game->selected2D.type = 2;
+				game->selected2D.nbr = i;
+				game->selected2D.prop = blocks->ftReturnSquareProp(i);
+				std::cout << "Hit Blocks: " << i << std::endl;
 				touch = 1;
 			}
-			if (touch == 0) // Not select or deselect item
-			{
-				game->selected2D.type = 0;
-			}
+		}
+		Rectangle	ply = player->ftReturnRectangleCollBox();
+		if (CheckCollisionPointRec(rayPos, ply))
+		{
+			game->selected2D.type = 1;
+			game->selected2D.nbr = 0;
+			game->selected2D.player = player->ftReturnPlayer();
+			// std::cout << "Hit Player: " << std::endl;
+			touch = 1;
+		}
+		if (touch == 0) // Not select or deselect item
+		{
+			game->selected2D.type = 0;
 		}
 	}
 }

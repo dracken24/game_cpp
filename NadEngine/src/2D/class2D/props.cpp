@@ -5,6 +5,12 @@ Props::Props(void)
 	return ;
 }
 
+Props::Props(Props const &src)
+{
+	*this = src;
+	return ;
+}
+
 Props::~Props(void)
 {
 	return ;

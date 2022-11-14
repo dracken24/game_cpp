@@ -9,7 +9,7 @@
 # include <iostream>
 # include <string>
 
-#define MAX_INPUT_CHAR 12
+#define MAX_INPUT_CHAR 8
 
 typedef struct VarChar
 {
@@ -21,6 +21,7 @@ typedef struct VarChar
 	char collBoxPosY[MAX_INPUT_CHAR + 1] = "\0";
 	char collBoxWidth[MAX_INPUT_CHAR + 1] = "\0";
 	char collBoxHeight[MAX_INPUT_CHAR + 1] = "\0";
+	int	nbr = 8;
 }	VarChar;
 
 typedef struct VarsSideDownPanel

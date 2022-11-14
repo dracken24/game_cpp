@@ -42,7 +42,7 @@ void	ftChooseMenu(Menu *menu)
 
 	if (warning >= 1)
 	{
-		DrawText("Please, Choose A Character First", 400, 0, 20, ORANGE);
+		DrawText("Please, Choose A Character First", 250, 0, 20, ORANGE);
 		warning++;
 	}
 }

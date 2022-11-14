@@ -3,10 +3,22 @@
 
 #include "../../vendor/raylib/src/raylib.h"
 
+#define MAX_INPUT_CHAR 8
+
+typedef struct VarCharEnvi
+{
+	char enviPosX[MAX_INPUT_CHAR + 1] = "\0";
+	char enviPosY[MAX_INPUT_CHAR + 1] = "\0";
+	char enviWidth[MAX_INPUT_CHAR + 1] = "\0";
+	char enviHeight[MAX_INPUT_CHAR + 1] = "\0";
+	int	nbr = 4;
+}	VarCharEnvi;
+
 typedef struct EnvItem {
 	Texture2D     texture;
 	Color 		color;
 	Rectangle 	rect;
+	VarCharEnvi _varCharEnvi;
 
 	int 		blocking;
 	int			nbr;
@@ -16,10 +28,12 @@ class EnvItems
 {
 	public:
 		EnvItems(void);
+		EnvItems(EnvItems const &src);
 		~EnvItems(void);
 
 		void        ftInitEnvitem(Vector2 pos, Vector2 size,
 						int blocking, Color color, Texture2D texture, int nbr);
+		VarCharEnvi	*ftReturnVarsCharEnvi(void);
 		void		ftNewEnvItem(int nbr);
 		Rectangle	ftReturnRectangle(int nbr) const;
 		Vector2		ftReturnEnviPos(int nbr) const;
@@ -44,7 +58,7 @@ class EnvItems
 		EnvItem		*_envItems;
 		EnvItem		_item;
 		int			_allNbr;
-		
+		// VarCharEnvi	_varCharEnvi;
 };
 
 #endif

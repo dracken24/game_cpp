@@ -54,7 +54,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 		player->ftNewWeaponCollBoxPos(plyCollBox.y, 'Y');
 	}
 	// DrawRectangleRec(player->ftReturnWeaponCollRect(), PURPLE); // Weapon collision box
-	
+
 	ftImgsGestion(Game, player);
 
 	/***********************************************************************************************************/
@@ -64,8 +64,8 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 		float dist = 0;
 		for (int i = 0; i < blocks->ftReturnNbr(); i++)
 		{
-			blocks->ftSetPosSquareProp((Vector2){200, 200 - dist}, i);
-			blocks->ftSetPosSquareProp((Vector2){200 - dist, 200}, i);
+			blocks->ftSetPosSquareProp((Vector2){200, 200.-(dist)}, i);
+			blocks->ftSetPosSquareProp((Vector2){200.-(dist), 200}, i);
 			dist += 50;
 		}
 	}

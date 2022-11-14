@@ -18,7 +18,7 @@ void	ftGravityX(Game *Game, Player *player, Props *blocks)
 			Rectangle propRect2 = blocks->ftReturnRectangleSqPr(k);
 			if (CheckCollisionRecs(propRect1, plyCollBox)) // Collision player
 			{
-				if (propRect1.x - propRect1.width / 2 > plyCollBox.x + 0 / 2) // Right
+				if (propRect1.x - propRect1.width / 2 > plyCollBox.x + 0./(2)) // Right
 				{
 					blocks->ftChangeSpeedModifier(speed / 4.0f, 'X', j);
 				}
@@ -159,7 +159,7 @@ void	ftUseGravity(SquareProps *prop, EnvItems *envItems, float delta, int envIte
 		}
 		else if (CheckCollisionRecs(ei->rect, tmpProp) && ei->blocking)
 		{
-			prop->ftSetSpeedModifier(prop->ftReturnSpeedModifier('X') * - 1 / 2, 'X');
+			prop->ftSetSpeedModifier(prop->ftReturnSpeedModifier('X') * - 1./(2), 'X');
 		}
 	}
 

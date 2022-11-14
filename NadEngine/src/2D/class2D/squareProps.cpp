@@ -20,10 +20,10 @@ SquareProps	*SquareProps::ftReturnCopySquareProp(void)
 
 void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
 {
-	this->rect.width = size.x;
-	this->rect.height = size.y;
-	this->rect.x = pos.x;
-	this->rect.y = pos.y;
+	this->_varCharPr.rect.width = size.x;
+	this->_varCharPr.rect.height = size.y;
+	this->_varCharPr.rect.x = pos.x;
+	this->_varCharPr.rect.y = pos.y;
 	this->pos.x = pos.x;
 	this->pos.y = pos.y;
 	this->color = color;
@@ -32,9 +32,14 @@ void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool
 	this->blocking = blocking;
 }
 
+VarCharPr	*SquareProps::ftReturnVarsProp(void)
+{
+	return (&this->_varCharPr.varCharPr);
+}
+
 Rectangle	SquareProps::ftReturnRectangle(void) const
 {
-	return (this->rect);
+	return (this->_varCharPr.rect);
 }
 
 Color	SquareProps::ftReturnRecColor(void) const
@@ -65,24 +70,24 @@ void	SquareProps::ftChangeSpeed(float speed)
 void	SquareProps::ftMovePosition(float x, float y)
 {
 	this->pos.x += x;
-	this->rect.x += x;
+	this->_varCharPr.rect.x += x;
 	this->pos.y += y;
-	this->rect.y += y;
+	this->_varCharPr.rect.y += y;
 }
 
 void	SquareProps::ftInitPosition(Vector2 pos)
 {
 	this->pos.x = pos.x;
-	this->rect.x = pos.x;
+	this->_varCharPr.rect.x = pos.x;
 	this->pos.y = pos.y;
-	this->rect.y = pos.y;
+	this->_varCharPr.rect.y = pos.y;
 }
 float	SquareProps::ftReturnWideorHigh(char c) const
 {
 	if (c == 'W') // Width
-		return (this->rect.width);
+		return (this->_varCharPr.rect.width);
 	if (c == 'H') // Hight
-		return (this->rect.height);
+		return (this->_varCharPr.rect.height);
 	return (0);
 }
 

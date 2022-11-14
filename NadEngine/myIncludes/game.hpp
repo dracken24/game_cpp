@@ -20,7 +20,7 @@
 # define G 800
 # define PLAYER_JUMP_SPD 600.0f
 # define PLAYER_HOR_SPD 200.0f
-#define MAX_INPUT_CHARS 12
+#define MAX_INPUT_CHARS 8
 
 #define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
 #define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
@@ -54,9 +54,13 @@ typedef struct Select
 {
 	int			type = 0;	// Select witch
 	int			nbr = 0;		// Nbr of prop
+	int			lastNbr = 0;
+	bool		resetTxt = false; // If deselect items
 	Player		*player;	// 1
 	SquareProps	*prop;		// 2
-	EnvItem	*item;		// 3
+	EnvItem		*item;		// 3
+
+	int			letterCount = 0;
 }	Select;
 
 class Game {
@@ -125,6 +129,7 @@ void	ftKeyGestion(Game *Game, Player *player, float delta);
 
 void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			Props blocks, MultipleCam2D allCameras, EnvItems *play, EnvItems *stop);
+void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_blocks);;
 
 /**---------------------------> Utility <----------------------------**/
 

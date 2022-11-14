@@ -5,6 +5,12 @@ EnvItems::EnvItems(void)
 	return ;
 }
 
+EnvItems::EnvItems(EnvItems const &src)
+{
+	*this = src;
+	return;
+}
+
 EnvItems::~EnvItems(void)
 {
     return ;
@@ -48,6 +54,11 @@ void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
 	this->_item.color = color;
 	this->_item.texture = texture;
 	this->_item.blocking = blocking;
+}
+
+VarCharEnvi	*EnvItems::ftReturnVarsCharEnvi(void)
+{
+	return (&this->_item._varCharEnvi);
 }
 
 EnvItem		*EnvItems::ftReturnEnvitemPtr(int nbr)

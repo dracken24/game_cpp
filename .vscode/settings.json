@@ -1,5 +1,5 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/raylib-cpp-starter/vendor/raylib",
+    "cmake.sourceDirectory": "${workspaceFolder}/NadEngine/vendor/raylib",
     "files.associations": {
         "array": "cpp",
         "atomic": "cpp",

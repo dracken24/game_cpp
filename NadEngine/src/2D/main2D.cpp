@@ -133,13 +133,13 @@ void	ftMode2D(Game *game, Menu *menu)
 					{
 						Menu			tmpMenu;
 						Player			tmpPlayer;
-						EnvItems		tmpEnvItems;
+						EnvItems		tmpEnvItems(*envItems);
 						Props			tmpBlocks;
 						MultipleCam2D	tmpAllCameras;
 
 						tmpMenu = *menu;
 						tmpPlayer = *player;
-						tmpEnvItems = *envItems;
+						// tmpEnvItems = *envItems;
 						tmpBlocks = blocks->ftReturnCopyProps();
 						tmpAllCameras = *allCameras;
 
@@ -348,8 +348,8 @@ void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop)
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu)
 {
 	// DrawText("Panel Side down", 10, 10, 20, BLACK);
-	if (Game->selected2D.type != 0) // Draw variables on side right down panel
-	{
-		ftDrawVarsRiDownPanel(Game);
-	}
+	// if (Game->selected2D.type != 0) // Draw variables on side right down panel
+	// {
+	ftDrawVarsRiDownPanel(Game);
+	// }
 }

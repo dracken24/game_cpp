@@ -3,11 +3,22 @@
 
 #include "../../vendor/raylib/src/raylib.h"
 
-// typedef struct EnvItem {
-// 	Rectangle rect;
-// 	bool blocking;
-// 	Color color;
-// }   EnvItem;
+#define MAX_INPUT_CHAR 12
+
+typedef struct VarCharPr
+{
+	char propPosX[MAX_INPUT_CHAR + 1] = "\0";
+	char propPosY[MAX_INPUT_CHAR + 1] = "\0";
+	char propWidth[MAX_INPUT_CHAR + 1] = "\0";
+	char propHeight[MAX_INPUT_CHAR + 1] = "\0";
+	int	nbr = 0;
+}	VarCharPr;
+
+typedef struct VarsSideDownPanelPr
+{
+	Rectangle   		rect;
+	VarCharPr		varCharPr;
+}	VarsSideDownPanelPr;
 
 class SquareProps
 {
@@ -19,6 +30,8 @@ class SquareProps
 		void		ftInitPosition(Vector2 pos);
 		Rectangle	ftReturnRectangle(void) const;
 		Color		ftReturnRecColor(void) const;
+
+		VarCharPr	*ftReturnVarsProp(void);
 
 		Vector2		*ftReturnPositionPtr(void) ;
 		float		ftReturnSpeed(void) const;
@@ -42,14 +55,15 @@ class SquareProps
 
 	private:
 		// EnvItem		_envItem;
-		Rectangle   rect;
-		Color		color;
-		Vector2		pos;
-		Vector2		speedModifier = {0, 0};
-		float		speed;
-		float		speedX;
-		int			blocking;
-		int			_nbr;
+		// Rectangle   		rect;
+		Color				color;
+		Vector2				pos;
+		Vector2				speedModifier = {0, 0};
+		float				speed;
+		float				speedX;
+		int					blocking;
+		int					_nbr;
+		VarsSideDownPanelPr	_varCharPr;
 };
 
 #endif

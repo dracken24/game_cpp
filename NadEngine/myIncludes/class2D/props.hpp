@@ -4,11 +4,11 @@
 #include "squareProps.hpp"
 #include <iostream>
 
-
 class Props
 {
 	public:
 		Props(void);
+		Props(Props const &src);
 		~Props(void);
 
 		// Square props //
