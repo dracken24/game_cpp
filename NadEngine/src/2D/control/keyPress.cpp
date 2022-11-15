@@ -1,7 +1,8 @@
 #include "../../../myIncludes/game.hpp"
 
-void	ftKeyGestion(Game *Game, Player *player, float delta)
+void	ftKeyGestion(Game *Game, Player *player, Menu *menu, float delta)
 {
+
 	// std::cout << player->ftReturnNbr() << std::endl;
 /******************************************************************************************************************/
 	if (IsKeyDown(KEY_A)) // Move left
@@ -64,13 +65,16 @@ void	ftKeyGestion(Game *Game, Player *player, float delta)
 			player->ftChangeCt(0);
 	}
 /******************************************************************************************************************/
-	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) // Attack 1
+	if (Game->ctStopAttack == 0)
 	{
-		if (player->ftReturnAttackCt() == 0)
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) // Attack 1
 		{
-			Game->ct_action = 0;
-			player->ftChangeDoAttack(true);
-			player->ftChangeAttackCt(1);
+			if (player->ftReturnAttackCt() == 0)
+			{
+				Game->ct_action = 0;
+				player->ftChangeDoAttack(true);
+				player->ftChangeAttackCt(1);
+			}
 		}
 	}
 	player->ftChangeCollX(false);

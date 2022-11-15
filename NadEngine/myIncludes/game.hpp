@@ -75,6 +75,7 @@ class Game {
 	int			ctPlayStop = 1;
 	int			ctImgBuildGame = 1;
 	int			ctMode = 1;
+	int			ctStopAttack = 1;
 
 	Mouse			mouse;
 	Font			font1;
@@ -120,12 +121,12 @@ void	ftMoveScreen(Game *game, Camera2D *camera);
 
 void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player,
 			int envItemsLength, float delta, int width, int height);
-void 	ftUpdatePlayer(Game *Game, Player *player, EnvItems *envItems, int envItemsLength, float delta);
+void 	ftUpdatePlayer(Game *Game, Player *player, Menu *menu, EnvItems *envItems, int envItemsLength, float delta);
 void	ftImgsGestion(Game *Game, Player *player);
 
 void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength);
-void	ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvItems *envItems);
-void	ftKeyGestion(Game *Game, Player *player, float delta);
+void	ftRoutine(Game *Game, Player *player, Menu *menu, Camera2D *camera, Props *blocks, EnvItems *envItems);
+void	ftKeyGestion(Game *Game, Player *player, Menu *menu, float delta);
 
 void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			Props blocks, MultipleCam2D allCameras, EnvItems *play, EnvItems *stop);

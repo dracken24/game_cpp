@@ -7,16 +7,16 @@ void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 
 	static bool mouseOnText[512];
 	static int 	letterCount[512];
 	static int 	framesCounter[512];
-	char 		*plyPosX[512];
+	// char 		*tmpText[512];
 
 	// static char tmpText[512][MAX_INPUT_CHARS + 1];
 
 	// tmpText[ct][MAX_INPUT_CHARS + 1] = '\0';
-	// // YYYYYYYEEEESSSSSSSSSS //
+
 	// if (!name && !varName && !nbr)
 	// {
 	// 	// std::cout << "NO" << std::endl;
-	// 	tmpText[0][0] = '\0';
+	// 	varName[0] = '\0';
 	// 	letterCount[0] = 0;
 	// 	return;
 	// }
@@ -123,5 +123,14 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsEnvi->enviPosX, tmp, 200 + nbr);
 		tmp = ft_ftoa(recEnvi.y, 0);
 		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsEnvi->enviPosY, tmp, 250 + nbr);
+	}
+
+	if (IsKeyPressed(KEY_ENTER))
+	{
+		if (game->selected2D.type == 1)
+		{
+			VarChar *vars = game->selected2D.player->ftReturnVarsChar();
+			game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnPlayerPositionY());
+		}
 	}
 }

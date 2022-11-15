@@ -18,7 +18,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			ClearBackground(LIGHTGRAY);
 			BeginMode2D(allCameras.camera00.camera);
 				
-				ftRoutine(Game, &player, tmpCam, &blocks, &envItems);
+				ftRoutine(Game, &player, &menu, tmpCam, &blocks, &envItems);
 				// ftKeyGestionBuildMode(Game);
 
 			EndMode2D();
@@ -68,6 +68,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 		ftDrawBoarders(Game);
 		EndDrawing();
 		ftSelectItemsTop(Game, &allCameras.camera03.camera, play, stop);
+		Game->ctStopAttack = 0;
 	}
 	//--------------------------------------------------------------------------------------//
 	// CloseWindow();
@@ -76,4 +77,5 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 	// UnloadRenderTexture(allCameras.camera00.textForCam);
 	// UnloadRenderTexture(allCameras.camera00.textForCam);
 	// exit (0);
+	Game->ctStopAttack = 1;
 }

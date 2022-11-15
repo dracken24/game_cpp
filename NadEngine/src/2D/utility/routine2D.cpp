@@ -3,7 +3,7 @@
 #include "../../../myIncludes/class2D/props.hpp"
 #include "../../../myIncludes/game.hpp"
 
-void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvItems *envItems)
+void ftRoutine(Game *Game, Player *player, Menu *menu, Camera2D *camera, Props *blocks, EnvItems *envItems)
 {
 	static int lastAction;
 	static int cameraOption = 0;
@@ -15,7 +15,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 	Game->delta = GetFrameTime();
 
 	Game->cameraUpdaters[cameraOption](Game, camera, player, envItemsLength, Game->delta, Game->screenWidth, Game->screenHeight);
-	ftUpdatePlayer(Game, player, envItems, envItemsLength, Game->delta);
+	ftUpdatePlayer(Game, player, menu, envItems, envItemsLength, Game->delta);
 	if (lastAction != player->ftReturnCt())
 		Game->ct_action = 0;
 
@@ -24,6 +24,8 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 		camera->zoom = 3.0f;
 	else if (camera->zoom < 0.25f)
 		camera->zoom = 0.25f;
+
+	// ftKeyGestion(Game, player, menu, Game->delta);
 
 	/*********************************************** Gravity ***************************************************/
 	ftGravityGestion(Game, player, blocks);
@@ -92,6 +94,7 @@ void ftRoutine(Game *Game, Player *player, Camera2D *camera, Props *blocks, EnvI
 		DrawText("- Mouse Button Left to Attack", 40, 100, 10, DARKGRAY);
 	}
 	// ftSideMenu(Game, player);
+	ftKeyGestion(Game, player, menu, Game->delta);
 }
 
 /*******************************************************************************************
@@ -119,11 +122,11 @@ void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTi
 }
 /******************************************************************************************/
 
-void	ftUpdatePlayer(Game *Game,Player *player, EnvItems *envItems, int envItemsLength, float delta)
+void	ftUpdatePlayer(Game *Game,Player *player, Menu *menu, EnvItems *envItems, int envItemsLength, float delta)
 {
 	player->ftChangeLastY(player->ftReturnPlayerPositionY());
 
-	ftKeyGestion(Game, player, delta);
+	// ftKeyGestion(Game, player, menu, delta);
 	ftUsePlayerGravity(player, envItems, delta, envItemsLength);
 
 	if (player->ftReturnLastY() < player->ftReturnPlayerPositionY() && player->ftReturnAttackCt() == 0)
