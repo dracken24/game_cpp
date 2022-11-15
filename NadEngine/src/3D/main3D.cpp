@@ -120,7 +120,7 @@ void ftMode3D(Game *game)
 		// Update
 		//----------------------------------------------------------------------------------
 		UpdateCamera(&camera);
-
+		
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			if (!collision.hit)

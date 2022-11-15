@@ -66,8 +66,8 @@ void ftRoutine(Game *Game, Player *player, Menu *menu, Camera2D *camera, Props *
 		float dist = 0;
 		for (int i = 0; i < blocks->ftReturnNbr(); i++)
 		{
-			blocks->ftSetPosSquareProp((Vector2){200, 200.-(dist)}, i);
-			blocks->ftSetPosSquareProp((Vector2){200.-(dist), 200}, i);
+			blocks->ftSetPosSquareProp((Vector2){200, 200 - dist}, i);
+			blocks->ftSetPosSquareProp((Vector2){200 - dist , 200}, i);
 			dist += 50;
 		}
 	}

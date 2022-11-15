@@ -94,6 +94,8 @@ void	ftDrawVarsRiDownPanel(Game *game)
 	{
 		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
 		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
+		recPlayer.x -= game->selected2D.player->ftReturnAjustCollBox('X');
+		recPlayer.y += game->selected2D.player->ftReturnAjustCollBox('Y');
 
 		char *tmp = ft_ftoa(recPlayer.x, 0);
 		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsPlayer->plyPosX, tmp, 0 + nbr);
@@ -130,7 +132,8 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		if (game->selected2D.type == 1)
 		{
 			VarChar *vars = game->selected2D.player->ftReturnVarsChar();
-			game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnPlayerPositionY());
+			game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnCollBoxPos('Y'));
+			game->selected2D.player->ftChangePosition(game->selected2D.player->ftReturnCollBoxPos('X'), atof(vars->plyPosY));
 		}
 	}
 }
