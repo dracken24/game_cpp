@@ -94,12 +94,10 @@ void	ftDrawVarsRiDownPanel(Game *game)
 	{
 		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
 		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
-		recPlayer.x -= game->selected2D.player->ftReturnAjustCollBox('X');
-		recPlayer.y += game->selected2D.player->ftReturnAjustCollBox('Y');
 
-		char *tmp = ft_ftoa(recPlayer.x, 0);
+		char *tmp = ft_ftoa(recPlayer.x - game->selected2D.player->ftReturnAjustCollBox('X'), 0);
 		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsPlayer->plyPosX, tmp, 0 + nbr);
-		tmp = ft_ftoa(recPlayer.y, 0);
+		tmp = ft_ftoa(recPlayer.y + game->selected2D.player->ftReturnAjustCollBox('Y'), 0);
 		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsPlayer->plyPosY, tmp, 25 + nbr);
 		tmp = ft_ftoa(recPlayer.width, 0);
 		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsPlayer->plyWidth, tmp, 50 + nbr);
@@ -137,3 +135,56 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		}
 	}
 }
+
+//*** Draw variables on side right down panel ***//
+// void	ftDrawVarsRiDownPanel(Game *game)
+// {
+// 	int nbr = game->selected2D.nbr;
+
+// 	if (game->selected2D.type == 1) // Player selected
+// 	{
+// 		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
+// 		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
+// 		recPlayer.x -= game->selected2D.player->ftReturnAjustCollBox('X');
+// 		recPlayer.y += game->selected2D.player->ftReturnAjustCollBox('Y');
+
+// 		char *tmp = ft_ftoa(recPlayer.x, 0);
+// 		ftSelectBox(game, (Rectangle){1260, 317, 75, 20}, (Rectangle){60, 10, 75, 20}, (Vector2){10, 14}, "Pos X:", varsPlayer->plyPosX, tmp, 0 + nbr);
+// 		tmp = ft_ftoa(recPlayer.y, 0);
+// 		ftSelectBox(game, (Rectangle){1400, 317, 75, 20}, (Rectangle){200, 10, 75, 20}, (Vector2){150, 14}, "Pos Y:", varsPlayer->plyPosY, tmp, 25 + nbr);
+// 		tmp = ft_ftoa(recPlayer.width, 0);
+// 		ftSelectBox(game, (Rectangle){1260, 347, 75, 20}, (Rectangle){60, 40, 75, 20}, (Vector2){10, 44}, "Width:", varsPlayer->plyWidth, tmp, 50 + nbr);
+// 		tmp = ft_ftoa(recPlayer.height, 0);
+// 		ftSelectBox(game, (Rectangle){1400, 347, 75, 20}, (Rectangle){200, 40, 75, 20}, (Vector2){150, 44}, "Height:", varsPlayer->plyHeight, tmp, 75 + nbr);
+// 	}
+// 	else if (game->selected2D.type == 2) // Items Blocks Props
+// 	{
+// 		VarCharPr	*varsProp = game->selected2D.prop->ftReturnVarsProp();
+// 		Rectangle   recProp = game->selected2D.prop->ftReturnRectangle();
+
+// 		char *tmp = ft_ftoa(recProp.x, 0);
+// 		ftSelectBox(game, (Rectangle){1260, 317, 75, 20}, (Rectangle){60, 10, 75, 20}, (Vector2){10, 14}, "Pos X:", varsProp->propPosX, tmp, 100 + nbr);
+// 		tmp = ft_ftoa(recProp.y, 0);
+// 		ftSelectBox(game, (Rectangle){1400, 317, 75, 20}, (Rectangle){200, 10, 75, 20}, (Vector2){150, 14}, "Pos Y:", varsProp->propPosY, tmp, 150 + nbr);
+// 	}
+// 	else if (game->selected2D.type == 3) // Platforms
+// 	{
+// 		VarCharEnvi	*varsEnvi = &game->selected2D.item->_varCharEnvi;
+// 		Rectangle   recEnvi = game->selected2D.item->rect;
+
+// 		char *tmp = ft_ftoa(recEnvi.x, 0);
+// 		ftSelectBox(game, (Rectangle){1260, 317, 75, 20}, (Rectangle){60, 10, 75, 20}, (Vector2){10, 14}, "Pos X:", varsEnvi->enviPosX, tmp, 200 + nbr);
+// 		tmp = ft_ftoa(recEnvi.y, 0);
+// 		ftSelectBox(game, (Rectangle){1400, 317, 75, 20}, (Rectangle){200, 10, 75, 20}, (Vector2){150, 14}, "Pos Y:", varsEnvi->enviPosY, tmp, 250 + nbr);
+// 	}
+
+// 	if (IsKeyPressed(KEY_ENTER))
+// 	{
+// 		if (game->selected2D.type == 1)
+// 		{
+// 			VarChar *vars = game->selected2D.player->ftReturnVarsChar();
+// 			game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnCollBoxPos('Y'));
+// 			game->selected2D.player->ftChangePosition(game->selected2D.player->ftReturnCollBoxPos('X'), atof(vars->plyPosY));
+// 		}
+// 	}
+// }
