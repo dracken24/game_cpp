@@ -100,26 +100,32 @@ void	ftMouseControl(Game *Game)
 		framesCounter++;
 
 	// Draw on screen
-	textBox1 = {125, 36, 100, 20};
-	DrawText("Blocks Rotation:", 10, 40, 14, LIGHTGRAY);
-	DrawRectangleRec(textBox1, LIGHTGRAY);
-	if (mouseOnText)
-		DrawRectangleLines((int)textBox1.x, (int)textBox1.y, (int)textBox1.width, (int)textBox1.height, RED);
-	else
-		DrawRectangleLines((int)textBox1.x, (int)textBox1.y, (int)textBox1.width, (int)textBox1.height, LIGHTGRAY);
-	DrawText(Game->rotation, (int)textBox1.x + 5 , (int)textBox1.y + 4, 14, MAROON);
-	if (mouseOnText)
-	{
-		if (letterCount < MAX_INPUT_CHARS)
-		{
-			// Draw blinking underscore char
-			if (((framesCounter / 20) % 2) == 0)
-				DrawText("_", (int)textBox1.x + MeasureText(Game->rotation, 14), (int)textBox1.y + 12, 14, MAROON);
-		}
-	}
+	// textBox1 = {125, 36, 100, 20};
+	// DrawText("Blocks Rotation:", 10, 40, 14, LIGHTGRAY);
+	// DrawRectangleRec(textBox1, LIGHTGRAY);
+	// if (mouseOnText)
+	// 	DrawRectangleLines((int)textBox1.x, (int)textBox1.y, (int)textBox1.width, (int)textBox1.height, RED);
+	// else
+	// 	DrawRectangleLines((int)textBox1.x, (int)textBox1.y, (int)textBox1.width, (int)textBox1.height, LIGHTGRAY);
+	// DrawText(Game->rotation, (int)textBox1.x + 5 , (int)textBox1.y + 4, 14, MAROON);
+	// if (mouseOnText)
+	// {
+	// 	if (letterCount < MAX_INPUT_CHARS)
+	// 	{
+	// 		// Draw blinking underscore char
+	// 		if (((framesCounter / 20) % 2) == 0)
+	// 			DrawText("_", (int)textBox1.x + MeasureText(Game->rotation, 14), (int)textBox1.y + 12, 14, MAROON);
+	// 	}
+	// }
 }
 
-void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu)
+void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu)
 {
-	ftMouseControl(Game);
+	if (game->selected2D.type == 2 || game->selected2D.type == 3)
+	{
+
+		// ImageDrawRectangle(&game->texCercleChrom, 130, 100, 100, 100, WHITE);
+		DrawTextureEx(game->textCercleChrom, {130, 100}, 0, 0.75, WHITE);
+	}
+	ftMouseControl(game);
 }

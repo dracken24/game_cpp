@@ -6,10 +6,11 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 	Vector2 mousePos = game->mouse.pos;
 	Vector2 rayPos = GetScreenToWorld2D(mousePos, *camera);
 	bool	touch = 0;
+	Color	color;
 
 	rayPos.y -= 40;
 
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && game->mouse.pos.x < game->screenWidth - 300 && game->mouse.pos.y > 40)
 	{
 		game->selected2D.lastNbr = game->selected2D.nbr;
 		for (int i = 1; i < envItems->ftReturnEnviAllNbr(); i++)
@@ -24,6 +25,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
 				// std::cout << "Hit Envi: " << i << std::endl;
+				game->selected2D.item->color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);
 				touch = 1;
 			}
 		}
@@ -39,6 +41,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.nbr = i;
 				game->selected2D.prop = blocks->ftReturnSquareProp(i);
 				// std::cout << "Hit Blocks: " << i << std::endl;
+				game->selected2D.prop->ftInitColorPix(GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y));
 				touch = 1;
 			}
 		}
@@ -63,6 +66,10 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 		}
 		// std::cout << "Mouse" << std::endl;
 	}
+	// if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	// {
+	// 	color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);
+	// }
 }
 
 //*** Move screen when mouse middle button is pressed, on build mode ***//

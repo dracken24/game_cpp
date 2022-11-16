@@ -66,7 +66,17 @@ Rectangle	SquareProps::ftReturnRectangle(void) const
 	return (this->_varCharPr.rect);
 }
 
-Color	SquareProps::ftReturnRecColor(void) const
+Color	SquareProps::ftReturnColorPix(void)
+{
+	return (this->_varCharPr.pixColor);
+}
+
+void	SquareProps::ftInitColorPix(Color color)
+{
+	this->_varCharPr.pixColor = color;
+}
+
+Color SquareProps::ftReturnRecColor(void) const
 {
 	return (this->color);
 }

@@ -19,6 +19,7 @@ typedef struct VarsSideDownPanelPr
 {
 	Rectangle   		rect;
 	VarCharPr		varCharPr;
+	Color			pixColor;
 }	VarsSideDownPanelPr;
 
 class SquareProps
@@ -57,6 +58,9 @@ class SquareProps
 
 		float		ftReturnSqurtPos(char c) const;
 		SquareProps *ftReturnCopySquareProp(void);
+
+		Color	 	ftReturnColorPix(void);
+		void	 	ftInitColorPix(Color color);
 
 	private:
 		// EnvItem		_envItem;

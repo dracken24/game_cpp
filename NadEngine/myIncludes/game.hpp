@@ -90,6 +90,9 @@ class Game {
 	Vector2			posCam = {650, 300};
 	Select			selected2D;
 
+	Image			imgCercleChrom;
+	Texture2D		textCercleChrom;
+
 	// MultipleCam2D	allCameras;
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
@@ -111,7 +114,7 @@ void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
-void	ftSideUpMenu2D(Game *Game, Player *player, Menu *menu);
+void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu);
 void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftDrawBoarders(Game *Game);

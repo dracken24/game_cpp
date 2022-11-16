@@ -35,6 +35,7 @@ typedef struct VarsSideDownPanel
 	Rectangle	_playerBox;
 	Rectangle	collisionBox;
 	VarChar		varChar;
+	Color		pixColor;
 }	VarsSideDownPanel;
 
 class Player

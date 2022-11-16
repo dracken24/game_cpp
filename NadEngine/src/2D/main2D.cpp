@@ -38,9 +38,9 @@ void	ftMode2D(Game *game, Menu *menu)
 
 	EnvItems *envItems;
 	envItems = new EnvItems;
-	// envItems->ftInitVarChar();
 
-	// envItems->ftInitVarChar();
+	game->imgCercleChrom = LoadImage("./imgs/wheelcolor.png");
+	game->textCercleChrom = LoadTextureFromImage(game->imgCercleChrom);
 
 	ftInitBlocks(blocks, envItems);
 
@@ -265,7 +265,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 		DrawLineEx({posPly.x, posPly.y - 1}, {posPly.x, posPly.y + posPly.height + 7}, 2, RED); // Left
 		posPly.x += posPly.width + 6;
 		DrawLineEx({posPly.x, posPly.y - 1}, {posPly.x, posPly.y + posPly.height + 7}, 2, RED); // Right
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && game->mouse.pos.x < game->screenWidth - 300 && game->mouse.pos.y > 40)
 		{
 			player->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
 		}
@@ -285,7 +285,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 		DrawLineEx({posBlock.x, posBlock.y - 1}, {posBlock.x, posBlock.y + posBlock.height + 7}, 2, RED); // Left
 		posBlock.x += posBlock.width + 6;
 		DrawLineEx({posBlock.x, posBlock.y - 1}, {posBlock.x, posBlock.y + posBlock.height + 7}, 2, RED); // Right
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && game->mouse.pos.x < game->screenWidth - 300 && game->mouse.pos.y > 40)
 		{
 			game->selected2D.prop->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
 		}
@@ -305,7 +305,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 		DrawLineEx({posWalkable.x, posWalkable.y - 1}, {posWalkable.x, posWalkable.y + posWalkable.height + 7}, 2, RED); // Left
 		posWalkable.x += posWalkable.width + 6;
 		DrawLineEx({posWalkable.x, posWalkable.y - 1}, {posWalkable.x, posWalkable.y + posWalkable.height + 7}, 2, RED); // Right
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && game->mouse.pos.x < game->screenWidth - 300 && game->mouse.pos.y > 40)
 		{
 			game->selected2D.item->rect.x += (-(int)(forMove.x / game->mouse.camZoom));
 			game->selected2D.item->rect.y += (-(int)(forMove.y / game->mouse.camZoom));

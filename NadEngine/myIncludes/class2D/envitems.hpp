@@ -20,6 +20,7 @@ typedef struct EnvItem {
 	Color 		color;
 	Rectangle 	rect;
 	VarCharEnvi _varCharEnvi;
+	Color		pixColor;
 
 	int 		blocking;
 	int			nbr;
