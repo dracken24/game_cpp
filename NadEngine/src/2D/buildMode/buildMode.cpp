@@ -25,7 +25,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
 				// std::cout << "Hit Envi: " << i << std::endl;
-				game->selected2D.item->color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);
+				// game->selected2D.item->color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);
 				touch = 1;
 			}
 		}
@@ -41,7 +41,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.nbr = i;
 				game->selected2D.prop = blocks->ftReturnSquareProp(i);
 				// std::cout << "Hit Blocks: " << i << std::endl;
-				game->selected2D.prop->ftInitColorPix(GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y));
+				// game->selected2D.prop->ftInitColorPix(GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y));
 				touch = 1;
 			}
 		}

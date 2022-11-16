@@ -35,6 +35,7 @@ typedef struct NeedBy2DCam{
 	Camera2D 		camera;
 	RenderTexture 	textForCam;
 	Rectangle		rectForCam;
+	Image			image;
 }	NeedBy2DCam;
 
 typedef struct MultipleCam2D{
@@ -92,6 +93,7 @@ class Game {
 
 	Image			imgCercleChrom;
 	Texture2D		textCercleChrom;
+	Rectangle		rectCercleChrom;
 
 	// MultipleCam2D	allCameras;
 
@@ -114,7 +116,7 @@ void	ftMode2D(Game *Game, Menu *menu);
 /**----------------------->> Control Panel <<-----------------------**/
 
 void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
-void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu);
+void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras);
 void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
 void	ftDrawBoarders(Game *Game);

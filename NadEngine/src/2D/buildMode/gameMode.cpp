@@ -30,7 +30,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			ClearBackground(DARKGRAY);
 			BeginMode2D(allCameras.camera01.camera);
 
-				ftSideUpMenu2D(Game, &player, &menu);
+				ftSideUpMenu2D(Game, &player, &menu, &allCameras);
 
 			EndMode2D();
 		EndTextureMode();

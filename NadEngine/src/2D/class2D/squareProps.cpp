@@ -76,6 +76,11 @@ void	SquareProps::ftInitColorPix(Color color)
 	this->_varCharPr.pixColor = color;
 }
 
+void	SquareProps::ftInitColor(Color color)
+{
+	this->color = color;
+}
+
 Color SquareProps::ftReturnRecColor(void) const
 {
 	return (this->color);

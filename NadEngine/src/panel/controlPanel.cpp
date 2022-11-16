@@ -119,13 +119,40 @@ void	ftMouseControl(Game *Game)
 	// }
 }
 
-void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu)
+void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras)
 {
-	if (game->selected2D.type == 2 || game->selected2D.type == 3)
-	{
+	Vector2 mousePos = GetMousePosition();
+	Color	color;
 
+	if (game->selected2D.type == 2) // prop
+	{
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) )
+		{
+			color = GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y);
+			for (int i = 100; i < 200; i++)
+			{
+				for (int k = 100; k < 200; k++)
+				{
+					DrawPixel(i, k, color);
+				}
+			}
+			// // game->selected2D.prop->ftInitColorPix(GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y));
+			// game->selected2D.prop->ftInitColor(GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y));
+			// game->textCercleChrom = LoadTextureFromImage(game->imgCercleChrom);
+		}
+		DrawRectangle(38, 143, 68, 68, BLACK);
+		DrawRectangle(40, 145, 64, 64, game->selected2D.prop->ftReturnRecColor());
+		// ImageDraw(&allCameras->camera01.image, game->imgCercleChrom, game->rectCercleChrom, allCameras->camera01.rectForCam, WHITE);
+		// ImageDrawRectangleRec(&game->imgCercleChrom, game->rectCercleChrom, WHITE);
+		// DrawTextureEx(game->textCercleChrom, {130, 100}, 0, 0.75, WHITE);
+		// DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
+	}
+	else if (game->selected2D.type == 3) // item
+	{
+		DrawRectangle(38, 143, 68, 68, BLACK);
+		DrawRectangle(40, 145, 64, 64, game->selected2D.item->color);
 		// ImageDrawRectangle(&game->texCercleChrom, 130, 100, 100, 100, WHITE);
-		DrawTextureEx(game->textCercleChrom, {130, 100}, 0, 0.75, WHITE);
+		// DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
 	}
 	ftMouseControl(game);
 }

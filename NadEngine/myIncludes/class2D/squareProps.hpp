@@ -37,7 +37,7 @@ class SquareProps
 		void		ftInitVars(void);
 		void		ftDeleteVars(void);
 
-		void ftChangeWorH(float size, char c);
+		void 		ftChangeWorH(float size, char c);
 
 		Vector2		*ftReturnPositionPtr(void) ;
 		float		ftReturnSpeed(void) const;
@@ -61,6 +61,7 @@ class SquareProps
 
 		Color	 	ftReturnColorPix(void);
 		void	 	ftInitColorPix(Color color);
+		void	 	ftInitColor(Color color);
 
 	private:
 		// EnvItem		_envItem;

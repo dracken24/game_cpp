@@ -41,6 +41,7 @@ void	ftMode2D(Game *game, Menu *menu)
 
 	game->imgCercleChrom = LoadImage("./imgs/wheelcolor.png");
 	game->textCercleChrom = LoadTextureFromImage(game->imgCercleChrom);
+	game->rectCercleChrom = {0, 0, 150, 150};
 
 	ftInitBlocks(blocks, envItems);
 
@@ -65,6 +66,7 @@ void	ftMode2D(Game *game, Menu *menu)
 	allCameras->camera01.camera.zoom = 1.0f;
 	allCameras->camera01.textForCam = LoadRenderTexture(300, game->screenHeight / 3);
 	allCameras->camera01.rectForCam = {0.0f, 0.0f, (float)allCameras->camera01.textForCam.texture.width, (float)-allCameras->camera01.textForCam.texture.height};
+	// allCameras->camera01.image = LoadImage();
 
 	// Camera panel side down
 	allCameras->camera02.camera = {0};
@@ -186,7 +188,7 @@ void	ftMode2D(Game *game, Menu *menu)
 			ClearBackground(DARKGRAY);
 			BeginMode2D(allCameras->camera01.camera);
 
-				ftSideUpMenu2D(game, player, menu);
+			ftSideUpMenu2D(game, player, menu, allCameras);
 
 			EndMode2D();
 		EndTextureMode();
