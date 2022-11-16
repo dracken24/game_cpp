@@ -31,11 +31,17 @@ void	ftMode2D(Game *game, Menu *menu)
 	Player	*player;
 	player = new Player;
 	player->ftSetPosition((Vector2){500, 300});
+	player->ftInitVarChar();
 
 	Props	*blocks;
-	EnvItems *envItems;
 	blocks = new Props;
+
+	EnvItems *envItems;
 	envItems = new EnvItems;
+	// envItems->ftInitVarChar();
+
+	// envItems->ftInitVarChar();
+
 	ftInitBlocks(blocks, envItems);
 
 	//--------------------------------------------------------------------------------------//
@@ -263,6 +269,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 		{
 			player->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
 		}
+		// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 0;
 	}
 	else if (game->selected2D.type == 2) // Items Blocks Props
 	{
@@ -283,6 +290,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 		{
 			game->selected2D.prop->ftMovePosition(-forMove.x / game->mouse.camZoom, -forMove.y / game->mouse.camZoom);
 		}
+		// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 100;
 	}
 	else if (game->selected2D.type == 3) // Platforms
 	{
@@ -304,6 +312,7 @@ void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *block
 			game->selected2D.item->rect.x += (-(int)(forMove.x / game->mouse.camZoom));
 			game->selected2D.item->rect.y += (-(int)(forMove.y / game->mouse.camZoom));
 		}
+		// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 200;
 	}
 }
 

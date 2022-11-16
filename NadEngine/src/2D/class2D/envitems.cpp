@@ -43,6 +43,10 @@ void 	EnvItems::ftInitEnvitem(Vector2 pos, Vector2 size,
 	this->_envItems[nbr].texture = texture;
 	this->_envItems[nbr].blocking = blocking;
 	this->_envItems[nbr].nbr = nbr;
+	this->_envItems[nbr]._varCharEnvi.enviPosX = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviPosY = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviWidth = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviHeight = (char *)calloc(sizeof(char), 9);
 }
 void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
 			int blocking, Color color, Texture texture)
@@ -54,6 +58,22 @@ void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
 	this->_item.color = color;
 	this->_item.texture = texture;
 	this->_item.blocking = blocking;
+}
+
+void		EnvItems::ftInitVarChar(int nbr)
+{
+	this->_envItems[nbr]._varCharEnvi.enviPosX = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviPosY = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviWidth = (char *)calloc(sizeof(char), 9);
+	this->_envItems[nbr]._varCharEnvi.enviHeight = (char *)calloc(sizeof(char), 9);
+}
+
+void		EnvItems::ftDeleteVarChar(int nbr)
+{
+	free(this->_envItems[nbr]._varCharEnvi.enviPosX);
+	free(this->_envItems[nbr]._varCharEnvi.enviPosY);
+	free(this->_envItems[nbr]._varCharEnvi.enviWidth);
+	free(this->_envItems[nbr]._varCharEnvi.enviHeight);
 }
 
 VarCharEnvi	*EnvItems::ftReturnVarsCharEnvi(void)

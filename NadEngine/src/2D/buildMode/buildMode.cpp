@@ -7,6 +7,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 	bool	touch = 0;
 
 	rayPos.y -= 40;
+	// game->selected2D.lastType = game->selected2D.type;
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
@@ -16,10 +17,14 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			Rectangle item = envItems->ftReturnRectangle(i);
 			if (CheckCollisionPointRec(rayPos, item))
 			{
+				game->selected2D.lastType = game->selected2D.type;
+				game->selected2D.lastItem = game->selected2D.item;
+				game->selected2D.lastNbr = game->selected2D.nbr;
 				game->selected2D.type = 3;
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
-				// std::cout << "Hit Envi: " << i << std::endl;
+				// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 3000;
+				std::cout << "Hit Envi: " << i << std::endl;
 				touch = 1;
 			}
 		}
@@ -28,26 +33,39 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			Rectangle item = blocks->ftReturnRectangleSqPr(i);
 			if (CheckCollisionPointRec(rayPos, item))
 			{
+				game->selected2D.lastType = game->selected2D.type;
+				game->selected2D.lastProp = game->selected2D.prop;
+				game->selected2D.lastNbr = game->selected2D.nbr;
 				game->selected2D.type = 2;
 				game->selected2D.nbr = i;
 				game->selected2D.prop = blocks->ftReturnSquareProp(i);
 				std::cout << "Hit Blocks: " << i << std::endl;
+				// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 2000;
 				touch = 1;
 			}
 		}
 		Rectangle	ply = player->ftReturnRectangleCollBox();
 		if (CheckCollisionPointRec(rayPos, ply))
 		{
+			game->selected2D.lastType = game->selected2D.type;
+			game->selected2D.lastPlayer = game->selected2D.player;
+			game->selected2D.lastNbr = game->selected2D.nbr;
 			game->selected2D.type = 1;
 			game->selected2D.nbr = 0;
 			game->selected2D.player = player->ftReturnPlayer();
-			// std::cout << "Hit Player: " << std::endl;
+			// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 0;
+			std::cout << "Hit Player: " << std::endl;
 			touch = 1;
 		}
 		if (touch == 0) // Not select or deselect item
 		{
-			game->selected2D.type = 0;
+			game->selected2D.lastType = game->selected2D.type;
+			game->selected2D.lastNbr = game->selected2D.nbr;
+			// game->selected2D.selected = -1;
+			game->selected2D.type = -1;
+			game->selected2D.nbr = -1;
 		}
+		std::cout << "Mouse" << std::endl;
 	}
 }
 

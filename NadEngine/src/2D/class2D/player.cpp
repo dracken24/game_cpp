@@ -412,6 +412,30 @@ VarChar		*Player::ftReturnVarsChar(void)
 	return (&this->_varsSideDownPanel.varChar);
 }
 
+void		Player::ftInitVarChar(void)
+{
+	this->_varsSideDownPanel.varChar.plyPosX = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.plyPosY = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.plyWidth = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.plyHeight = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.collBoxPosX = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.collBoxPosY = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.collBoxWidth = (char *)calloc(sizeof(char), 9);
+	this->_varsSideDownPanel.varChar.collBoxHeight = (char *)calloc(sizeof(char), 9);
+}
+
+void		Player::ftDeleteVarChar(void)
+{
+	free(this->_varsSideDownPanel.varChar.plyPosX);
+	free(this->_varsSideDownPanel.varChar.plyPosY);
+	free(this->_varsSideDownPanel.varChar.plyWidth);
+	free(this->_varsSideDownPanel.varChar.plyHeight);
+	free(this->_varsSideDownPanel.varChar.collBoxPosX);
+	free(this->_varsSideDownPanel.varChar.collBoxPosY);
+	free(this->_varsSideDownPanel.varChar.collBoxWidth);
+	free(this->_varsSideDownPanel.varChar.collBoxHeight);
+}
+
 void    Player::ftSetPosition(Vector2 pos)
 {
 	this->position = pos;

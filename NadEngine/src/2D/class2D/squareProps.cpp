@@ -10,6 +10,22 @@ SquareProps::~SquareProps(void)
 	return ;
 }
 
+void		SquareProps::ftInitVars(void)
+{
+	this->_varCharPr.varCharPr.propPosX = (char *)calloc(sizeof(char), 9);
+	this->_varCharPr.varCharPr.propPosY = (char *)calloc(sizeof(char), 9);
+	this->_varCharPr.varCharPr.propWidth = (char *)calloc(sizeof(char), 9);
+	this->_varCharPr.varCharPr.propHeight = (char *)calloc(sizeof(char), 9);
+}
+
+void SquareProps::ftDeleteVars(void)
+{
+	free(this->_varCharPr.varCharPr.propPosX);
+	free(this->_varCharPr.varCharPr.propPosY);
+	free(this->_varCharPr.varCharPr.propWidth);
+	free(this->_varCharPr.varCharPr.propHeight);
+}
+
 SquareProps	*SquareProps::ftReturnCopySquareProp(void)
 {
 	SquareProps *ret = new SquareProps;
@@ -31,6 +47,8 @@ void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool
 	this->_nbr = nbr;
 	this->blocking = blocking;
 }
+
+
 
 VarCharPr	*SquareProps::ftReturnVarsProp(void)
 {

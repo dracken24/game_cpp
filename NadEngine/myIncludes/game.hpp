@@ -53,12 +53,19 @@ typedef struct MultipleCam2D{
 typedef struct Select
 {
 	int			type = 0;	// Select witch
+	int			lastType = 0;
 	int			nbr = 0;		// Nbr of prop
+	int			selected = 0;
+	int			lastSelected = 0;
+
 	int			lastNbr = 0;
 	bool		resetTxt = false; // If deselect items
 	Player		*player;	// 1
 	SquareProps	*prop;		// 2
 	EnvItem		*item;		// 3
+	Player		*lastPlayer;	// 1
+	SquareProps	*lastProp;		// 2
+	EnvItem		*lastItem;		// 3
 
 	int			letterCount = 0;
 }	Select;

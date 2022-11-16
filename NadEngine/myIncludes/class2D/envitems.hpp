@@ -2,15 +2,16 @@
 # define ENVITEM_HPP
 
 #include "../../vendor/raylib/src/raylib.h"
+#include <stdlib.h>
 
 #define MAX_INPUT_CHAR 8
 
 typedef struct VarCharEnvi
 {
-	char enviPosX[MAX_INPUT_CHAR + 1] = "\0";
-	char enviPosY[MAX_INPUT_CHAR + 1] = "\0";
-	char enviWidth[MAX_INPUT_CHAR + 1] = "\0";
-	char enviHeight[MAX_INPUT_CHAR + 1] = "\0";
+	char *enviPosX;
+	char *enviPosY;
+	char *enviWidth;
+	char *enviHeight;
 	int	nbr = 4;
 }	VarCharEnvi;
 
@@ -53,6 +54,9 @@ class EnvItems
 		Color		ftReturnOneEnviColor(void) const;
 		Texture2D	ftReturnOneEnviTexture(void) const;
 		EnvItem		*ftReturnOneEnvitemPtr(void);
+
+		void		ftInitVarChar(int nbr);
+		void		ftDeleteVarChar(int nbr);
 
 	private:
 		EnvItem		*_envItems;

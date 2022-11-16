@@ -13,14 +13,14 @@
 
 typedef struct VarChar
 {
-	char plyPosX[MAX_INPUT_CHAR + 1] = "\0";
-	char plyPosY[MAX_INPUT_CHAR + 1] = "\0";
-	char plyWidth[MAX_INPUT_CHAR + 1] = "\0";
-	char plyHeight[MAX_INPUT_CHAR + 1] = "\0";
-	char collBoxPosX[MAX_INPUT_CHAR + 1] = "\0";
-	char collBoxPosY[MAX_INPUT_CHAR + 1] = "\0";
-	char collBoxWidth[MAX_INPUT_CHAR + 1] = "\0";
-	char collBoxHeight[MAX_INPUT_CHAR + 1] = "\0";
+	char *plyPosX;
+	char *plyPosY;
+	char *plyWidth;
+	char *plyHeight;
+	char *collBoxPosX;
+	char *collBoxPosY;
+	char *collBoxWidth;
+	char *collBoxHeight;
 	int	nbr = 8;
 }	VarChar;
 
@@ -42,6 +42,9 @@ class Player
 		void		ftInitImgsIchigo(void);
 		void		ftInitImgsMeliodas(void);
 		void		ftSetPosition(Vector2 pos);
+
+		void		ftInitVarChar(void);
+		void		ftDeleteVarChar(void);
 
 		Player		*ftReturnPlayer(void);
 		VarChar		*ftReturnVarsChar(void);
