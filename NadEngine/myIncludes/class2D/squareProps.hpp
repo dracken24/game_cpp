@@ -36,6 +36,8 @@ class SquareProps
 		void		ftInitVars(void);
 		void		ftDeleteVars(void);
 
+		void ftChangeWorH(float size, char c);
+
 		Vector2		*ftReturnPositionPtr(void) ;
 		float		ftReturnSpeed(void) const;
 		void		ftChangeSpeed(float speed);

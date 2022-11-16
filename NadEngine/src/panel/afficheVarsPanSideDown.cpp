@@ -3,8 +3,12 @@
 void	ftResetPlayerStrPanSideDown(Game *game);
 void	ftResetItemsStrPanSideDown(Game *game);
 void	ftResetPropsStrPanSideDown(Game *game);
+void	ftEnterVarsPlayer(Game *game);
+void	ftEnterVarsProp(Game *game);
+void	ftEnterVarsItem(Game *game);
 
-//** Select Box **//              Collision Box   /    Visual Box     /               / Affichable/ Variable Struct/ Nbr to put
+//*** Fon write on select box right down panel, in build mode
+//                                Collision Box   /    Visual Box     /               / Affichable/ Variable Struct/ Nbr to put/ nbr in array
 void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 posText, char *name, char *varName, char *nbr, int ct)
 {
 	// static Rectangle textBox1;
@@ -89,11 +93,8 @@ void	ftDrawVarsRiDownPanel(Game *game)
 
 	if (game->selected2D.nbr != game->selected2D.lastNbr || game->selected2D.type != game->selected2D.lastType)
 	{
-		static int i = 0;
-		// std::cout << "Last " << i++ << std::endl;
 		if (game->selected2D.lastType == 1) // Player
 		{
-			std::cout << "Reset Player" << i++ << std::endl;
 			ftResetPlayerStrPanSideDown(game);
 			for (int i = 0; i < 8; i++)
 			{
@@ -102,11 +103,9 @@ void	ftDrawVarsRiDownPanel(Game *game)
 			
 			game->selected2D.lastNbr = game->selected2D.nbr;
 			game->selected2D.lastType= game->selected2D.type;
-			std::cout << "Reset Player" << i++ << std::endl;
 		}
 		else if (game->selected2D.lastType == 2) // Items Blocks Props
 		{
-			std::cout << "Reset Props" << i++ << std::endl;
 			ftResetPropsStrPanSideDown(game);
 
 			for (int i = 0; i < 4; i++)
@@ -128,7 +127,6 @@ void	ftDrawVarsRiDownPanel(Game *game)
 
 			game->selected2D.lastNbr = game->selected2D.nbr;
 			game->selected2D.lastType = game->selected2D.type;
-			std::cout << "Reset Items" << i++ << std::endl;
 		}
 	}
 	if (game->selected2D.type == 1) // Player selected
@@ -154,6 +152,10 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsProp->propPosX, tmp, 100);
 		tmp = ft_ftoa(recProp.y, 0);
 		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsProp->propPosY, tmp, 101);
+		tmp = ft_ftoa(recProp.width, 0);
+		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsProp->propWidth, tmp, 102);
+		tmp = ft_ftoa(recProp.height, 0);
+		ftSelectBox(game, {1400, 347, 75, 20}, {200, 40, 75, 20}, {150, 44}, "Height:", varsProp->propHeight, tmp, 103);
 	}
 	else if (game->selected2D.type == 3) // Platforms
 	{
@@ -164,17 +166,114 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsEnvi->enviPosX, tmp, 200);
 		tmp = ft_ftoa(recEnvi.y, 0);
 		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsEnvi->enviPosY, tmp, 201);
+		tmp = ft_ftoa(recEnvi.width, 0);
+		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsEnvi->enviWidth, tmp, 202);
+		tmp = ft_ftoa(recEnvi.height, 0);
+		ftSelectBox(game, {1400, 347, 75, 20}, {200, 40, 75, 20}, {150, 44}, "Height:", varsEnvi->enviHeight, tmp, 203);
 	}
 
 	if (IsKeyPressed(KEY_ENTER))
 	{
-		std::cout << "";
+		// std::cout << "";
 		if (game->selected2D.type == 1)
 		{
-			VarChar *vars = game->selected2D.player->ftReturnVarsChar();
-			game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnCollBoxPos('Y'));
-			game->selected2D.player->ftChangePosition(game->selected2D.player->ftReturnCollBoxPos('X'), atof(vars->plyPosY));
+			ftEnterVarsPlayer(game);
 		}
+		else if (game->selected2D.type == 2)
+		{
+			ftEnterVarsProp(game);
+		}
+		else if (game->selected2D.type == 3)
+		{
+			ftEnterVarsItem(game);
+		}
+	}
+}
+
+void	ftEnterVarsItem(Game *game)
+{
+	if (game->selected2D.item->_varCharEnvi.enviPosX[0] != '\0')
+	{
+		game->selected2D.item->rect.x = atof(game->selected2D.item->_varCharEnvi.enviPosX);
+		game->selected2D.item->_varCharEnvi.enviPosX[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 200);
+	}
+	if (game->selected2D.item->_varCharEnvi.enviPosY[0] != '\0')
+	{
+		game->selected2D.item->rect.y = atof(game->selected2D.item->_varCharEnvi.enviPosY);
+		game->selected2D.item->_varCharEnvi.enviPosY[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 201);
+	}
+	if (game->selected2D.item->_varCharEnvi.enviWidth[0] != '\0')
+	{
+		game->selected2D.item->rect.width = atof(game->selected2D.item->_varCharEnvi.enviWidth);
+		game->selected2D.item->_varCharEnvi.enviWidth[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 202);
+	}
+	if (game->selected2D.item->_varCharEnvi.enviHeight[0] != '\0')
+	{
+		game->selected2D.item->rect.height = atof(game->selected2D.item->_varCharEnvi.enviHeight);
+		game->selected2D.item->_varCharEnvi.enviHeight[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 203);
+	}
+}
+
+void	ftEnterVarsProp(Game *game)
+{
+	VarCharPr *vars = game->selected2D.prop->ftReturnVarsProp();
+	Rectangle rec = game->selected2D.prop->ftReturnRectangle();
+	if (vars->propPosX[0] != '\0')
+	{
+		game->selected2D.prop->ftMovePosition(atof(vars->propPosX), 0);
+		vars->propPosX[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 100);
+	}
+	if (vars->propPosY[0] != '\0')
+	{
+		game->selected2D.prop->ftMovePosition(0, atof(vars->propPosY));
+		vars->propPosY[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 101);
+	}
+	if (vars->propWidth[0] != '\0')
+	{
+		game->selected2D.prop->ftChangeWorH(atof(vars->propWidth), 'W');
+		vars->propWidth[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 102);
+	}
+	if (vars->propHeight[0] != '\0')
+	{
+		game->selected2D.prop->ftChangeWorH(atof(vars->propHeight), 'H');
+		vars->propHeight[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 103);
+	}
+}
+
+void	ftEnterVarsPlayer(Game *game)
+{
+	VarChar *vars = game->selected2D.player->ftReturnVarsChar();
+	if (vars->plyPosX[0] != '\0')
+	{
+		game->selected2D.player->ftChangePosition(atof(vars->plyPosX), game->selected2D.player->ftReturnCollBoxPos('Y'));
+		vars->plyPosX[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 0);
+	}
+	if (vars->plyPosY[0] != '\0')
+	{
+		game->selected2D.player->ftChangePosition(game->selected2D.player->ftReturnCollBoxPos('X'), atof(vars->plyPosY));
+		vars->plyPosY[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 1);
+	}
+	if (vars->plyWidth[0] != '\0')
+	{
+		game->selected2D.player->ftChangeCollisionBoxSize({(float)atof(vars->plyWidth), (float)game->selected2D.player->ftReturnCollBoxSize('H')});
+		vars->plyWidth[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 2);
+	}
+	if (vars->plyHeight[0] != '\0')
+	{
+		game->selected2D.player->ftChangeCollisionBoxSize({(float)game->selected2D.player->ftReturnCollBoxSize('W'), (float)atof(vars->plyHeight)});
+		vars->plyHeight[0] = '\0';
+		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 3);
 	}
 }
 

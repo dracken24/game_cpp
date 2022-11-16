@@ -412,6 +412,11 @@ VarChar		*Player::ftReturnVarsChar(void)
 	return (&this->_varsSideDownPanel.varChar);
 }
 
+SelectionBoxPly	*Player::ftSelectionBoxPly(void)
+{
+	return (&this->_selectionBox);
+}
+
 void		Player::ftInitVarChar(void)
 {
 	this->_varsSideDownPanel.varChar.plyPosX = (char *)calloc(sizeof(char), 9);

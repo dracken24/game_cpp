@@ -48,7 +48,13 @@ void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool
 	this->blocking = blocking;
 }
 
-
+void		SquareProps::ftChangeWorH(float size, char c)
+{
+	if (c == 'W')
+		this->_varCharPr.rect.width = size;
+	if (c == 'H')
+		this->_varCharPr.rect.height = size;
+}
 
 VarCharPr	*SquareProps::ftReturnVarsProp(void)
 {

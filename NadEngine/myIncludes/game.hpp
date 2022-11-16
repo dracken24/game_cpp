@@ -68,6 +68,7 @@ typedef struct Select
 	EnvItem		*lastItem;		// 3
 
 	int			letterCount = 0;
+	int			witchBox = 0;
 }	Select;
 
 class Game {

@@ -24,6 +24,12 @@ typedef struct VarChar
 	int	nbr = 8;
 }	VarChar;
 
+typedef struct SelectionBoxPly
+{
+	char	buffer[MAX_INPUT_CHAR + 1] = "\0";
+	int		selectBoxNbr = 0;
+}	SelectionBoxPly;
+
 typedef struct VarsSideDownPanel
 {
 	Rectangle	_playerBox;
@@ -45,6 +51,7 @@ class Player
 
 		void		ftInitVarChar(void);
 		void		ftDeleteVarChar(void);
+		SelectionBoxPly		*ftSelectionBoxPly(void);
 
 		Player		*ftReturnPlayer(void);
 		VarChar		*ftReturnVarsChar(void);
@@ -184,6 +191,7 @@ class Player
 		Player		*_player;
 
 		VarsSideDownPanel	_varsSideDownPanel;
+		SelectionBoxPly		_selectionBox;
 };
 
 #endif

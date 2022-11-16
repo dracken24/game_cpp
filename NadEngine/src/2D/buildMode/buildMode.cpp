@@ -1,5 +1,6 @@
 #include "../../../myIncludes/game.hpp"
 
+//*** If not selected, select item on build mode ***//
 void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envItems, Props *blocks)
 {
 	Vector2 mousePos = game->mouse.pos;
@@ -7,7 +8,6 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 	bool	touch = 0;
 
 	rayPos.y -= 40;
-	// game->selected2D.lastType = game->selected2D.type;
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
@@ -23,8 +23,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.type = 3;
 				game->selected2D.nbr = i;
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
-				// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 3000;
-				std::cout << "Hit Envi: " << i << std::endl;
+				// std::cout << "Hit Envi: " << i << std::endl;
 				touch = 1;
 			}
 		}
@@ -39,8 +38,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.type = 2;
 				game->selected2D.nbr = i;
 				game->selected2D.prop = blocks->ftReturnSquareProp(i);
-				std::cout << "Hit Blocks: " << i << std::endl;
-				// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 2000;
+				// std::cout << "Hit Blocks: " << i << std::endl;
 				touch = 1;
 			}
 		}
@@ -53,22 +51,21 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			game->selected2D.type = 1;
 			game->selected2D.nbr = 0;
 			game->selected2D.player = player->ftReturnPlayer();
-			// game->selected2D.selected = game->selected2D.nbr * game->selected2D.type + 0;
-			std::cout << "Hit Player: " << std::endl;
+			// std::cout << "Hit Player: " << std::endl;
 			touch = 1;
 		}
 		if (touch == 0) // Not select or deselect item
 		{
 			game->selected2D.lastType = game->selected2D.type;
 			game->selected2D.lastNbr = game->selected2D.nbr;
-			// game->selected2D.selected = -1;
 			game->selected2D.type = -1;
 			game->selected2D.nbr = -1;
 		}
-		std::cout << "Mouse" << std::endl;
+		// std::cout << "Mouse" << std::endl;
 	}
 }
 
+//*** Move screen when mouse middle button is pressed, on build mode ***//
 void ftMoveScreen(Game *game, Camera2D *camera)
 {
 	Vector2 mousePos = GetMousePosition();
@@ -88,6 +85,7 @@ void ftMoveScreen(Game *game, Camera2D *camera)
 	game->mouse.camZoom = camera->zoom;
 }
 
+//*** Main fonction for build mode ***//
 void ftRunBuildMode(Game *game, Player *player, EnvItems *envItems, Props *blocks, Camera2D *camera)
 {
 	ftMoveScreen(game, camera);
@@ -96,6 +94,7 @@ void ftRunBuildMode(Game *game, Player *player, EnvItems *envItems, Props *block
 	ftSelectItems(game, player, camera, envItems, blocks);
 }
 
+//*** Draw all item on screen in buils mode, player included ***//
 void ftDrawAll(Game * oldGame, Player * _player, EnvItems * _envItems, Props * _blocks)
 {
 	for (int i = 0; i < _envItems->ftReturnEnviAllNbr(); i++)
