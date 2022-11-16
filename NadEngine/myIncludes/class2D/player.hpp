@@ -131,6 +131,10 @@ class Player
 
 		int			ftReturnNbr(void) const;
 
+		void		ftDestroyImgs1(void);
+		void		ftDestroyImgs2(void);
+		void		ftDestroyImgs3(void);
+
 		// Player		ftReturnPlayerCpy(void);
 
 	/***************************** Weapon ****************************/
@@ -186,7 +190,7 @@ class Player
 		int			moveIdleX;
 
 		float		lastY = 0;
-		int			nbr;
+		int			nbr = 0;
 		bool		doAttack = false;
 		bool		collX = false;
 		Player		*_player;

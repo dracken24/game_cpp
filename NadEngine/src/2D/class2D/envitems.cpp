@@ -147,3 +147,8 @@ Texture2D	EnvItems::ftReturnOneEnviTexture(void) const
 {
 	return (this->_item.texture);
 }
+
+void EnvItems::ftDestroyImgsPlayStop(void)
+{
+	UnloadTexture(this->_item.texture);
+}

@@ -143,6 +143,19 @@ void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCa
 	}
 	else if (game->selected2D.type == 3) // item
 	{
+		DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			if (game->colorCt == false)
+				game->colorCt = true;
+			else
+			{
+				Color *colors = LoadImageColors(game->imgCercleChrom);
+				int index = ((mousePos.y - 140) * game->imgCercleChrom.height) + mousePos.x - 1330;
+				Color pixel = colors[index];
+				game->selected2D.item->color = pixel;
+			}
+		}
 		DrawRectangle(38, 143, 68, 68, BLACK);
 		DrawRectangle(40, 145, 64, 64, game->selected2D.item->color);
 		// ImageDrawRectangle(&game->imgCercleChrom, 130, 100, 100, 100, WHITE);

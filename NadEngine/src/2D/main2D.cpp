@@ -235,10 +235,29 @@ void	ftMode2D(Game *game, Menu *menu)
 	}
 //--------------------------------------------------------------------------------------//
 	// CloseWindow();
+
 	UnloadRenderTexture(allCameras->camera00.textForCam);
 	UnloadRenderTexture(allCameras->camera00.textForCam);
 	UnloadRenderTexture(allCameras->camera00.textForCam);
 	UnloadRenderTexture(allCameras->camera00.textForCam);
+
+	player->ftDeleteVarChar();
+	for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		blocks->ftDeleteVarsChar(i);
+	for (int i = 0; i < envItems->ftReturnEnviAllNbr(); i++)
+		envItems->ftDeleteVarChar(i);
+
+	if (player->ftReturnNbr() == 1)
+		player->ftDestroyImgs1();
+	if (player->ftReturnNbr() == 2)
+		player->ftDestroyImgs2();
+	if (player->ftReturnNbr() == 3)
+		player->ftDestroyImgs3();
+	UnloadImage(game->imgCercleChrom);
+	UnloadTexture(game->textCercleChrom);
+	play.ftDestroyImgsPlayStop();
+	stop.ftDestroyImgsPlayStop();
+
 	delete player;
 	delete blocks;
 	delete envItems;

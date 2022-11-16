@@ -38,6 +38,11 @@ void	Props::ftKillSquareProps(void)
 	delete this->_squareProps;
 }
 
+void	Props::ftDeleteVarsChar(int nbr)
+{
+	this->_squareProps[nbr].ftDeleteVars();
+}
+
 void	Props::ftAddProps(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string type)
 {
 	if (type == "blocks")

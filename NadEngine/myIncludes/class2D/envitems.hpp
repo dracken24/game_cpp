@@ -58,6 +58,7 @@ class EnvItems
 
 		void		ftInitVarChar(int nbr);
 		void		ftDeleteVarChar(int nbr);
+		void		ftDestroyImgsPlayStop(void);
 
 	private:
 		EnvItem		*_envItems;

@@ -192,6 +192,172 @@ void Player::ftInitImgsMeliodas(void) // Meliodas Lostvayne
 	this->p1_attack00lft[3] = LoadTexture("./imgs/meliodas/attack_00_lft/meliodas_attack_00_lft_03.png");
 }
 
+/**************************************** Destroy images *******************************************/
+
+void	Player::ftDestroyImgs1()
+{
+	UnloadTexture(this->p1_idle_ri[0]);
+	UnloadTexture(this->p1_idle_ri[1]);
+	UnloadTexture(this->p1_idle_ri[2]);
+	UnloadTexture(this->p1_idle_ri[3]);
+
+	UnloadTexture(this->p1_idle_lft[0]);
+	UnloadTexture(this->p1_idle_lft[1]);
+	UnloadTexture(this->p1_idle_lft[2]);
+	UnloadTexture(this->p1_idle_lft[3]);
+
+	UnloadTexture(this->p1_jumpr[0]);
+	UnloadTexture(this->p1_jumpr[1]);
+
+	UnloadTexture(this->p1_jumpl[0]);
+	UnloadTexture(this->p1_jumpl[1]);
+
+	UnloadTexture(this->p1_fallr[0]);
+	UnloadTexture(this->p1_fallr[1]);
+
+	UnloadTexture(this->p1_falll[0]);
+	UnloadTexture(this->p1_falll[1]);
+
+	UnloadTexture(this->p1_runRi[0]);
+	UnloadTexture(this->p1_runRi[1]);
+	UnloadTexture(this->p1_runRi[2]);
+	UnloadTexture(this->p1_runRi[3]);
+	UnloadTexture(this->p1_runRi[4]);
+	UnloadTexture(this->p1_runRi[5]);
+
+	UnloadTexture(this->p1_runLft[0]);
+	UnloadTexture(this->p1_runLft[1]);
+	UnloadTexture(this->p1_runLft[2]);
+	UnloadTexture(this->p1_runLft[3]);
+	UnloadTexture(this->p1_runLft[4]);
+	UnloadTexture(this->p1_runLft[5]);
+	UnloadTexture(this->p1_runLft[6]);
+
+	UnloadTexture(this->p1_attack00ri[0]);
+	UnloadTexture(this->p1_attack00ri[1]);
+	UnloadTexture(this->p1_attack00ri[2]);
+	UnloadTexture(this->p1_attack00ri[3]);
+	UnloadTexture(this->p1_attack00ri[4]);
+	UnloadTexture(this->p1_attack00ri[5]);
+	UnloadTexture(this->p1_attack00ri[6]);
+
+	UnloadTexture(this->p1_attack00lft[0]);
+	UnloadTexture(this->p1_attack00lft[1]);
+	UnloadTexture(this->p1_attack00lft[2]);
+	UnloadTexture(this->p1_attack00lft[3]);
+	UnloadTexture(this->p1_attack00lft[4]);
+	UnloadTexture(this->p1_attack00lft[5]);
+	UnloadTexture(this->p1_attack00lft[6]);
+}
+
+void	Player::ftDestroyImgs2()
+{
+	UnloadTexture(this->p1_idle_ri[0]);
+	UnloadTexture(this->p1_idle_ri[1]);
+	UnloadTexture(this->p1_idle_ri[2]);
+	UnloadTexture(this->p1_idle_ri[3]);
+
+	UnloadTexture(this->p1_idle_lft[0]);
+	UnloadTexture(this->p1_idle_lft[1]);
+	UnloadTexture(this->p1_idle_lft[2]);
+	UnloadTexture(this->p1_idle_lft[3]);
+
+	UnloadTexture(this->p1_jumpr[0]);
+	UnloadTexture(this->p1_jumpr[1]);
+	UnloadTexture(this->p1_jumpr[2]);
+
+	UnloadTexture(this->p1_jumpl[0]);
+	UnloadTexture(this->p1_jumpl[1]);
+	UnloadTexture(this->p1_jumpl[2]);
+
+	UnloadTexture(this->p1_fallr[0]);
+	UnloadTexture(this->p1_fallr[1]);
+
+	UnloadTexture(this->p1_falll[0]);
+	UnloadTexture(this->p1_falll[1]);
+
+	UnloadTexture(this->p1_runRi[0]);
+	UnloadTexture(this->p1_runRi[1]);
+	UnloadTexture(this->p1_runRi[2]);
+	UnloadTexture(this->p1_runRi[3]);
+	UnloadTexture(this->p1_runRi[4]);
+	UnloadTexture(this->p1_runRi[5]);
+	UnloadTexture(this->p1_runRi[6]);
+	UnloadTexture(this->p1_runRi[7]);
+
+	UnloadTexture(this->p1_runLft[0]);
+	UnloadTexture(this->p1_runLft[1]);
+	UnloadTexture(this->p1_runLft[2]);
+	UnloadTexture(this->p1_runLft[3]);
+	UnloadTexture(this->p1_runLft[4]);
+	UnloadTexture(this->p1_runLft[5]);
+	UnloadTexture(this->p1_runLft[6]);
+	UnloadTexture(this->p1_runLft[7]);
+
+	UnloadTexture(this->p1_attack00ri[0]);
+	UnloadTexture(this->p1_attack00ri[1]);
+	UnloadTexture(this->p1_attack00ri[2]);
+	UnloadTexture(this->p1_attack00ri[3]);
+	UnloadTexture(this->p1_attack00ri[4]);
+	UnloadTexture(this->p1_attack00ri[5]);
+	UnloadTexture(this->p1_attack00ri[6]);
+
+	UnloadTexture(this->p1_attack00lft[0]);
+	UnloadTexture(this->p1_attack00lft[1]);
+	UnloadTexture(this->p1_attack00lft[2]);
+	UnloadTexture(this->p1_attack00lft[3]);
+	UnloadTexture(this->p1_attack00lft[4]);
+	UnloadTexture(this->p1_attack00lft[5]);
+	UnloadTexture(this->p1_attack00lft[6]);
+}
+
+void	Player::ftDestroyImgs3(void)
+{
+	UnloadTexture(this->p1_idle_ri[0]);
+	UnloadTexture(this->p1_idle_ri[1]);
+
+	UnloadTexture(this->p1_idle_lft[0]);
+	UnloadTexture(this->p1_idle_lft[1]);
+
+	UnloadTexture(this->p1_jumpr[0]);
+	UnloadTexture(this->p1_jumpr[1]);
+
+	UnloadTexture(this->p1_jumpl[0]);
+	UnloadTexture(this->p1_jumpl[1]);
+
+	UnloadTexture(this->p1_fallr[0]);
+
+	UnloadTexture(this->p1_falll[0]);
+
+	UnloadTexture(this->p1_runRi[0]);
+	UnloadTexture(this->p1_runRi[1]);
+	UnloadTexture(this->p1_runRi[2]);
+	UnloadTexture(this->p1_runRi[3]);
+	UnloadTexture(this->p1_runRi[4]);
+	UnloadTexture(this->p1_runRi[5]);
+	UnloadTexture(this->p1_runRi[6]);
+	UnloadTexture(this->p1_runRi[7]);
+
+	UnloadTexture(this->p1_runLft[0]);
+	UnloadTexture(this->p1_runLft[1]);
+	UnloadTexture(this->p1_runLft[2]);
+	UnloadTexture(this->p1_runLft[3]);
+	UnloadTexture(this->p1_runLft[4]);
+	UnloadTexture(this->p1_runLft[5]);
+	UnloadTexture(this->p1_runLft[6]);
+	UnloadTexture(this->p1_runLft[7]);
+
+	UnloadTexture(this->p1_attack00ri[0]);
+	UnloadTexture(this->p1_attack00ri[1]);
+	UnloadTexture(this->p1_attack00ri[2]);
+	UnloadTexture(this->p1_attack00ri[3]);
+
+	UnloadTexture(this->p1_attack00lft[0]);
+	UnloadTexture(this->p1_attack00lft[1]);
+	UnloadTexture(this->p1_attack00lft[2]);
+	UnloadTexture(this->p1_attack00lft[3]);
+}
+
 /**************************************** Gestion images *******************************************/
 
 Texture2D	Player::ftReturnGoodImage(std::string string, int ct)

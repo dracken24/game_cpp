@@ -30,6 +30,7 @@ class Props
 		void		ftSetSpeed(float speed, int nbr);
 		float		ftReturnSpeed(int nbr) const;
 		void		ftChangeSpeedModifier(float speed, char c, int nbr);
+		void		ftDeleteVarsChar(int nbr);
 
 	private:
 		SquareProps *_squareProps;
