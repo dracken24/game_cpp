@@ -1,5 +1,9 @@
 #include "../../myIncludes/game.hpp"
 
+void	ftResetPlayerStrPanSideDown(Game *game);
+void	ftResetItemsStrPanSideDown(Game *game);
+void	ftResetPropsStrPanSideDown(Game *game);
+
 //** Select Box **//              Collision Box   /    Visual Box     /               / Affichable/ Variable Struct/ Nbr to put
 void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 posText, char *name, char *varName, char *nbr, int ct)
 {
@@ -7,19 +11,11 @@ void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 
 	static bool mouseOnText[512];
 	static int 	letterCount[512];
 	static int 	framesCounter[512];
-	// char 		*tmpText[512];
-
-	// static char tmpText[512][MAX_INPUT_CHARS + 1];
-
-	// tmpText[ct][MAX_INPUT_CHARS + 1] = '\0';
 
 	if (!name && !varName && !nbr)
 	{
-		std::cout << "NO" << std::endl;
 		framesCounter[ct] = 0;
-		// std::cout << "1" << std::endl;
 		letterCount[ct] = 0;
-		// std::cout << "2" << std::endl;
 		return;
 	}
 
@@ -27,7 +23,6 @@ void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 
 	if (!letterCount[ct] || !framesCounter[ct])
 	{
 		letterCount[ct] = 0;
-		// framesCounter[ct] = 0;
 	}
 
 	if (CheckCollisionPointRec(Game->mouse.pos, textBox1))
@@ -99,17 +94,7 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		if (game->selected2D.lastType == 1) // Player
 		{
 			std::cout << "Reset Player" << i++ << std::endl;
-			VarChar	*varsPlayer = game->selected2D.player->ftReturnVarsChar();
-
-			varsPlayer->plyPosX[0] = '\0';
-			varsPlayer->plyPosY[0] = '\0';
-			varsPlayer->plyWidth[0] = '\0';
-			varsPlayer->plyHeight[0] = '\0';
-			varsPlayer->collBoxPosX[0] = '\0';
-			varsPlayer->collBoxPosY[0] = '\0';
-			varsPlayer->collBoxWidth[0] = '\0';
-			varsPlayer->collBoxHeight[0] = '\0';
-
+			ftResetPlayerStrPanSideDown(game);
 			for (int i = 0; i < 8; i++)
 			{
 				ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, i);
@@ -122,11 +107,7 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		else if (game->selected2D.lastType == 2) // Items Blocks Props
 		{
 			std::cout << "Reset Props" << i++ << std::endl;
-			VarCharPr	*varsProp = game->selected2D.prop->ftReturnVarsProp();
-			varsProp->propPosX[0] = '\0';
-			varsProp->propPosY[0] = '\0';
-			varsProp->propWidth[0] = '\0';
-			varsProp->propHeight[0] = '\0';
+			ftResetPropsStrPanSideDown(game);
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -138,11 +119,7 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		}
 		else if (game->selected2D.lastType == 3) // Platforms
 		{
-			VarCharEnvi	*varsEnvi = &game->selected2D.item->_varCharEnvi;
-			varsEnvi->enviPosX[0] = '\0';
-			varsEnvi->enviPosY[0] = '\0';
-			varsEnvi->enviWidth[0] = '\0';
-			varsEnvi->enviHeight[0] = '\0';
+			ftResetItemsStrPanSideDown(game);
 
 			for (int i = 0; i < 4; i++)
 			{
@@ -199,4 +176,38 @@ void	ftDrawVarsRiDownPanel(Game *game)
 			game->selected2D.player->ftChangePosition(game->selected2D.player->ftReturnCollBoxPos('X'), atof(vars->plyPosY));
 		}
 	}
+}
+
+void	ftResetPropsStrPanSideDown(Game *game)
+{
+	VarCharPr	*varsProp = game->selected2D.prop->ftReturnVarsProp();
+
+	varsProp->propPosX[0] = '\0';
+	varsProp->propPosY[0] = '\0';
+	varsProp->propWidth[0] = '\0';
+	varsProp->propHeight[0] = '\0';
+}
+
+void	ftResetItemsStrPanSideDown(Game *game)
+{
+	VarCharEnvi	*varsEnvi = &game->selected2D.item->_varCharEnvi;
+
+	varsEnvi->enviPosX[0] = '\0';
+	varsEnvi->enviPosY[0] = '\0';
+	varsEnvi->enviWidth[0] = '\0';
+	varsEnvi->enviHeight[0] = '\0';
+}
+
+void	ftResetPlayerStrPanSideDown(Game *game)
+{
+	VarChar *varsPlayer = game->selected2D.player->ftReturnVarsChar();
+
+	varsPlayer->plyPosX[0] = '\0';
+	varsPlayer->plyPosY[0] = '\0';
+	varsPlayer->plyWidth[0] = '\0';
+	varsPlayer->plyHeight[0] = '\0';
+	varsPlayer->collBoxPosX[0] = '\0';
+	varsPlayer->collBoxPosY[0] = '\0';
+	varsPlayer->collBoxWidth[0] = '\0';
+	varsPlayer->collBoxHeight[0] = '\0';
 }
