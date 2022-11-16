@@ -94,6 +94,7 @@ class Game {
 	Image			imgCercleChrom;
 	Texture2D		textCercleChrom;
 	Rectangle		rectCercleChrom;
+	bool			colorCt = false;
 
 	// MultipleCam2D	allCameras;
 

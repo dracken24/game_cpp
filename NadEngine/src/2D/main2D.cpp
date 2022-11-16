@@ -40,7 +40,7 @@ void	ftMode2D(Game *game, Menu *menu)
 	envItems = new EnvItems;
 
 	game->imgCercleChrom = LoadImage("./imgs/wheelcolor.png");
-	game->textCercleChrom = LoadTextureFromImage(game->imgCercleChrom);
+	game->textCercleChrom = LoadTexture("./imgs/wheelcolor.png");
 	game->rectCercleChrom = {0, 0, 150, 150};
 
 	ftInitBlocks(blocks, envItems);
@@ -188,7 +188,7 @@ void	ftMode2D(Game *game, Menu *menu)
 			ClearBackground(DARKGRAY);
 			BeginMode2D(allCameras->camera01.camera);
 
-			ftSideUpMenu2D(game, player, menu, allCameras);
+				ftSideUpMenu2D(game, player, menu, allCameras);
 
 			EndMode2D();
 		EndTextureMode();

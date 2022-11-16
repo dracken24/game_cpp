@@ -13,8 +13,8 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && game->mouse.pos.x < game->screenWidth - 300 && game->mouse.pos.y > 40)
 	{
 		game->selected2D.lastNbr = game->selected2D.nbr;
-		for (int i = 1; i < envItems->ftReturnEnviAllNbr(); i++)
-		{
+		for (int i = 1; i < envItems->ftReturnEnviAllNbr(); i++) // items
+		{ 
 			Rectangle item = envItems->ftReturnRectangle(i);
 			if (CheckCollisionPointRec(rayPos, item))
 			{
@@ -26,10 +26,11 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.item = envItems->ftReturnEnvitemPtr(i);
 				// std::cout << "Hit Envi: " << i << std::endl;
 				// game->selected2D.item->color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);
+				game->colorCt = false;
 				touch = 1;
 			}
 		}
-		for (int i = 0; i < blocks->ftReturnNbr(); i++)
+		for (int i = 0; i < blocks->ftReturnNbr(); i++) 		// props
 		{
 			Rectangle item = blocks->ftReturnRectangleSqPr(i);
 			if (CheckCollisionPointRec(rayPos, item))
@@ -41,12 +42,14 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 				game->selected2D.nbr = i;
 				game->selected2D.prop = blocks->ftReturnSquareProp(i);
 				// std::cout << "Hit Blocks: " << i << std::endl;
-				// game->selected2D.prop->ftInitColorPix(GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y));
+				// color = GetImageColor(game->imgCercleChrom, mousePos.x, mousePos.y);
+				// game->selected2D.prop->ftInitColorPix(color);
+				game->colorCt = false;
 				touch = 1;
 			}
 		}
 		Rectangle	ply = player->ftReturnRectangleCollBox();
-		if (CheckCollisionPointRec(rayPos, ply))
+		if (CheckCollisionPointRec(rayPos, ply))				// player
 		{
 			game->selected2D.lastType = game->selected2D.type;
 			game->selected2D.lastPlayer = game->selected2D.player;
@@ -55,6 +58,7 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			game->selected2D.nbr = 0;
 			game->selected2D.player = player->ftReturnPlayer();
 			// std::cout << "Hit Player: " << std::endl;
+			game->colorCt = false;
 			touch = 1;
 		}
 		if (touch == 0) // Not select or deselect item
@@ -63,9 +67,14 @@ void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envIt
 			game->selected2D.lastNbr = game->selected2D.nbr;
 			game->selected2D.type = -1;
 			game->selected2D.nbr = -1;
+			game->colorCt = false;
 		}
 		// std::cout << "Mouse" << std::endl;
 	}
+	// else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	// {
+	// 	game->colorCt = false;
+	// }
 	// if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	// {
 	// 	color = GetImageColor(game->imgCercleChrom,mousePos.x, mousePos.y);

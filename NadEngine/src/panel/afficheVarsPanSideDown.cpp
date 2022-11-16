@@ -112,7 +112,7 @@ void	ftDrawVarsRiDownPanel(Game *game)
 			{
 				ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, i + 100);
 			}
-
+			
 			game->selected2D.lastNbr = game->selected2D.nbr;
 			game->selected2D.lastType = game->selected2D.type;
 		}
