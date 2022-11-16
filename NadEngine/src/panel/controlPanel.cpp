@@ -123,43 +123,57 @@ void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCa
 {
 	Vector2 mousePos = GetMousePosition();
 
-	if (game->selected2D.type == 2) // prop
+	if (game->ctMenuUpButtons == 1)
 	{
-		DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (game->selected2D.type == 2) // prop
 		{
-			if (game->colorCt == false)
-				game->colorCt = true;
-			else
+			DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && game->mouse.pos.x > 1330 && game->mouse.pos.x < 1480
+				&& game->mouse.pos.y > 140 && game->mouse.pos.y < 280)
 			{
-				Color *colors = LoadImageColors(game->imgCercleChrom);
-				int index = ((mousePos.y - 140) * game->imgCercleChrom.height) + mousePos.x - 1330;
-				Color pixel = colors[index];
-				game->selected2D.prop->ftInitColor(pixel);
+				if (game->colorCt == false)
+					game->colorCt = true;
+				else
+				{
+					Color *colors = LoadImageColors(game->imgCercleChrom);
+					int index = ((mousePos.y - 140) * game->imgCercleChrom.height) + mousePos.x - 1330;
+					Color pixel = colors[index];
+					game->selected2D.prop->ftInitColor(pixel);
+				}
 			}
+			DrawRectangle(38, 143, 68, 68, BLACK);
+			DrawRectangle(40, 145, 64, 64, game->selected2D.prop->ftReturnRecColor());
 		}
-		DrawRectangle(38, 143, 68, 68, BLACK);
-		DrawRectangle(40, 145, 64, 64, game->selected2D.prop->ftReturnRecColor());
+		else if (game->selected2D.type == 3) // item
+		{
+			DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
+			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && game->mouse.pos.x > 1330 && game->mouse.pos.x < 1480
+				&& game->mouse.pos.y > 140 && game->mouse.pos.y < 280)
+			{
+				if (game->colorCt == false)
+					game->colorCt = true;
+				else
+				{
+					Color *colors = LoadImageColors(game->imgCercleChrom);
+					int index = ((mousePos.y - 140) * game->imgCercleChrom.height) + mousePos.x - 1330;
+					Color pixel = colors[index];
+					game->selected2D.item->color = pixel;
+				}
+			}
+			DrawRectangle(38, 143, 68, 68, BLACK);
+			DrawRectangle(40, 145, 64, 64, game->selected2D.item->color);
+		}
 	}
-	else if (game->selected2D.type == 3) // item
+	else if (game->ctMenuUpButtons == 0)
 	{
-		DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-		{
-			if (game->colorCt == false)
-				game->colorCt = true;
-			else
-			{
-				Color *colors = LoadImageColors(game->imgCercleChrom);
-				int index = ((mousePos.y - 140) * game->imgCercleChrom.height) + mousePos.x - 1330;
-				Color pixel = colors[index];
-				game->selected2D.item->color = pixel;
-			}
-		}
-		DrawRectangle(38, 143, 68, 68, BLACK);
-		DrawRectangle(40, 145, 64, 64, game->selected2D.item->color);
-		// ImageDrawRectangle(&game->imgCercleChrom, 130, 100, 100, 100, WHITE);
-		// DrawTextureRec(game->textCercleChrom, game->rectCercleChrom, {130, 100}, WHITE);
+		ftSideUpControlMenu2D(game, player, menu);
 	}
 	ftMouseControl(game);
+}
+
+void	ftInitTextBoxSideUp(Game *game)
+{
+	game->textBoxSideUp.rightBox0.hitBox = {1260, 80, 75, 20};
+	game->textBoxSideUp.rightBox0.writeBox = {60, 38, 75, 20};
+	game->textBoxSideUp.rightBox0.posTextBox = {10, 42};
 }

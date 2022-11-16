@@ -131,17 +131,18 @@ void	ftDrawVarsRiDownPanel(Game *game)
 	}
 	if (game->selected2D.type == 1) // Player selected
 	{
-		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
 		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
+		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
+		TrioBox		boxRight0 = game->textBoxSideUp.rightBox0;
 
 		char *tmp = ft_ftoa(recPlayer.x - game->selected2D.player->ftReturnAjustCollBox('X'), 0);
-		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsPlayer->plyPosX, tmp, 0);
+		ftSelectBox(game, boxRight0.hitBox, boxRight0.writeBox, boxRight0.posTextBox, "Pos X:", varsPlayer->plyPosX, tmp, 0);
 		tmp = ft_ftoa(recPlayer.y + game->selected2D.player->ftReturnAjustCollBox('Y'), 0);
-		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsPlayer->plyPosY, tmp, 1);
+		ftSelectBox(game, {1400, 80, 75, 20}, {200, 38, 75, 20}, {150, 42}, "Pos Y:", varsPlayer->plyPosY, tmp, 1);
 		tmp = ft_ftoa(recPlayer.width, 0);
-		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsPlayer->plyWidth, tmp, 2);
+		ftSelectBox(game, {1260, 110, 75, 20}, {60, 68, 75, 20}, {10, 72}, "Width:", varsPlayer->plyWidth, tmp, 2);
 		tmp = ft_ftoa(recPlayer.height, 0);
-		ftSelectBox(game, {1400, 347, 75, 20}, {200, 40, 75, 20}, {150, 44}, "Height:", varsPlayer->plyHeight, tmp, 3);
+		ftSelectBox(game, {1400, 110, 75, 20}, {200, 68, 75, 20}, {150, 72}, "Height:", varsPlayer->plyHeight, tmp, 3);
 	}
 	else if (game->selected2D.type == 2) // Items Blocks Props
 	{
@@ -281,32 +282,32 @@ void	ftResetPropsStrPanSideDown(Game *game)
 {
 	VarCharPr	*varsProp = game->selected2D.prop->ftReturnVarsProp();
 
+	varsProp->propHeight[0] = '\0';
+	varsProp->propWidth[0] = '\0';
 	varsProp->propPosX[0] = '\0';
 	varsProp->propPosY[0] = '\0';
-	varsProp->propWidth[0] = '\0';
-	varsProp->propHeight[0] = '\0';
 }
 
 void	ftResetItemsStrPanSideDown(Game *game)
 {
 	VarCharEnvi	*varsEnvi = &game->selected2D.item->_varCharEnvi;
 
+	varsEnvi->enviHeight[0] = '\0';
+	varsEnvi->enviWidth[0] = '\0';
 	varsEnvi->enviPosX[0] = '\0';
 	varsEnvi->enviPosY[0] = '\0';
-	varsEnvi->enviWidth[0] = '\0';
-	varsEnvi->enviHeight[0] = '\0';
 }
 
 void	ftResetPlayerStrPanSideDown(Game *game)
 {
 	VarChar *varsPlayer = game->selected2D.player->ftReturnVarsChar();
 
-	varsPlayer->plyPosX[0] = '\0';
-	varsPlayer->plyPosY[0] = '\0';
-	varsPlayer->plyWidth[0] = '\0';
-	varsPlayer->plyHeight[0] = '\0';
-	varsPlayer->collBoxPosX[0] = '\0';
-	varsPlayer->collBoxPosY[0] = '\0';
-	varsPlayer->collBoxWidth[0] = '\0';
 	varsPlayer->collBoxHeight[0] = '\0';
+	varsPlayer->collBoxWidth[0] = '\0';
+	varsPlayer->collBoxPosY[0] = '\0';
+	varsPlayer->collBoxPosX[0] = '\0';
+	varsPlayer->plyHeight[0] = '\0';
+	varsPlayer->plyWidth[0] = '\0';
+	varsPlayer->plyPosY[0] = '\0';
+	varsPlayer->plyPosX[0] = '\0';
 }

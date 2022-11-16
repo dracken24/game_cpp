@@ -1,7 +1,7 @@
 #include "../../../myIncludes/game.hpp"
 
 void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
-			Props blocks, MultipleCam2D allCameras, EnvItems *play, EnvItems *stop)
+			Props blocks, MultipleCam2D allCameras)
 {
 	// Camera2D	camera = allCameras->camera00.camera;
 	// Player		tmpPlayer = player->f;
@@ -52,7 +52,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			ClearBackground(DARKGRAY1);
 			BeginMode2D(allCameras.camera03.camera);
 
-			ftUpMenu2D(Game, &allCameras.camera03.camera, play, stop);
+			ftUpMenu2D(Game, &allCameras.camera03.camera);
 
 			EndMode2D();
 		EndTextureMode();
@@ -67,15 +67,10 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 		DrawTextureRec(allCameras.camera03.textForCam.texture, allCameras.camera03.rectForCam, (Vector2){0, 0}, WHITE);
 		ftDrawBoarders(Game);
 		EndDrawing();
-		ftSelectItemsTop(Game, &allCameras.camera03.camera, play, stop);
+		ftSelectItemsTop(Game, &allCameras.camera03.camera);
 		Game->ctStopAttack = 0;
 	}
 	//--------------------------------------------------------------------------------------//
 	// CloseWindow();
-	// UnloadRenderTexture(allCameras.camera00.textForCam);
-	// UnloadRenderTexture(allCameras.camera00.textForCam);
-	// UnloadRenderTexture(allCameras.camera00.textForCam);
-	// UnloadRenderTexture(allCameras.camera00.textForCam);
-	// exit (0);
 	Game->ctStopAttack = 1;
 }

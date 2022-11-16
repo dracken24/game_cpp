@@ -48,7 +48,7 @@ class EnvItems
 
 		// One item
 		void        ftInitOneEnvitem(Vector2 pos, Vector2 size,
-						int blocking, Color color, Texture2D texture);
+						int blocking, Color color, Texture2D texture, int nbr);
 		Rectangle	ftReturnOneRectangle(void) const;
 		Vector2		ftReturnOneEnviPos(void) const;
 		Vector2		ftReturnOneEnviSize(void) const;

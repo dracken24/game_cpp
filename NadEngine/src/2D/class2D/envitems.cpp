@@ -49,7 +49,7 @@ void 	EnvItems::ftInitEnvitem(Vector2 pos, Vector2 size,
 	this->_envItems[nbr]._varCharEnvi.enviHeight = (char *)calloc(sizeof(char), 9);
 }
 void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
-			int blocking, Color color, Texture texture)
+			int blocking, Color color, Texture texture, int nbr)
 {
 	this->_item.rect.x = pos.x;
 	this->_item.rect.y = pos.y;
@@ -58,6 +58,7 @@ void 	EnvItems::ftInitOneEnvitem(Vector2 pos, Vector2 size,
 	this->_item.color = color;
 	this->_item.texture = texture;
 	this->_item.blocking = blocking;
+	this->_item.nbr = nbr;
 }
 
 void		EnvItems::ftInitVarChar(int nbr)

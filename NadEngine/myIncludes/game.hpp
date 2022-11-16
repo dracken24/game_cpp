@@ -32,9 +32,10 @@ typedef struct Mouse{
 }	Mouse;
 
 typedef struct NeedBy2DCam{
-	Camera2D 		camera;
+	RenderTexture 	textForCam2;
 	RenderTexture 	textForCam;
 	Rectangle		rectForCam;
+	Camera2D 		camera;
 	Image			image;
 }	NeedBy2DCam;
 
@@ -53,24 +54,51 @@ typedef struct MultipleCam2D{
 
 typedef struct Select
 {
-	int			type = 0;	// Select witch
-	int			lastType = 0;
-	int			nbr = 0;		// Nbr of prop
-	int			selected = 0;
+	Player		*lastPlayer;	// 1
+	Player		*player;	// 1
+	SquareProps	*lastProp;		// 2
+	SquareProps	*prop;		// 2
+	EnvItem		*lastItem;		// 3
+	EnvItem		*item;		// 3
 	int			lastSelected = 0;
+	int			selected = 0;
+	int			lastType = 0;
+	int			type = 0;	// Select witch
+	int			nbr = 0;		// Nbr of prop
 
 	int			lastNbr = 0;
 	bool		resetTxt = false; // If deselect items
-	Player		*player;	// 1
-	SquareProps	*prop;		// 2
-	EnvItem		*item;		// 3
-	Player		*lastPlayer;	// 1
-	SquareProps	*lastProp;		// 2
-	EnvItem		*lastItem;		// 3
 
 	int			letterCount = 0;
 	int			witchBox = 0;
 }	Select;
+
+typedef struct MenuUp
+{
+	EnvItems	buttonControlClose;
+	EnvItems	buttonControlOpen;
+	EnvItems	buttonColorClose;
+	EnvItems	buttonColorOpen;
+	EnvItems	play;
+	EnvItems	stop;
+}	MenuUp;
+
+typedef struct TrioBox
+{
+	Vector2		posTextBox;
+
+	Rectangle	writeBox;
+	Rectangle	hitBox;
+}	TrioBox;
+
+typedef struct TextBoxSideUp
+{
+	TrioBox		rightBox0;
+	TrioBox		leftBox0;
+
+	TrioBox		rightBox1;
+	TrioBox		leftBox1;
+}	TextBoxSideUp;
 
 class Game {
 	public:
@@ -78,13 +106,15 @@ class Game {
 	const int   screenWidth = 1500;
 	const int   screenHeight = 800;
 	float		delta;
-	int         characterSelection = 0;
-	int         ct_action = 0;
+
 	bool		ctCollision = false;
-	int			ctPlayStop = 1;
+	int         characterSelection = 0;
+	int			ctMenuUpButtons = 1;
 	int			ctImgBuildGame = 1;
-	int			ctMode = 1;
 	int			ctStopAttack = 1;
+	int			ctPlayStop = 1;
+	int         ct_action = 0;
+	int			ctMode = 1;
 
 	Mouse			mouse;
 	Font			font1;
@@ -94,9 +124,9 @@ class Game {
 	Image			imgCercleChrom;
 	Texture2D		textCercleChrom;
 	Rectangle		rectCercleChrom;
+	MenuUp			buttonsMenuUp;
+	TextBoxSideUp	textBoxSideUp;
 	bool			colorCt = false;
-
-	// MultipleCam2D	allCameras;
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
@@ -113,16 +143,20 @@ void	ftChooseMenu(Menu *menu);
 //										2D											//
 //**********************************************************************************//
 
-void	ftMode2D(Game *Game, Menu *menu);
+/**--------------------------->> Init <<---------------------------**/
+
+void	ftInitTextBoxSideUp(Game *game);
+
 /**----------------------->> Control Panel <<-----------------------**/
 
-void	ftSideDownMenu2D(Game *Game, Player *player, Menu *menu);
-void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras);
-void	ftUpMenu2D(Game *Game, Camera2D *camera, EnvItems *play, EnvItems *stop);
-void	ftSelectItemsTop(Game *game, Camera2D *camera, EnvItems *play, EnvItems *stop);
-void	ftDrawBoarders(Game *Game);
 void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks);
+void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras);
+void	ftSideUpControlMenu2D(Game *game, Player *player, Menu *mmakeenu);
+void	ftSideDownMenu2D(Game *game, Player *player, Menu *menu);
+void	ftSelectItemsTop(Game *game, Camera2D *camera);
+void	ftUpMenu2D(Game *game, Camera2D *camera);
 void	ftDrawVarsRiDownPanel(Game *game);
+void	ftDrawBoarders(Game *Game);
 
 /**-------------------------> Build Game <--------------------------**/
 
@@ -133,17 +167,17 @@ void	ftMoveScreen(Game *game, Camera2D *camera);
 
 /**----------------------------> Game <-----------------------------**/
 
+void 	ftUpdatePlayer(Game *Game, Player *player, Menu *menu, EnvItems *envItems, int envItemsLength, float delta);
 void 	ftUpdateCameraCenter(Game *Game, Camera2D *camera, Player *player,
 			int envItemsLength, float delta, int width, int height);
-void 	ftUpdatePlayer(Game *Game, Player *player, Menu *menu, EnvItems *envItems, int envItemsLength, float delta);
 void	ftImgsGestion(Game *Game, Player *player);
 
-void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength);
 void	ftRoutine(Game *Game, Player *player, Menu *menu, Camera2D *camera, Props *blocks, EnvItems *envItems);
+void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength);
 void	ftKeyGestion(Game *Game, Player *player, Menu *menu, float delta);
 
 void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
-			Props blocks, MultipleCam2D allCameras, EnvItems *play, EnvItems *stop);
+			Props blocks, MultipleCam2D allCameras);
 void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_blocks);;
 
 /**---------------------------> Utility <----------------------------**/
@@ -160,6 +194,7 @@ char	*ft_ftoa(float f, int *status);
 
 /**------------------------->> Fonctions <<-------------------------**/
 
+void	ftMode2D(Game *Game, Menu *menu);
 void 	ftMode3D(Game *Game);
 
 #endif
