@@ -1,8 +1,9 @@
 #ifndef SQUAREPROPS_HPP
 # define SQUAREPROPS_HPP
 
-#include "../../vendor/raylib/src/raylib.h"
-#include <stdlib.h>
+# include "../../vendor/raylib/src/raylib.h"
+# include <stdlib.h>
+#include <iostream>
 
 namespace obj
 {
@@ -20,6 +21,7 @@ namespace obj
 		Rectangle   		rect;
 		VarCharPr		varCharPr;
 		Color			pixColor;
+		std::string		name;
 	}	VarsSideDownPanelPr;
 
 	class SquareProps
@@ -28,7 +30,8 @@ namespace obj
 			SquareProps(void);
 			~SquareProps(void);
 
-			void        ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr);
+			SquareProps	*ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string name);
+						// void        ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr);
 			void		ftInitPosition(Vector2 pos);
 			Rectangle	ftReturnRectangle(void) const;
 			Color		ftReturnRecColor(void) const;

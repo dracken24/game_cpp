@@ -36,19 +36,38 @@ SquareProps	*SquareProps::ftReturnCopySquareProp(void)
 	return (ret);
 }
 
-void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
+SquareProps	*SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr, std::string name)
 {
-	this->_varCharPr.rect.width = size.x;
-	this->_varCharPr.rect.height = size.y;
-	this->_varCharPr.rect.x = pos.x;
-	this->_varCharPr.rect.y = pos.y;
-	this->pos.x = pos.x;
-	this->pos.y = pos.y;
-	this->color = color;
-	this->speed = 0;
-	this->_nbr = nbr;
-	this->blocking = blocking;
+	SquareProps	*ret;
+
+	ret->_varCharPr.rect.width = size.x;
+	ret->_varCharPr.rect.height = size.y;
+	ret->_varCharPr.rect.x = pos.x;
+	ret->_varCharPr.rect.y = pos.y;
+	ret->pos.x = pos.x;
+	ret->pos.y = pos.y;
+	ret->color = color;
+	ret->speed = 0;
+	ret->_nbr = nbr;
+	ret->blocking = blocking;
+	ret->_varCharPr.name = name;
+
+	return (ret);
 }
+
+// void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
+// {
+// 	this->_varCharPr.rect.width = size.x;
+// 	this->_varCharPr.rect.height = size.y;
+// 	this->_varCharPr.rect.x = pos.x;
+// 	this->_varCharPr.rect.y = pos.y;
+// 	this->pos.x = pos.x;
+// 	this->pos.y = pos.y;
+// 	this->color = color;
+// 	this->speed = 0;
+// 	this->_nbr = nbr;
+// 	this->blocking = blocking;
+// }
 
 void		SquareProps::ftChangeWorH(float size, char c)
 {
