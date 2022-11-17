@@ -80,22 +80,22 @@ typedef struct Select
 
 typedef struct MenuUp
 {
-	EnvItems	*buttonControlClose;
-	EnvItems	*buttonControlOpen;
-	EnvItems	*buttonColorClose;
-	EnvItems	*buttonColorOpen;
-	EnvItems	*play;
-	EnvItems	*stop;
+	EnvItems	buttonControlClose;
+	EnvItems	buttonControlOpen;
+	EnvItems	buttonColorClose;
+	EnvItems	buttonColorOpen;
+	EnvItems	play;
+	EnvItems	stop;
 }	MenuUp;
 
 typedef struct MenuSideDown
 {
-	EnvItems	*buttonMiddleClose;
-	EnvItems	*buttonMiddleOpen;
-	EnvItems	*buttonRightClose;
-	EnvItems	*buttonRightOpen;
-	EnvItems	*buttonLeftClose;
-	EnvItems	*buttonLeftOpen;
+	EnvItems	buttonMiddleClose;
+	EnvItems	buttonMiddleOpen;
+	EnvItems	buttonRightClose;
+	EnvItems	buttonRightOpen;
+	EnvItems	buttonLeftClose;
+	EnvItems	buttonLeftOpen;
 }	MenuSideDown;
 
 typedef struct TrioBox
