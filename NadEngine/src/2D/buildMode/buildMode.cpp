@@ -93,7 +93,7 @@ void ftMoveScreen(Game *game, Camera2D *camera)
 }
 
 //*** Main fonction for build mode ***//
-void ftRunBuildMode(Game *game, Player *player, EnvItems *envItems, Props *blocks, Camera2D *camera)
+void ftRunBuildMode(Game *game, Player *player, EnvItems **envItems, SquareProps **blocks, Camera2D *camera)
 {
 	ftMoveScreen(game, camera);
 

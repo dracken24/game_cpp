@@ -47,22 +47,22 @@ void	ftMode2D(Game *game, Menu *menu)
 	game->rectCercleChrom = {0, 0, 150, 150};
 
 	// blocks->ftInitSquareProps(5, "blocks");
-	blocks[0]->obj::SquareProps::ftInitSquareprops((Vector2){200, 200}, (Vector2){24, 24}, BLUE, true, 0, "blocks0");
-	blocks[1]->obj::SquareProps::ftInitSquareprops((Vector2){160, 200}, (Vector2){24, 24}, RED, true, 1, "blocks1");
-	blocks[2]->obj::SquareProps::ftInitSquareprops((Vector2){120, 200}, (Vector2){24, 24}, YELLOW, true, 2, "blocks2");
-	blocks[3]->obj::SquareProps::ftInitSquareprops((Vector2){240, 200}, (Vector2){24, 24}, PINK, true, 3, "blocks3");
-	blocks[3]->obj::SquareProps::ftInitSquareprops((Vector2){80, 200}, (Vector2){24, 24}, PURPLE, true, 4, "blocks4");
-
+	blocks[0]->obj::SquareProps::ftInitSquareprops(game, (Vector2){200, 200}, (Vector2){24, 24}, BLUE, true, 0, "blocks0");
+	blocks[1]->obj::SquareProps::ftInitSquareprops(game, (Vector2){160, 200}, (Vector2){24, 24}, RED, true, 1, "blocks1");
+	blocks[2]->obj::SquareProps::ftInitSquareprops(game, (Vector2){120, 200}, (Vector2){24, 24}, YELLOW, true, 2, "blocks2");
+	blocks[3]->obj::SquareProps::ftInitSquareprops(game, (Vector2){240, 200}, (Vector2){24, 24}, PINK, true, 3, "blocks3");
+	blocks[4]->obj::SquareProps::ftInitSquareprops(game, (Vector2){80, 200}, (Vector2){24, 24}, PURPLE, true, 4, "blocks4");
+	
 	Texture2D	tmp;
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){0, 0}, (Vector2){1000, 400}, 0, LIGHTGRAY, tmp, 0, "Platform0");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){0, 400}, (Vector2){1000, 200}, 1, GRAY, tmp, 1, "Platform1");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){300, 150}, (Vector2){400, 10}, 1, GRAY, tmp, 2, "Platform1");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){250, 250}, (Vector2){100, 10}, 1, GRAY, tmp, 3, "Platform3");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){650, 250}, (Vector2){100, 10}, 1, GRAY, tmp, 4, "Platform4");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){-850, 350}, (Vector2){700, 205}, 1, GRAY, tmp, 5, "Platform5");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){1100, 380}, (Vector2){400, 13}, 1, GRAY, tmp, 6, "Platform6");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){700, 100}, (Vector2){150, 10}, 1, GRAY, tmp, 7, "Platform7");
-	envItems[0]->obj::EnvItems::ftInitOneEnvitem((Vector2){450, 500}, (Vector2){180, 15}, 1, GRAY, tmp, 8, "Platform8");
+	envItems[0]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){0, 0}, (Vector2){1000, 400}, 0, LIGHTGRAY, tmp, 0, "Platform0");
+	envItems[1]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){0, 400}, (Vector2){1000, 200}, 1, GRAY, tmp, 1, "Platform1");
+	envItems[2]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){300, 150}, (Vector2){400, 10}, 1, GRAY, tmp, 2, "Platform1");
+	envItems[3]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){250, 250}, (Vector2){100, 10}, 1, GRAY, tmp, 3, "Platform3");
+	envItems[4]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){650, 250}, (Vector2){100, 10}, 1, GRAY, tmp, 4, "Platform4");
+	envItems[5]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){-850, 350}, (Vector2){700, 205}, 1, GRAY, tmp, 5, "Platform5");
+	envItems[6]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){1100, 380}, (Vector2){400, 13}, 1, GRAY, tmp, 6, "Platform6");
+	envItems[7]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){700, 100}, (Vector2){150, 10}, 1, GRAY, tmp, 7, "Platform7");
+	envItems[8]->obj::EnvItems::ftInitOneEnvitem(game, (Vector2){450, 500}, (Vector2){180, 15}, 1, GRAY, tmp, 8, "Platform8");
 
 	// envItems->ftNewEnvItem(9);
 	// envItems->ftInitEnvitem((Vector2){0, 400}, (Vector2){1000, 200}, 1, GRAY, tmp, 1);
@@ -126,36 +126,50 @@ void	ftMode2D(Game *game, Menu *menu)
 
 //--------------------------------------------------------------------------------------//
 	// buttons top
-	game->buttonsMenuUp.play->obj::EnvItems::ftInitOneEnvitem({(float)game->screenWidth - 300, 5}, {30, 30}, 0, WHITE, LoadTexture("./imgs/buttons/play_00.png"), 0, "Play");
-	game->buttonsMenuUp.play->obj::EnvItems::ftInitOneEnvitem
+	game->buttonsMenuUp.play->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 300, 5}, {30, 30}, 0, WHITE,
+		LoadTexture("./imgs/buttons/play_00.png"), 0, "Play");
+	game->buttonsMenuUp.stop->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 260, 5}, {30, 30}, 0, WHITE,
+		LoadTexture("./imgs/buttons/stop_00.png"), 1, "Stop");
 
-	game->buttonsMenuUp.stop.ftInitOneEnvitem({(float)game->screenWidth - 260, 5}, {30, 30}, 0, WHITE,
-		LoadTexture("./imgs/buttons/stop_00.png"), 1);
+	game->buttonsMenuUp.buttonColorOpen->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
+		 LoadTexture("./imgs/buttons/colorSideUpSelected.png"), 0, "SelectColorSideUp");
+	game->buttonsMenuUp.buttonColorClose->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/colorSideUpUnSelected.png"), 1, "UnSelectColorSideUp");
+	game->buttonsMenuUp.buttonControlOpen->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 206, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/controlSideUpSelected.png"), 0, "SelectControlSideUp");
+	game->buttonsMenuUp.buttonControlClose->obj::EnvItems::ftInitOneEnvitem(game, {(float)game->screenWidth - 206, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/controlSideUpUnSelected.png"), 1, "UnSelectControlSideUp");
 
-	game->buttonsMenuUp.buttonColorOpen.ftInitOneEnvitem({(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/colorSideUpSelected.png"), 0);
-	game->buttonsMenuUp.buttonColorClose.ftInitOneEnvitem({(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/colorSideUpUnSelected.png"), 1);
-	game->buttonsMenuUp.buttonControlClose.ftInitOneEnvitem({(float)game->screenWidth - 206, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/controlSideUpUnSelected.png"), 0);
-	game->buttonsMenuUp.buttonControlOpen.ftInitOneEnvitem({(float)game->screenWidth - 206, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/controlSideUpSelected.png"), 1);
+	game->buttonsMenuSideDown.buttonRightOpen->obj::EnvItems::ftInitOneEnvitem(game, {197, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/shapesSideUpSelected.png"), 0, "shapesSideUpSelected");
+	game->buttonsMenuSideDown.buttonMiddleOpen->obj::EnvItems::ftInitOneEnvitem(game, {97, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0, "untitledSideUpSelected");
+	game->buttonsMenuSideDown.buttonLeftOpen->obj::EnvItems::ftInitOneEnvitem(game, {-3, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0, "untitledSideUpSelected");
 
-	game->buttonsMenuSideDown.buttonRightOpen.ftInitOneEnvitem({197, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/shapesSideUpSelected.png"), 0);
-	game->buttonsMenuSideDown.buttonMiddleOpen.ftInitOneEnvitem({97, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0);
-	game->buttonsMenuSideDown.buttonLeftOpen.ftInitOneEnvitem({-3, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0);
+	game->buttonsMenuSideDown.buttonRightClose->obj::EnvItems::ftInitOneEnvitem(game, {197, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/shapesSideUpUnSelected.png"), 1, "shapesSideUpUnSelected");
+	game->buttonsMenuSideDown.buttonMiddleClose->obj::EnvItems::ftInitOneEnvitem(game, {97, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1, "untitledSideUpUnSelected");
+	game->buttonsMenuSideDown.buttonLeftClose->obj::EnvItems::ftInitOneEnvitem(game, {-3, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1, "untitledSideUpUnSelected");
 
-	game->buttonsMenuSideDown.buttonRightClose.ftInitOneEnvitem({197, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/shapesSideUpUnSelected.png"), 1);
-	game->buttonsMenuSideDown.buttonMiddleClose.ftInitOneEnvitem({97, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1);
-	game->buttonsMenuSideDown.buttonLeftClose.ftInitOneEnvitem({-3, 0}, {100, 40}, 0, WHITE,
-		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1);
+	// game->buttonsMenuUp.stop.ftInitOneEnvitem();
 
-//--------------------------------------------------------------------------------------//
+	// game->buttonsMenuUp.buttonColorOpen.ftInitOneEnvitem();
+	// game->buttonsMenuUp.buttonColorClose.ftInitOneEnvitem();
+	// game->buttonsMenuUp.buttonControlClose.ftInitOneEnvitem();
+	// game->buttonsMenuUp.buttonControlOpen.ftInitOneEnvitem();
+
+	// game->buttonsMenuSideDown.buttonRightOpen.ftInitOneEnvitem();
+	// game->buttonsMenuSideDown.buttonMiddleOpen.ftInitOneEnvitem();
+	// game->buttonsMenuSideDown.buttonLeftOpen.ftInitOneEnvitem();
+
+	// 	game->buttonsMenuSideDown.buttonRightClose.ftInitOneEnvitem();
+	// game->buttonsMenuSideDown.buttonMiddleClose.ftInitOneEnvitem();
+	// game->buttonsMenuSideDown.buttonLeftClose.ftInitOneEnvitem();
+
+	//--------------------------------------------------------------------------------------//
 	int cameraUpdatersLength = sizeof(1) / sizeof(game->cameraUpdaters[0]);
 	game->posCam = player->ftReturnPlayerPosition();
 
@@ -194,14 +208,17 @@ void	ftMode2D(Game *game, Menu *menu)
 					{
 						Menu			tmpMenu;
 						Player			tmpPlayer;
-						EnvItems		tmpEnvItems(*envItems);
-						Props			tmpBlocks;
+						EnvItems		**tmpEnvItems;
+						SquareProps		**tmpBlocks;
 						MultipleCam2D	tmpAllCameras;
 
 						tmpMenu = *menu;
 						tmpPlayer = *player;
-						// tmpEnvItems = *envItems;
-						tmpBlocks = blocks->ftReturnCopyProps();
+						for (int i = 0; i< game->nbrEnvItems; i++)
+							tmpEnvItems[i] = envItems[i]->obj::EnvItems::ftReturnOneEnvitems();
+						for (int i = 0; i < game->nbrSquareProps; i++)
+							tmpBlocks[i] = blocks[i]->obj::SquareProps::ftReturnCopySquareProp();
+						// tmpBlocks = blocks->ftReturnCopyProps();
 						tmpAllCameras = *allCameras;
 
 						// pid_t pid;
@@ -295,10 +312,10 @@ void	ftMode2D(Game *game, Menu *menu)
 	UnloadRenderTexture(allCameras->camera00.textForCam);
 
 	player->ftDeleteVarChar();
-	for (int i = 0; i < blocks->ftReturnNbr(); i++)
-		blocks->ftDeleteVarsChar(i);
-	for (int i = 0; i < envItems->ftReturnEnviAllNbr(); i++)
-		envItems->ftDeleteVarChar(i);
+	for (int i = 0; i < game->nbrSquareProps; i++)
+		blocks[i]->obj::SquareProps::ftDeleteVars();
+	for (int i = 0; i < game->nbrEnvItems; i++)
+		envItems[i]->obj::EnvItems::ftDeleteVarChar();
 
 	if (player->ftReturnNbr() == 1)
 		player->ftDestroyImgs1();
@@ -308,18 +325,18 @@ void	ftMode2D(Game *game, Menu *menu)
 		player->ftDestroyImgs3();
 	UnloadImage(game->imgCercleChrom);
 	UnloadTexture(game->textCercleChrom);
-	game->buttonsMenuUp.play.ftDestroyImgsPlayStop();
-	game->buttonsMenuUp.stop.ftDestroyImgsPlayStop();
-	game->buttonsMenuUp.buttonColorOpen.ftDestroyImgsPlayStop();
-	game->buttonsMenuUp.buttonColorClose.ftDestroyImgsPlayStop();
-	game->buttonsMenuUp.buttonControlOpen.ftDestroyImgsPlayStop();
-	game->buttonsMenuUp.buttonControlClose.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonRightOpen.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonMiddleOpen.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonLeftOpen.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonRightClose.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonMiddleClose.ftDestroyImgsPlayStop();
-	game->buttonsMenuSideDown.buttonLeftClose.ftDestroyImgsPlayStop();
+	game->buttonsMenuUp.play->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuUp.stop->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuUp.buttonColorOpen->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuUp.buttonColorClose->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuUp.buttonControlOpen->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuUp.buttonControlClose->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonRightOpen->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonMiddleOpen->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonLeftOpen->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonRightClose->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonMiddleClose->obj::EnvItems::ftDestroyImgs();
+	game->buttonsMenuSideDown.buttonLeftClose->obj::EnvItems::ftDestroyImgs();
 
 	delete player;
 	delete blocks;
@@ -328,7 +345,7 @@ void	ftMode2D(Game *game, Menu *menu)
 }
 
 //*** Move items on Build Mode ***/
-void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks)
+void	ftControlItems(Game *game, Player *player, EnvItems **envItems, SquareProps **blocks)
 {
 	Vector2 mousePos = GetMousePosition();
 	Vector2 lastPos = game->mouse.pos;
@@ -414,7 +431,7 @@ void	ftSelectItemsTop(Game *game, Camera2D *camera)
 
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 	{
-		Rectangle item = game->buttonsMenuUp.play.ftReturnOneRectangle();
+		Rectangle item = game->buttonsMenuUp.play->obj::EnvItems::ftReturnOneRectangle();
 		if (CheckCollisionPointRec(rayPos, item) && game->ctMode != -1)
 		{
 			game->ctMode = -1;

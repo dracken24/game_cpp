@@ -80,22 +80,22 @@ typedef struct Select
 
 typedef struct MenuUp
 {
-	EnvItems	buttonControlClose;
-	EnvItems	buttonControlOpen;
-	EnvItems	buttonColorClose;
-	EnvItems	buttonColorOpen;
-	EnvItems	play;
-	EnvItems	stop;
+	EnvItems	*buttonControlClose;
+	EnvItems	*buttonControlOpen;
+	EnvItems	*buttonColorClose;
+	EnvItems	*buttonColorOpen;
+	EnvItems	*play;
+	EnvItems	*stop;
 }	MenuUp;
 
 typedef struct MenuSideDown
 {
-	EnvItems	buttonMiddleClose;
-	EnvItems	buttonMiddleOpen;
-	EnvItems	buttonRightClose;
-	EnvItems	buttonRightOpen;
-	EnvItems	buttonLeftClose;
-	EnvItems	buttonLeftOpen;
+	EnvItems	*buttonMiddleClose;
+	EnvItems	*buttonMiddleOpen;
+	EnvItems	*buttonRightClose;
+	EnvItems	*buttonRightOpen;
+	EnvItems	*buttonLeftClose;
+	EnvItems	*buttonLeftOpen;
 }	MenuSideDown;
 
 typedef struct TrioBox
@@ -145,6 +145,10 @@ class Game {
 	MenuSideDown	buttonsMenuSideDown;
 	bool			colorCt = false;
 
+	int				nbrEnvItems = 0;
+	int				nbrSquareProps = 0;
+	int				nbrbuttons = 0;
+
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
 
 	void (*cameraUpdaters[])(Game *, Camera2D *, Player *, int, float, int, int);
@@ -166,7 +170,7 @@ void	ftInitTextBoxSideUp(Game *game);
 
 /**----------------------->> Control Panel <<-----------------------**/
 
-void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks);
+void	ftControlItems(Game *game, Player *player, EnvItems **envItems, SquareProps **blocks);
 void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras);
 void	ftSideUpControlMenu2D(Game *game, Player *player, Menu *mmakeenu);
 void	ftSideDownMenu2D(Game *game, Camera2D *camera);
@@ -178,8 +182,8 @@ void	ftDrawBoarders(Game *Game);
 /**-------------------------> Build Game <--------------------------**/
 
 // void	ftRunBuildMode(Game *Game,Stop *buildGame);
-void	ftRunBuildMode(Game *game, Player *player, EnvItems *envItems,
-			Props *blocks, Camera2D *camera);
+void	ftRunBuildMode(Game *game, Player *player, EnvItems **envItems,
+			SquareProps **blocks, Camera2D *camera);
 void	ftMoveScreen(Game *game, Camera2D *camera);
 
 /**----------------------------> Game <-----------------------------**/
@@ -193,8 +197,8 @@ void	ftRoutine(Game *Game, Player *player, Menu *menu, Camera2D *camera, Props *
 void	ftGestionProps(Game *Game, Props *blocks, EnvItems *envItems, float deltaTime, int envItemsLength);
 void	ftKeyGestion(Game *Game, Player *player, Menu *menu, float delta);
 
-void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
-			Props blocks, MultipleCam2D allCameras);
+void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems **envItems,
+			SquareProps **blocks, MultipleCam2D allCameras)
 void	ftDrawAll(Game *oldGame, Player *_player, EnvItems *_envItems, Props *_blocks);;
 
 /**---------------------------> Utility <----------------------------**/
