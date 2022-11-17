@@ -1,5 +1,7 @@
 #include "../../../myIncludes/class2D/envitems.hpp"
 
+using namespace obj;
+
 EnvItems::EnvItems(void)
 {
 	return ;

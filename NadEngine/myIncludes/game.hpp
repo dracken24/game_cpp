@@ -27,6 +27,8 @@
 # define DARKPURPLE2 CLITERAL(Color){ 46, 23, 126, 255 } 
 # define MYDARKGREEN  CLITERAL(Color){ 0, 148, 54, 255 }
 
+using namespace obj;
+
 struct MultipleCam2D;
 
 typedef struct Mouse{
@@ -123,7 +125,7 @@ class Game {
 	bool		ctCollision = false;
 	int         characterSelection = 0;
 	int			ctMenuSideDownButtons = 0;
-	int			ctMenuUpButtons = 1;
+	int			ctMenuUpButtons = 0;
 	int			ctImgBuildGame = 1;
 	int			ctStopAttack = 1;
 	int			ctPlayStop = 1;

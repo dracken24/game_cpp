@@ -95,7 +95,7 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 	DrawText("Ichigo Kurosaki", 250, 250, 20, DARKGRAY);
 	DrawText("Meliodas Lostvayne", 250, 300, 20, DARKGRAY);
 
-	if (menu->ftReturnPlayer() == 1)
+	if (menu->ftReturnPlayer() == 1) // Edward
 	{
 		player->ftInitPlayerImgs(1);
 		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 100}, {-25, 100});
@@ -116,7 +116,7 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 		{(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		menu->ftChangeStart(0);
 	}
-	else if (menu->ftReturnPlayer() == 2)
+	else if (menu->ftReturnPlayer() == 2) // Ichigo
 	{
 		player->ftInitPlayerImgs(2);
 		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {50, 110}, {-20, 108});
@@ -137,10 +137,10 @@ void	ftMenuChooseCharacter(Game *Game, Player * player, Menu * menu)
 		{(float)player->ftReturnCollBoxSize('W'), (float)player->ftReturnCollBoxSize('H')});
 		menu->ftChangeStart(0);
 	}
-	else if (menu->ftReturnPlayer() == 3)
+	else if (menu->ftReturnPlayer() == 3) // Meliodas
 	{
 		player->ftInitPlayerImgs(3);
-		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {45, 95}, {-72, 95});
+		player->ftSetCollosionBox({player->ftReturnPlayerPositionX(), player->ftReturnPlayerPositionY()}, {45, 95}, {-72, 115});
 		player->ftInitWeapon("Brocken Sword", {(float)player->ftReturnCollBoxPos('X'), (float)player->ftReturnCollBoxPos('Y')}, {50, (float)player->ftReturnCollBoxSize('H')});
 		player->ftChangeCtIdle(30);
 		player->ftChangeCtMove(8);

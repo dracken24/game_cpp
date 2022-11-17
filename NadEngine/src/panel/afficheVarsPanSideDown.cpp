@@ -137,13 +137,13 @@ void	ftDrawVarsRiDownPanel(Game *game)
 
 	if (game->selected2D.type == 1) // Player selected
 	{
-		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
+		Rectangle   recPlayer = game->selected2D.player->FtReturnRectanglePlayer();
 		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
 
-		char *tmp = ft_ftoa(recPlayer.x - game->selected2D.player->ftReturnAjustCollBox('X'), 0);
+		char *tmp = ft_ftoa(recPlayer.x, 0);
 		ftSelectBox(game, box0.hitBox, box0.writeBox, box0.posTextBox, "Pos X:", varsPlayer->plyPosX, tmp, 0);
 		
-		tmp = ft_ftoa(recPlayer.y + game->selected2D.player->ftReturnAjustCollBox('Y'), 0);
+		tmp = ft_ftoa(recPlayer.y, 0);
 		ftSelectBox(game, box1.hitBox, box1.writeBox, box1.posTextBox, "Pos Y:", varsPlayer->plyPosY, tmp, 1);
 		
 		tmp = ft_ftoa(recPlayer.width, 0);
@@ -176,10 +176,13 @@ void	ftDrawVarsRiDownPanel(Game *game)
 
 		char *tmp = ft_ftoa(recEnvi.x, 0);
 		ftSelectBox(game, box0.hitBox, box0.writeBox, box0.posTextBox, "Pos X:", varsEnvi->enviPosX, tmp, 200);
+		
 		tmp = ft_ftoa(recEnvi.y, 0);
 		ftSelectBox(game, box1.hitBox, box1.writeBox, box1.posTextBox, "Pos Y:", varsEnvi->enviPosY, tmp, 201);
+		
 		tmp = ft_ftoa(recEnvi.width, 0);
 		ftSelectBox(game, box2.hitBox, box2.writeBox, box2.posTextBox, "Width:", varsEnvi->enviWidth, tmp, 202);
+		
 		tmp = ft_ftoa(recEnvi.height, 0);
 		ftSelectBox(game, box3.hitBox, box3.writeBox, box3.posTextBox, "Height:", varsEnvi->enviHeight, tmp, 203);
 	}
@@ -236,13 +239,13 @@ void	ftEnterVarsProp(Game *game)
 	Rectangle rec = game->selected2D.prop->ftReturnRectangle();
 	if (vars->propPosX[0] != '\0')
 	{
-		game->selected2D.prop->ftMovePosition(atof(vars->propPosX), 0);
+		game->selected2D.prop->ftInitPosition({(float)atof(vars->propPosX), 0});
 		vars->propPosX[0] = '\0';
 		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 100);
 	}
 	if (vars->propPosY[0] != '\0')
 	{
-		game->selected2D.prop->ftMovePosition(0, atof(vars->propPosY));
+		game->selected2D.prop->ftInitPosition({0, (float)atof(vars->propPosY)});
 		vars->propPosY[0] = '\0';
 		ftSelectBox(game, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0}, NULL, NULL, NULL, 101);
 	}

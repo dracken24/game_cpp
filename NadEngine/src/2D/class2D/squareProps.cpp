@@ -1,5 +1,7 @@
 #include "../../../myIncludes/class2D/squareProps.hpp"
 
+using namespace obj;
+
 SquareProps::SquareProps(void)
 {
 	return ;
@@ -187,3 +189,19 @@ void	SquareProps::ftChangeSpeedModifier(float speed, char c)
 	if (c == 'Y')
 		this->speedModifier.y += speed;
 }
+
+//*** Add squareprops by drag and drop ***//
+
+// void	SquareProps::ftInitSquareprops(Vector2 pos, Vector2 size, Color color, bool blocking, int nbr)
+// {
+// 	this->_varCharPr.rect.width = size.x;
+// 	this->_varCharPr.rect.height = size.y;
+// 	this->_varCharPr.rect.x = pos.x;
+// 	this->_varCharPr.rect.y = pos.y;
+// 	this->pos.x = pos.x;
+// 	this->pos.y = pos.y;
+// 	this->color = color;
+// 	this->speed = 0;
+// 	this->_nbr = nbr;
+// 	this->blocking = blocking;
+// }
