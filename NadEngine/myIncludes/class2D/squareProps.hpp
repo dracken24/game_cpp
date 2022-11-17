@@ -4,8 +4,6 @@
 #include "../../vendor/raylib/src/raylib.h"
 #include <stdlib.h>
 
-#define MAX_INPUT_CHAR 12
-
 typedef struct VarCharPr
 {
 	char *propPosX;

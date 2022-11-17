@@ -101,14 +101,6 @@ Props		Props::ftReturnCopyProps(void)
 	return (ret);
 }
 
-// Props		*Props::ftReturnCopyProps(void)
-// {
-// 	Props *ret = new Props;
-// 	ret = this;
-
-// 	return (ret);
-// }
-
 Rectangle	Props::ftReturnRectangleSqPr(int nbr)
 {
 	return (this->_squareProps[nbr].ftReturnRectangle());

@@ -1,5 +1,3 @@
-#include "../../../myIncludes/class2D/player.hpp"
-#include "../../../myIncludes/class2D/menu.hpp"
 #include "../../../myIncludes/game.hpp"
 
 void	ftChooseMenu(Menu *menu)

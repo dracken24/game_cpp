@@ -40,7 +40,7 @@ void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 
 		int key = GetCharPressed();
 		while (key > 0)
 		{
-			if ((key >= 32) && (key <= 125) && (letterCount[ct] < MAX_INPUT_CHAR))
+			if ((key >= 32) && (key <= 125) && (letterCount[ct] < MAX_INPUT_CHARS))
 			{
 				varName[letterCount[ct]] = (char)key;
 				varName[letterCount[ct] + 1] = '\0';
@@ -68,21 +68,21 @@ void    ftSelectBox(Game *Game, Rectangle textBox1, Rectangle textBox2, Vector2 
 	DrawText(name, posText.x, posText.y, 14, LIGHTGRAY);
 	DrawRectangleRec(textBox2, LIGHTGRAY);
 	if (mouseOnText[ct])
-		DrawRectangleLines((int)textBox2.x, (int)textBox2.y, (int)textBox2.width, (int)textBox2.height, RED);
+		DrawRectangleLines((int)textBox2.x - 2, (int)textBox2.y - 2, (int)textBox2.width + 2, (int)textBox2.height + 2, MYDARKGREEN);
 	else
 		DrawRectangleLines((int)textBox2.x, (int)textBox2.y, (int)textBox2.width, (int)textBox2.height, LIGHTGRAY);
-	DrawText(varName, (int)textBox2.x + 5, (int)textBox2.y + 4, 14, MAROON);
+	DrawText(varName, (int)textBox2.x + 5, (int)textBox2.y + 4, 14, DARKGREEN);
 	if (mouseOnText[ct])
 	{
 		if (letterCount[ct] < MAX_INPUT_CHARS)
 		{
 			if (((framesCounter[ct] / 20) % 2) == 0)
-				DrawText("_", (int)textBox2.x + MeasureText(varName, 14), (int)textBox2.y + 12, 14, MAROON);
+				DrawText("_", (int)textBox2.x + MeasureText(varName, 14), (int)textBox2.y + 12, 14, MYDARKGREEN);
 		}
 	}
 	else if (varName[0] == '\0')
 	{
-		DrawText(nbr, (int)textBox2.x + MeasureText(varName, 14) + 2, (int)textBox2.y + 4, 14, MAROON);
+		DrawText(nbr, (int)textBox2.x + MeasureText(varName, 14) + 2, (int)textBox2.y + 4, 14, DARKPURPLE);
 	}
 }
 
@@ -129,20 +129,28 @@ void	ftDrawVarsRiDownPanel(Game *game)
 			game->selected2D.lastType = game->selected2D.type;
 		}
 	}
+
+	TrioBox		box0 = game->textBoxSideUp.RightBox0;
+	TrioBox		box1 = game->textBoxSideUp.LeftBox0;
+	TrioBox		box2 = game->textBoxSideUp.RightBox1;
+	TrioBox		box3 = game->textBoxSideUp.LeftBox1;
+
 	if (game->selected2D.type == 1) // Player selected
 	{
 		Rectangle   recPlayer = game->selected2D.player->ftReturnCollisionBox();
 		VarChar     *varsPlayer = game->selected2D.player->ftReturnVarsChar();
-		TrioBox		boxRight0 = game->textBoxSideUp.rightBox0;
 
 		char *tmp = ft_ftoa(recPlayer.x - game->selected2D.player->ftReturnAjustCollBox('X'), 0);
-		ftSelectBox(game, boxRight0.hitBox, boxRight0.writeBox, boxRight0.posTextBox, "Pos X:", varsPlayer->plyPosX, tmp, 0);
+		ftSelectBox(game, box0.hitBox, box0.writeBox, box0.posTextBox, "Pos X:", varsPlayer->plyPosX, tmp, 0);
+		
 		tmp = ft_ftoa(recPlayer.y + game->selected2D.player->ftReturnAjustCollBox('Y'), 0);
-		ftSelectBox(game, {1400, 80, 75, 20}, {200, 38, 75, 20}, {150, 42}, "Pos Y:", varsPlayer->plyPosY, tmp, 1);
+		ftSelectBox(game, box1.hitBox, box1.writeBox, box1.posTextBox, "Pos Y:", varsPlayer->plyPosY, tmp, 1);
+		
 		tmp = ft_ftoa(recPlayer.width, 0);
-		ftSelectBox(game, {1260, 110, 75, 20}, {60, 68, 75, 20}, {10, 72}, "Width:", varsPlayer->plyWidth, tmp, 2);
+		ftSelectBox(game, box2.hitBox, box2.writeBox, box2.posTextBox, "Width:", varsPlayer->plyWidth, tmp, 2);
+
 		tmp = ft_ftoa(recPlayer.height, 0);
-		ftSelectBox(game, {1400, 110, 75, 20}, {200, 68, 75, 20}, {150, 72}, "Height:", varsPlayer->plyHeight, tmp, 3);
+		ftSelectBox(game, box3.hitBox, box3.writeBox, box3.posTextBox, "Height:", varsPlayer->plyHeight, tmp, 3);
 	}
 	else if (game->selected2D.type == 2) // Items Blocks Props
 	{
@@ -150,13 +158,16 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		Rectangle   recProp = game->selected2D.prop->ftReturnRectangle();
 
 		char *tmp = ft_ftoa(recProp.x, 0);
-		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsProp->propPosX, tmp, 100);
+		ftSelectBox(game, box0.hitBox, box0.writeBox, box0.posTextBox, "Pos X:", varsProp->propPosX, tmp, 100);
+
 		tmp = ft_ftoa(recProp.y, 0);
-		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsProp->propPosY, tmp, 101);
+		ftSelectBox(game, box1.hitBox, box1.writeBox, box1.posTextBox, "Pos Y:", varsProp->propPosY, tmp, 101);
+
 		tmp = ft_ftoa(recProp.width, 0);
-		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsProp->propWidth, tmp, 102);
+		ftSelectBox(game, box2.hitBox, box2.writeBox, box2.posTextBox, "Width:", varsProp->propWidth, tmp, 102);
+
 		tmp = ft_ftoa(recProp.height, 0);
-		ftSelectBox(game, {1400, 347, 75, 20}, {200, 40, 75, 20}, {150, 44}, "Height:", varsProp->propHeight, tmp, 103);
+		ftSelectBox(game, box3.hitBox, box3.writeBox, box3.posTextBox, "Height:", varsProp->propHeight, tmp, 103);
 	}
 	else if (game->selected2D.type == 3) // Platforms
 	{
@@ -164,13 +175,13 @@ void	ftDrawVarsRiDownPanel(Game *game)
 		Rectangle   recEnvi = game->selected2D.item->rect;
 
 		char *tmp = ft_ftoa(recEnvi.x, 0);
-		ftSelectBox(game, {1260, 317, 75, 20}, {60, 10, 75, 20}, {10, 14}, "Pos X:", varsEnvi->enviPosX, tmp, 200);
+		ftSelectBox(game, box0.hitBox, box0.writeBox, box0.posTextBox, "Pos X:", varsEnvi->enviPosX, tmp, 200);
 		tmp = ft_ftoa(recEnvi.y, 0);
-		ftSelectBox(game, {1400, 317, 75, 20}, {200, 10, 75, 20}, {150, 14}, "Pos Y:", varsEnvi->enviPosY, tmp, 201);
+		ftSelectBox(game, box1.hitBox, box1.writeBox, box1.posTextBox, "Pos Y:", varsEnvi->enviPosY, tmp, 201);
 		tmp = ft_ftoa(recEnvi.width, 0);
-		ftSelectBox(game, {1260, 347, 75, 20}, {60, 40, 75, 20}, {10, 44}, "Width:", varsEnvi->enviWidth, tmp, 202);
+		ftSelectBox(game, box2.hitBox, box2.writeBox, box2.posTextBox, "Width:", varsEnvi->enviWidth, tmp, 202);
 		tmp = ft_ftoa(recEnvi.height, 0);
-		ftSelectBox(game, {1400, 347, 75, 20}, {200, 40, 75, 20}, {150, 44}, "Height:", varsEnvi->enviHeight, tmp, 203);
+		ftSelectBox(game, box3.hitBox, box3.writeBox, box3.posTextBox, "Height:", varsEnvi->enviHeight, tmp, 203);
 	}
 
 	if (IsKeyPressed(KEY_ENTER))

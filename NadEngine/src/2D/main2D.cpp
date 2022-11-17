@@ -1,6 +1,4 @@
 #include "../../myIncludes/game.hpp"
-#include "../../myIncludes/class2D/squareProps.hpp"
-#include "../../myIncludes/class2D/envitems.hpp"
 #include <string.h>
 
 void	ftInitBlocks(Props *blocks, EnvItems *envItems)
@@ -100,6 +98,7 @@ void	ftMode2D(Game *game, Menu *menu)
 		LoadTexture("./imgs/buttons/play_00.png"), 0);
 	game->buttonsMenuUp.stop.ftInitOneEnvitem({(float)game->screenWidth - 260, 5}, {30, 30}, 0, WHITE,
 		LoadTexture("./imgs/buttons/stop_00.png"), 1);
+
 	game->buttonsMenuUp.buttonColorOpen.ftInitOneEnvitem({(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
 		LoadTexture("./imgs/buttons/colorSideUpSelected.png"), 0);
 	game->buttonsMenuUp.buttonColorClose.ftInitOneEnvitem({(float)game->screenWidth - 106, 0}, {100, 40}, 0, WHITE,
@@ -108,6 +107,20 @@ void	ftMode2D(Game *game, Menu *menu)
 		LoadTexture("./imgs/buttons/controlSideUpUnSelected.png"), 0);
 	game->buttonsMenuUp.buttonControlOpen.ftInitOneEnvitem({(float)game->screenWidth - 206, 0}, {100, 40}, 0, WHITE,
 		LoadTexture("./imgs/buttons/controlSideUpSelected.png"), 1);
+
+	game->buttonsMenuSideDown.buttonRightOpen.ftInitOneEnvitem({197, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/shapesSideUpSelected.png"), 0);
+	game->buttonsMenuSideDown.buttonMiddleOpen.ftInitOneEnvitem({97, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0);
+	game->buttonsMenuSideDown.buttonLeftOpen.ftInitOneEnvitem({-3, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpSelected.png"), 0);
+
+	game->buttonsMenuSideDown.buttonRightClose.ftInitOneEnvitem({197, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/shapesSideUpUnSelected.png"), 1);
+	game->buttonsMenuSideDown.buttonMiddleClose.ftInitOneEnvitem({97, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1);
+	game->buttonsMenuSideDown.buttonLeftClose.ftInitOneEnvitem({-3, 0}, {100, 40}, 0, WHITE,
+		LoadTexture("./imgs/buttons/untitledSideUpUnSelected.png"), 1);
 
 //--------------------------------------------------------------------------------------//
 	int cameraUpdatersLength = sizeof(1) / sizeof(game->cameraUpdaters[0]);
@@ -207,7 +220,7 @@ void	ftMode2D(Game *game, Menu *menu)
 			ClearBackground(DARKGRAY2);
 			BeginMode2D(allCameras->camera02.camera);
 
-				ftSideDownMenu2D(game, player, menu);
+				ftSideDownMenu2D(game, &allCameras->camera02.camera);
 
 			EndMode2D();
 		EndTextureMode();
@@ -268,6 +281,12 @@ void	ftMode2D(Game *game, Menu *menu)
 	game->buttonsMenuUp.buttonColorClose.ftDestroyImgsPlayStop();
 	game->buttonsMenuUp.buttonControlOpen.ftDestroyImgsPlayStop();
 	game->buttonsMenuUp.buttonControlClose.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonRightOpen.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonMiddleOpen.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonLeftOpen.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonRightClose.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonMiddleClose.ftDestroyImgsPlayStop();
+	game->buttonsMenuSideDown.buttonLeftClose.ftDestroyImgsPlayStop();
 
 	delete player;
 	delete blocks;
@@ -375,19 +394,20 @@ void	ftSelectItemsTop(Game *game, Camera2D *camera)
 	}
 }
 
+//*** Control buttons side up panel ***//
 void	ftUpMenu2D(Game *game, Camera2D *camera)
 {
 	ftSelectItemsTop(game, camera);
 	DrawTextureEx(game->buttonsMenuUp.play.ftReturnOneEnviTexture(),{(float)game->screenWidth - 300, 5}, 0, 1, WHITE);
 	DrawTextureEx(game->buttonsMenuUp.stop.ftReturnOneEnviTexture(),{(float)game->screenWidth - 260, 5}, 0, 1, WHITE);
-	if (game->ctMenuUpButtons == 1)
+	if (game->ctMenuUpButtons == 1) // Button Top Right
 	{
 		DrawTextureEx(game->buttonsMenuUp.buttonColorOpen.ftReturnOneEnviTexture(),
 			game->buttonsMenuUp.buttonColorOpen.ftReturnOneEnviPos(), 0, 1, WHITE);
 		DrawTextureEx(game->buttonsMenuUp.buttonControlClose.ftReturnOneEnviTexture(),
 			game->buttonsMenuUp.buttonControlClose.ftReturnOneEnviPos(), 0, 1, WHITE);
 	}
-	else if (game->ctMenuUpButtons == 0)
+	else if (game->ctMenuUpButtons == 0) // Second Button Top Right
 	{
 		DrawTextureEx(game->buttonsMenuUp.buttonControlOpen.ftReturnOneEnviTexture(),
 			game->buttonsMenuUp.buttonControlOpen.ftReturnOneEnviPos(), 0, 1, WHITE);
@@ -414,13 +434,70 @@ void	ftUpMenu2D(Game *game, Camera2D *camera)
 	}
 }
 
+//*** Main fonction for control menu side down ***//
 void	ftSideUpControlMenu2D(Game *game, Player *player, Menu *menu)
 {
 	ftDrawVarsRiDownPanel(game);
 }
 
-void	ftSideDownMenu2D(Game *game, Player *player, Menu *menu)
+//*** Put Button control panel for menu side down ***//
+void	ftSideDownMenu2D(Game *game, Camera2D *camera)
 {
-	DrawText("Panel Side Down", 10, 10, 20, WHITE);
-	// ftDrawVarsRiDownPanel(game);
+	Vector2	pos1 = {(float)game->screenWidth - 97, (float)game->screenHeight / 3 + 40};
+	Vector2 pos2 = {(float)game->screenWidth - 197, (float)game->screenHeight / 3 + 40};
+	Vector2 pos3 = {(float)game->screenWidth - 297, (float)game->screenHeight / 3 + 40};
+
+	if (game->ctMenuSideDownButtons == 0) 	// Right button side down
+	{
+		DrawTextureEx(game->buttonsMenuSideDown.buttonRightOpen.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonRightOpen.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonMiddleClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonMiddleClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonLeftClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonLeftClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+	}
+	else if (game->ctMenuSideDownButtons == 1)	// Middle button side down
+	{
+		DrawTextureEx(game->buttonsMenuSideDown.buttonRightClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonRightClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonMiddleOpen.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonMiddleOpen.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonLeftClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonLeftClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+	}
+	else if (game->ctMenuSideDownButtons == 2)	// Left button side down
+	{
+		DrawTextureEx(game->buttonsMenuSideDown.buttonRightClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonRightClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonMiddleClose.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonMiddleClose.ftReturnOneEnviPos(), 0, 1, WHITE);
+		DrawTextureEx(game->buttonsMenuSideDown.buttonLeftOpen.ftReturnOneEnviTexture(),
+			game->buttonsMenuSideDown.buttonLeftOpen.ftReturnOneEnviPos(), 0, 1, WHITE);
+	}
+
+	//*** Change counter for change button side down panel ***//
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+	{
+		Vector2 mousePos = game->mouse.pos;
+		Vector2 rayPos = GetScreenToWorld2D(mousePos, *camera);
+
+		Rectangle item = game->buttonsMenuSideDown.buttonRightOpen.ftReturnOneRectangle(); // Right button
+		item.x = pos1.x; item.y = pos1.y;
+		if (CheckCollisionPointRec(rayPos, item))
+		{
+			game->ctMenuSideDownButtons = 0;
+		}
+		item = game->buttonsMenuSideDown.buttonMiddleOpen.ftReturnOneRectangle(); // Middle button
+		item.x = pos2.x; item.y = pos2.y;
+		if (CheckCollisionPointRec(rayPos, item))
+		{
+			game->ctMenuSideDownButtons = 1;
+		}
+		item = game->buttonsMenuSideDown.buttonLeftOpen.ftReturnOneRectangle(); // Left button
+		item.x = pos3.x; item.y = pos3.y;
+		if (CheckCollisionPointRec(rayPos, item))
+		{
+			game->ctMenuSideDownButtons = 2;
+		}
+	}
 }

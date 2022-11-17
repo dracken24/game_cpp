@@ -20,10 +20,13 @@
 # define G 800
 # define PLAYER_JUMP_SPD 600.0f
 # define PLAYER_HOR_SPD 200.0f
-#define MAX_INPUT_CHARS 8
+# define MAX_INPUT_CHARS 8
 
-#define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
-#define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
+# define DARKGRAY1   CLITERAL(Color){ 60, 60, 60, 255 }
+# define DARKGRAY2   CLITERAL(Color){ 140, 140, 140, 255 }
+# define DARKPURPLE2 CLITERAL(Color){ 46, 23, 126, 255 } 
+# define MYDARKGREEN  CLITERAL(Color){ 0, 148, 54, 255 }
+
 struct MultipleCam2D;
 
 typedef struct Mouse{
@@ -83,6 +86,16 @@ typedef struct MenuUp
 	EnvItems	stop;
 }	MenuUp;
 
+typedef struct MenuSideDown
+{
+	EnvItems	buttonMiddleClose;
+	EnvItems	buttonMiddleOpen;
+	EnvItems	buttonRightClose;
+	EnvItems	buttonRightOpen;
+	EnvItems	buttonLeftClose;
+	EnvItems	buttonLeftOpen;
+}	MenuSideDown;
+
 typedef struct TrioBox
 {
 	Vector2		posTextBox;
@@ -93,11 +106,11 @@ typedef struct TrioBox
 
 typedef struct TextBoxSideUp
 {
-	TrioBox		rightBox0;
-	TrioBox		leftBox0;
+	TrioBox		RightBox0;
+	TrioBox		LeftBox0;
+	TrioBox		RightBox1;
+	TrioBox		LeftBox1;
 
-	TrioBox		rightBox1;
-	TrioBox		leftBox1;
 }	TextBoxSideUp;
 
 class Game {
@@ -109,6 +122,7 @@ class Game {
 
 	bool		ctCollision = false;
 	int         characterSelection = 0;
+	int			ctMenuSideDownButtons = 0;
 	int			ctMenuUpButtons = 1;
 	int			ctImgBuildGame = 1;
 	int			ctStopAttack = 1;
@@ -126,6 +140,7 @@ class Game {
 	Rectangle		rectCercleChrom;
 	MenuUp			buttonsMenuUp;
 	TextBoxSideUp	textBoxSideUp;
+	MenuSideDown	buttonsMenuSideDown;
 	bool			colorCt = false;
 
 	char rotation[MAX_INPUT_CHARS + 1] = "\0";
@@ -152,7 +167,7 @@ void	ftInitTextBoxSideUp(Game *game);
 void	ftControlItems(Game *game, Player *player, EnvItems *envItems, Props *blocks);
 void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCameras);
 void	ftSideUpControlMenu2D(Game *game, Player *player, Menu *mmakeenu);
-void	ftSideDownMenu2D(Game *game, Player *player, Menu *menu);
+void	ftSideDownMenu2D(Game *game, Camera2D *camera);
 void	ftSelectItemsTop(Game *game, Camera2D *camera);
 void	ftUpMenu2D(Game *game, Camera2D *camera);
 void	ftDrawVarsRiDownPanel(Game *game);

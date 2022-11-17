@@ -4,8 +4,6 @@
 #include "../../vendor/raylib/src/raylib.h"
 #include <stdlib.h>
 
-#define MAX_INPUT_CHAR 8
-
 typedef struct VarCharEnvi
 {
 	char *enviPosX;

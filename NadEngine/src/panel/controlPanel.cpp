@@ -171,9 +171,23 @@ void	ftSideUpMenu2D(Game *game, Player *player, Menu *menu, MultipleCam2D *allCa
 	ftMouseControl(game);
 }
 
+//*** 	Init position and size for box andt text for enter	***//
+//***	text for move objet on screen                 	***//
 void	ftInitTextBoxSideUp(Game *game)
 {
-	game->textBoxSideUp.rightBox0.hitBox = {1260, 80, 75, 20};
-	game->textBoxSideUp.rightBox0.writeBox = {60, 38, 75, 20};
-	game->textBoxSideUp.rightBox0.posTextBox = {10, 42};
+	game->textBoxSideUp.RightBox0.hitBox = {1260, 80, 75, 20};
+	game->textBoxSideUp.RightBox0.writeBox = {60, 38, 75, 20};
+	game->textBoxSideUp.RightBox0.posTextBox = {10, 42};
+
+	game->textBoxSideUp.LeftBox0.hitBox = {1400, 80, 75, 20};
+	game->textBoxSideUp.LeftBox0.writeBox = {200, 38, 75, 20};
+	game->textBoxSideUp.LeftBox0.posTextBox = {150, 42};
+
+	game->textBoxSideUp.RightBox1.hitBox = {1260, 110, 75, 20};
+	game->textBoxSideUp.RightBox1.writeBox = {60, 68, 75, 20};
+	game->textBoxSideUp.RightBox1.posTextBox = {10, 72};
+
+	game->textBoxSideUp.LeftBox1.hitBox = {1400, 110, 75, 20};
+	game->textBoxSideUp.LeftBox1.writeBox = {200, 68, 75, 20};
+	game->textBoxSideUp.LeftBox1.posTextBox = {150, 72};
 }

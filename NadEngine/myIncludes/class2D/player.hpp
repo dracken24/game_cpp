@@ -9,7 +9,7 @@
 # include <iostream>
 # include <string>
 
-#define MAX_INPUT_CHAR 8
+# define MAX_INPUT_CHARS 8
 
 typedef struct VarChar
 {
@@ -26,7 +26,6 @@ typedef struct VarChar
 
 typedef struct SelectionBoxPly
 {
-	char	buffer[MAX_INPUT_CHAR + 1] = "\0";
 	int		selectBoxNbr = 0;
 }	SelectionBoxPly;
 

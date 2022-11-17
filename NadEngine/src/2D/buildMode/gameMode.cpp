@@ -3,8 +3,6 @@
 void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			Props blocks, MultipleCam2D allCameras)
 {
-	// Camera2D	camera = allCameras->camera00.camera;
-	// Player		tmpPlayer = player->f;
 	Camera2D *tmpCam = &allCameras.camera00.camera;
 	allCameras.camera00.camera.target = player.ftReturnPlayerPosition();
 
@@ -41,7 +39,7 @@ void	ftRunGameMode(Game *Game, Menu menu, Player player, EnvItems envItems,
 			ClearBackground(DARKGRAY2);
 			BeginMode2D(allCameras.camera02.camera);
 
-				ftSideDownMenu2D(Game, &player, &menu);
+				ftSideDownMenu2D(Game, &allCameras.camera02.camera);
 
 			EndMode2D();
 		EndTextureMode();
