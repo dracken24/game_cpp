@@ -4,8 +4,6 @@
 #include "../../vendor/raylib/src/raylib.h"
 #include <stdlib.h>
 
-namespace obj
-{
 	typedef struct VarCharPr
 	{
 		char *propPosX;
@@ -77,9 +75,5 @@ namespace obj
 			int					_nbr;
 			VarsSideDownPanelPr	_varCharPr;
 	};
-
-};
-
-
 
 #endif

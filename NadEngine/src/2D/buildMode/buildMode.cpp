@@ -1,7 +1,5 @@
 #include "../../../myIncludes/game.hpp"
 
-using namespace obj;
-
 //*** If not selected, select item on build mode ***//
 void ftSelectItems(Game *game, Player *player, Camera2D *camera, EnvItems *envItems, Props *blocks)
 {

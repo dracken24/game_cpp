@@ -1,8 +1,6 @@
 #include "../../myIncludes/game.hpp"
 #include <string.h>
 
-using namespace obj;
-
 void	ftDrawSideDownButtons(Game *game);
 void	ftChangeSidedownPanel(Game *game, Camera2D *camera);
 

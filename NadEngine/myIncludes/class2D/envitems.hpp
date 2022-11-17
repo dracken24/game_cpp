@@ -4,8 +4,6 @@
 #include "../../vendor/raylib/src/raylib.h"
 #include <stdlib.h>
 
-namespace obj
-{
 	typedef struct VarCharEnvi
 	{
 		char *enviPosX;
@@ -66,6 +64,5 @@ namespace obj
 			int			_allNbr;
 			// VarCharEnvi	_varCharEnvi;
 	};
-};
 
 #endif
